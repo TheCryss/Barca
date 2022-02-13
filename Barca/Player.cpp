@@ -44,13 +44,13 @@ void Player::handleEvents()
   SDL_Event event;
   SDL_PollEvent(&event);
   //Permite usar el boton de cerrar ventana.
-  switch (event.type)
+  /*switch (event.type)
   {
   case SDL_QUIT:
     isRunning = false;
   default:
     break;
-  }
+  }*/
 }
 void Player::updater()
 {}
