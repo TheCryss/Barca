@@ -1,30 +1,36 @@
 #include "SDL.h"
-#include "Player.h"
+#include "Game.h"
 #include <iostream>
 
-Player* player = nullptr;
+Game* game = nullptr;
 //test1
 //test2
-int main(int argc, char* argv[])
-{
-  player = new Player();
-  player->init("Barca", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, false);
-  while (player->running())
-  {
-    player->handleEvents();
-    player->updater();
-    player->render();
+int main(int argc, char* args[]) {
+    //Creamos nuestra clase game
+    auto game = Game();
+    try {
+        game.init();
 
-  }
+        //Bucle Principal|
+        while (game.isRunning()) {
+            // Gestion de eventos (Leer inputs por ejemplo)
+            game.handleEvents();
 
-  player->clean();
-  /*SDL_Init(SDL_INIT_EVERYTHING);
-  SDL_Window* window = SDL_CreateWindow("Barca", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_SHOWN);
-  SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-  SDL_RenderClear(renderer);
-  SDL_RenderPresent(renderer);
-  SDL_Delay(5000);*/
-  return 0;
-};
+            // Actualiza (Fisica y Logica del juego, actualiza en funcion del input)
+            game.update();
+
+            //Renderiza (Una vez actualizado se renderiza)
+            game.render();
+        }
+
+        game.release();
+    }
+    catch (std::exception& exception) {
+        fprintf(stderr, exception.what());
+        SDL_Quit();
+        return -1;
+    }
+
+    return 0;
+}
 
