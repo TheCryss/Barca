@@ -11,15 +11,10 @@ Historia: Queremos alojar los promedios de n estudiante, para luego mostrarlos
 */
 
 #include "Personaje.h"
-#include "Juego.h"
 #include <string>
 
 // Funcion main
 int main()
 {
-  Juego miJuego;
-  Personaje p;
-
-  cout << miJuego.personajes.size() << endl;
   return 0;
 }

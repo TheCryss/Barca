@@ -48,7 +48,8 @@ public:
   // Funciones
   virtual int numeroDePersonajes();
   virtual void agregarPersonaje(Personaje *personaje);
-  virtual void agregarPersonajes(vector<Personaje *> personajes);
+  virtual bool agregarPersonajeBooleano(Personaje *personaje);
+  virtual bool agregarPersonajes(vector<Personaje *> personajes);
   virtual Personaje *getPersonajePorIndice(int indice);
   virtual bool existePersonajeConNombre(string nombre);
   virtual void moverATodos(Lugar *lugarDestino);

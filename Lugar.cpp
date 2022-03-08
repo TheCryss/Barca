@@ -84,7 +84,17 @@ void Lugar::agregarPersonaje(Personaje *personaje)
   }
 }
 
-void Lugar::agregarPersonajes(vector<Personaje *> personajes)
+bool Lugar::agregarPersonajeBooleano(Personaje *personaje)
+{
+  if (numeroDePersonajes() < getCapacidad() || getCapacidad() == -1)
+  {
+    personajes.push_back(personaje);
+    return true;
+  }
+  return false;
+}
+
+bool Lugar::agregarPersonajes(vector<Personaje *> personajes)
 {
   if (numeroDePersonajes() + personajes.size() < getCapacidad() || getCapacidad() == -1)
   {
@@ -191,7 +201,7 @@ int Lugar::buscarPorLetra(string primeraLetra)
   // busca un individuo y compara su letra inicial con primeraLetra
   int index = 0;
   for (Personaje *personaje : personajes)
-  { 
+  {
     if (personaje->getNombre()[0] == primeraLetra[0])
     {
       return index;
