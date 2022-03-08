@@ -1,6 +1,9 @@
 /**
 Archivo: main.cpp
-Autor: Carlos Hernandez
+Autores:
+Carlos Hernandez
+Susana
+Jose Luis
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL

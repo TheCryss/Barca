@@ -1,6 +1,9 @@
 /**
 Archivo: Lugar.cpp
-Autor: Carlos Hernandez
+Autores:
+Carlos Hernandez
+Susana
+Jose Luis
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -81,6 +84,8 @@ void Lugar::agregarPersonaje(Personaje *personaje)
   if (numeroDePersonajes() < getCapacidad() || getCapacidad() == -1)
   {
     personajes.push_back(personaje);
+    // Una vez agregado el personaje verificamos si ese personaje es o no es guardian, para setearlo en el atributo estGuardian de la clase
+    verificarGuardian();
   }
 }
 
@@ -89,6 +94,8 @@ bool Lugar::agregarPersonajeBooleano(Personaje *personaje)
   if (numeroDePersonajes() < getCapacidad() || getCapacidad() == -1)
   {
     personajes.push_back(personaje);
+    // Una vez agregado el personaje verificamos si ese personaje es o no es guardian, para setearlo en el atributo estGuardian de la clase
+    verificarGuardian();
     return true;
   }
   return false;
@@ -103,6 +110,11 @@ bool Lugar::agregarPersonajes(vector<Personaje *> personajes)
     {
       agregarPersonaje(personaje);
     }
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }
 
@@ -134,7 +146,7 @@ bool Lugar::existePersonajeConNombre(string nombre)
 void Lugar::moverATodos(Lugar *lugarDestino)
 {
   lugarDestino->agregarPersonajes(personajes);
-  // No se si hacer esto
+  // Limpiamos los personajes del vector actual
   for (int indexPersonaje = 0; indexPersonaje < numeroDePersonajes(); indexPersonaje++)
   {
     if (personajes[indexPersonaje])
@@ -155,7 +167,7 @@ void Lugar::verificarGuardian()
     if (personaje->getNombre() == getGuardian())
     {
       setEstaGuardian(true);
-      bool aux = true;
+      aux = true;
     }
   }
   if (aux == false)
@@ -166,6 +178,7 @@ void Lugar::verificarGuardian()
 
 Personaje *Lugar::algunPersonajeASidoComido()
 {
+  verificarGuardian();
   // Verificar si esta el robot
   if (getEstaGuardian())
   {
@@ -208,7 +221,7 @@ int Lugar::buscarPorLetra(string primeraLetra)
     }
     else
     {
-      index++;
+      index+=1;
     }
   }
   return -1;

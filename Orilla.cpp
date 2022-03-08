@@ -1,6 +1,9 @@
 /**
 Archivo: Orilla.cpp
-Autor: Carlos Hernandez
+Autores:
+Carlos Hernandez
+Susana
+Jose Luis
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -29,7 +32,7 @@ Orilla::~Orilla()
   }
 }
 
-Lugar *Orilla::getbarca()
+Barca *Orilla::getbarca()
 {
   if (barca)
   {
@@ -51,14 +54,13 @@ void Orilla::setEstaBarca(bool estado)
   this->estaBarca = estado;
 }
 
-bool Orilla::vincularBarca(Lugar *barca)
+void Orilla::vincularBarca(Barca *barca)
 {
   this->barca = barca;
   setEstaBarca(true);
-  return true;
 }
 
-bool Orilla::desvincularBarca()
+void Orilla::desvincularBarca()
 {
   if (barca)
   {
@@ -66,7 +68,6 @@ bool Orilla::desvincularBarca()
     barca = nullptr;
     setEstaBarca(false);
   }
-  return true;
 }
 
 bool Orilla::moverPersonajeABarca(string primeraLetra)
@@ -93,6 +94,6 @@ bool Orilla::moverPersonajeABarca(string primeraLetra)
   else
   {
     // Significa que la barca ya esta llena
-    throw(string) "La barca esta llena... Intentalo de nuevo";
+    throw(string) "La barca esta llena... No se puede subir nadie más";
   }
 }
