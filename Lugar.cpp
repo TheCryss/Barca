@@ -176,7 +176,7 @@ void Lugar::verificarGuardian()
   }
 }
 
-Personaje *Lugar::algunPersonajeASidoComido()
+Personaje *Lugar::algunPersonajeHaSidoComido()
 {
   verificarGuardian();
   // Verificar si esta el robot
@@ -193,6 +193,7 @@ Personaje *Lugar::algunPersonajeASidoComido()
     {
       if (personajes[i]->puedeComer(personajes[j]))
       {
+        personajes[j]->setEstaVivo(false);
         return personajes[j];
       }
     }
@@ -201,6 +202,7 @@ Personaje *Lugar::algunPersonajeASidoComido()
     {
       if (personajes[i]->puedeComer(personajes[j]))
       {
+        personajes[j]->setEstaVivo(false);
         return personajes[j];
       }
     }
@@ -225,4 +227,8 @@ int Lugar::buscarPorLetra(string primeraLetra)
     }
   }
   return -1;
+}
+
+bool Lugar::moverPersonaje(string primeraLetra){
+
 }

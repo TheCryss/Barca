@@ -33,7 +33,7 @@ public:
   /*
     Tenemos dos constructores, para que así existan dos maneras de intanciar un objeto de la clase Personaje
   */
-  Personaje(string nombre, string personajeQueCome);
+  Personaje(string nombre, string personajeQueCome="");
   Personaje();
   // Destructor
   virtual ~Personaje();

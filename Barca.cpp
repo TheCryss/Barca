@@ -140,7 +140,7 @@ void Barca::moverBarca(array<Lugar *, 4> *mapa, bool verificarConductor = true)
   }
 }
 
-bool Barca::moverIndividuoAOrillaCercana(string primeraLetra)
+bool Barca::moverPersonaje(string primeraLetra)
 {
   int personajeAMover = buscarPorLetra(primeraLetra);
 

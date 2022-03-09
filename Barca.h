@@ -71,7 +71,7 @@ public:
   /*
     Lo que hace es pasar el personaje que esta dentro del vector personajes cuyo nombre empieze con la primera letra pasada por parametro a la orilla que este enlazada la barca en ese momento
   */
-  bool moverIndividuoAOrillaCercana(string primeraLetra);
+  virtual bool moverPersonaje(string primeraLetra);
 };
 
 #endif

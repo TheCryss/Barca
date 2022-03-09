@@ -70,7 +70,7 @@ void Orilla::desvincularBarca()
   }
 }
 
-bool Orilla::moverPersonajeABarca(string primeraLetra)
+bool Orilla::moverPersonaje(string primeraLetra)
 {
   int personajeAMover = buscarPorLetra(primeraLetra);
 

@@ -97,11 +97,13 @@ public:
       «           «        £          »           »         »
 
   */
-  virtual Personaje *algunPersonajeASidoComido();
+  virtual Personaje *algunPersonajeHaSidoComido();
   /*
     Retornar -1 si no se encontro ningun Personaje dentro del vector cuyo nombre empiece con la primera letra pasado por parametro. Si lo encuentra, retorna el indice donde se encuentra el personaje dentro del vector.
   */
   virtual int buscarPorLetra(string primeraLetra);
+
+  virtual bool moverPersonaje(string primeraLetra);
 };
 
 #endif
