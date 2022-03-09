@@ -29,8 +29,8 @@ class Barca : public Lugar
 {
   // Atributos
 private:
-  Orilla *orillaIzquierda;
-  Orilla *orillaDerecha;
+  Lugar *orillaIzquierda;
+  Lugar *orillaDerecha;
   bool estaIzquierda;
   bool estaDerecha;
 
@@ -40,8 +40,8 @@ public:
   // Destructor
   virtual ~Barca();
   // Getters
-  Orilla *getOrillaIzquierda();
-  Orilla *getOrillaDerecha();
+  Lugar *getOrillaIzquierda();
+  Lugar *getOrillaDerecha();
   bool getEstaIzquierda();
   bool getEstaDerecha();
   // Setters
@@ -49,19 +49,19 @@ public:
   void setEstaDerecha(bool estado);
   // Metodos
   /*
-    Asignar al atributo orillaIzquieda de la clase Barca un puntero de la clase Orilla pasado por parametro, y a su vez setear el atributo estaOrillaIzquierda  a true.
+    Asignar al atributo orillaIzquieda de la clase Barca un puntero de la clase Lugar pasado por parametro, y a su vez setear el atributo estaOrillaIzquierda  a true.
   */
-  bool vincularOrillaIzquierda(Orilla *orilla);
+  bool vincularOrillaIzquierda(Lugar *orilla);
   /*
-  Asignar al atributo orillaDerecha de la clase Barca un puntero de la clase Orilla pasado por parametro, y a su vez setear el atributo estaOrillaDerecha  a true.
+  Asignar al atributo orillaDerecha de la clase Barca un puntero de la clase Lugar pasado por parametro, y a su vez setear el atributo estaOrillaDerecha  a true.
   */
-  bool vincularOrillaDerecha(Orilla *orilla);
+  bool vincularOrillaDerecha(Lugar *orilla);
   /*
-  Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla derecha si no a un puntero nulo, además de setear el atributo estaOrillaDerecha a false
+  Eliminar la relacion de la clase Barca a la clase Lugar por medio del puntero, para que así ya no apunte a la orilla derecha si no a un puntero nulo, además de setear el atributo estaOrillaDerecha a false
   */
   void desvincularOrillaDerecha();
   /*
-  Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla izquierda si no a un puntero nulo, además de setear el atributo estaOrillaIzquierda a false
+  Eliminar la relacion de la clase Barca a la clase Lugar por medio del puntero, para que así ya no apunte a la orilla izquierda si no a un puntero nulo, además de setear el atributo estaOrillaIzquierda a false
   */
   void desvincularOrillaIzquierda();
   /*

@@ -223,12 +223,20 @@ int Lugar::buscarPorLetra(string primeraLetra)
     }
     else
     {
-      index+=1;
+      index += 1;
     }
   }
   return -1;
 }
 
-bool Lugar::moverPersonaje(string primeraLetra){
+bool Lugar::moverPersonaje(string primeraLetra)
+{
+}
 
+void Lugar::vincularBarca(Lugar *barca)
+{
+}
+
+void Lugar::desvincularBarca()
+{
 }

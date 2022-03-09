@@ -32,7 +32,7 @@ Orilla::~Orilla()
   }
 }
 
-Barca *Orilla::getbarca()
+Lugar *Orilla::getbarca()
 {
   if (barca)
   {
@@ -54,7 +54,7 @@ void Orilla::setEstaBarca(bool estado)
   this->estaBarca = estado;
 }
 
-void Orilla::vincularBarca(Barca *barca)
+void Orilla::vincularBarca(Lugar *barca)
 {
   this->barca = barca;
   setEstaBarca(true);

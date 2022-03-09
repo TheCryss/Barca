@@ -27,7 +27,7 @@ class Orilla : public Lugar
 {
   // Atributos
 private:
-  Barca *barca;
+  Lugar *barca;
   bool estaBarca;
 
 public:
@@ -40,7 +40,7 @@ public:
   // Destructor
   virtual ~Orilla();
   // Getters
-  Barca* getbarca();
+  Lugar* getbarca();
   bool getEstaBarca();
   // Setters
   void setEstaBarca(bool estado);
@@ -48,7 +48,7 @@ public:
   /*
     Asignar al atributo barca de la clase Orilla un puntero de la clase Barca pasado por parametro, y a su vez setear el atributo estaBarca a true.
   */
-  void vincularBarca(Barca*   barca);
+  void vincularBarca(Lugar* barca);
   /*
     Eliminar la relacion de la clase Orilla a la clase Barca por medio del puntero, para que así ya no apunte a la barca si no a un puntero nulo, además de setear el atributo estaBarca a false
   */

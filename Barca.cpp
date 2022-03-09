@@ -33,7 +33,7 @@ Barca::~Barca()
   }
 }
 
-Orilla *Barca::getOrillaDerecha()
+Lugar *Barca::getOrillaDerecha()
 {
   if (orillaDerecha)
   {
@@ -45,7 +45,7 @@ Orilla *Barca::getOrillaDerecha()
   }
 }
 
-Orilla *Barca::getOrillaIzquierda()
+Lugar *Barca::getOrillaIzquierda()
 {
   if (orillaIzquierda)
   {
@@ -79,7 +79,7 @@ void Barca::desvincularOrillaIzquierda()
   this->orillaIzquierda = nullptr;
 }
 
-bool Barca::vincularOrillaDerecha(Orilla *orilla)
+bool Barca::vincularOrillaDerecha(Lugar *orilla)
 {
   // Vincular el parametro al atributo orillaDerecha
   this->orillaDerecha = orilla;
@@ -93,7 +93,7 @@ bool Barca::vincularOrillaDerecha(Orilla *orilla)
   orillaIzquierda->desvincularBarca();
 }
 
-bool Barca::vincularOrillaIzquierda(Orilla *orilla)
+bool Barca::vincularOrillaIzquierda(Lugar *orilla)
 {
   // Vincular el parametro al atributo orillaIzquierda
   this->orillaIzquierda = orilla;
@@ -118,7 +118,7 @@ void Barca::setEstaIzquierda(bool estado)
 }
 
 // ? no se
-void Barca::moverBarca(array<Lugar *, 4> *mapa, bool verificarConductor = true)
+void Barca::moverBarca(array<Lugar *, 4> *mapa, bool verificarConductor)
 {
   // Se verifica que el conductor se encuentre en la barca a no ser que el parametro verificarConductor sea falso
   if (!this->existePersonajeConNombre("Robot") && verificarConductor)
@@ -163,11 +163,15 @@ bool Barca::moverPersonaje(string primeraLetra)
       throw(string) "La orilla esta llena... No caben más";
     }
   }
-  if(getEstaIzquierda()){
-    if(orillaIzquierda->agregarPersonajeBooleano(personajes[personajeAMover])){
-      personajes.erase(personajes.begin()+personajeAMover);
+  if (getEstaIzquierda())
+  {
+    if (orillaIzquierda->agregarPersonajeBooleano(personajes[personajeAMover]))
+    {
+      personajes.erase(personajes.begin() + personajeAMover);
       return true;
-    }else{
+    }
+    else
+    {
       // Significa que la orilla ya esta llena
       throw(string) "La orilla esta llena... No caben más";
     }
