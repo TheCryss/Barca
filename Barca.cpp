@@ -33,7 +33,7 @@ Barca::~Barca()
   }
 }
 
-Lugar *Barca::getOrillaDerecha()
+Orilla *Barca::getOrillaDerecha()
 {
   if (orillaDerecha)
   {
@@ -45,7 +45,7 @@ Lugar *Barca::getOrillaDerecha()
   }
 }
 
-Lugar *Barca::getOrillaIzquierda()
+Orilla *Barca::getOrillaIzquierda()
 {
   if (orillaIzquierda)
   {
@@ -79,7 +79,7 @@ void Barca::desvincularOrillaIzquierda()
   this->orillaIzquierda = nullptr;
 }
 
-bool Barca::vincularOrillaDerecha(Lugar *orilla)
+bool Barca::vincularOrillaDerecha(Orilla *orilla)
 {
   // Vincular el parametro al atributo orillaDerecha
   this->orillaDerecha = orilla;
@@ -88,12 +88,16 @@ bool Barca::vincularOrillaDerecha(Lugar *orilla)
   orillaDerecha->vincularBarca(this);
 
   // Desvincular la orilla izquierda del atriuto orillaIzquierda
-  desvincularOrillaIzquierda();
-  // Desvincular la barca de la orilla izquierda
-  orillaIzquierda->desvincularBarca();
+  if (orillaIzquierda)
+  {
+    desvincularOrillaIzquierda();
+    // Desvincular la barca de la orilla izquierda
+    orillaIzquierda->desvincularBarca();
+  }
+  return true;
 }
 
-bool Barca::vincularOrillaIzquierda(Lugar *orilla)
+bool Barca::vincularOrillaIzquierda(Orilla *orilla)
 {
   // Vincular el parametro al atributo orillaIzquierda
   this->orillaIzquierda = orilla;
@@ -102,9 +106,13 @@ bool Barca::vincularOrillaIzquierda(Lugar *orilla)
   orillaIzquierda->vincularBarca(this);
 
   // Desvincular la orilla derecha del atriuto orillaDerecha
-  desvincularOrillaDerecha();
-  // Desvincular la barca de la orilla Derecha
-  orillaDerecha->desvincularBarca();
+  if (orillaDerecha)
+  {
+    desvincularOrillaDerecha();
+    // Desvincular la barca de la orilla Derecha
+    orillaDerecha->desvincularBarca();
+  }
+  return true;
 }
 
 void Barca::setEstaDerecha(bool estado)

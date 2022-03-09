@@ -231,12 +231,5 @@ int Lugar::buscarPorLetra(string primeraLetra)
 
 bool Lugar::moverPersonaje(string primeraLetra)
 {
-}
-
-void Lugar::vincularBarca(Lugar *barca)
-{
-}
-
-void Lugar::desvincularBarca()
-{
+  return true;
 }

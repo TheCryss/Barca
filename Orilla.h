@@ -23,11 +23,13 @@ Relaciones:
 
 #include "Barca.h"
 
+class Barca;
+
 class Orilla : public Lugar
 {
   // Atributos
 private:
-  Lugar *barca;
+  Barca *barca;
   bool estaBarca;
 
 public:
@@ -40,7 +42,7 @@ public:
   // Destructor
   virtual ~Orilla();
   // Getters
-  Lugar* getbarca();
+  Barca* getbarca();
   bool getEstaBarca();
   // Setters
   void setEstaBarca(bool estado);
@@ -48,7 +50,7 @@ public:
   /*
     Asignar al atributo barca de la clase Orilla un puntero de la clase Barca pasado por parametro, y a su vez setear el atributo estaBarca a true.
   */
-  void vincularBarca(Lugar* barca);
+  void vincularBarca(Barca* barca);
   /*
     Eliminar la relacion de la clase Orilla a la clase Barca por medio del puntero, para que así ya no apunte a la barca si no a un puntero nulo, además de setear el atributo estaBarca a false
   */

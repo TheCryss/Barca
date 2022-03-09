@@ -21,8 +21,8 @@ Relaciones:
 
 #include "Personaje.h"
 #include <iostream>
+#include <vector>
 using namespace std;
-#include <vector>;
 
 class Lugar
 {
@@ -104,9 +104,6 @@ public:
   virtual int buscarPorLetra(string primeraLetra);
 
   virtual bool moverPersonaje(string primeraLetra);
-
-  void vincularBarca(Lugar *barca);
-  void desvincularBarca();
 };
 
 #endif

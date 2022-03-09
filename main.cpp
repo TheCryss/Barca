@@ -31,9 +31,11 @@ int main()
   Orilla orillaDerecha("DERECHA");
   array<Lugar *, 4> mapa = {&orillaIzquierda, &barca, &tramoDelRio, &orillaDerecha};
 
+
   // defino los vecinos, es una simplificacion al uso del array mapa[4]
   orillaIzquierda.vincularBarca(&barca);
   barca.vincularOrillaIzquierda(&orillaIzquierda);
+
 
   // creo los objetos individuos del juego
   // Personaje robot("R2D2", "Robot");
@@ -52,8 +54,10 @@ int main()
   conejo.setPersonajeQueCome("Lechuga");
   // matias.agregarAlimentacion("Lechuga");
 
+
   // agrego los individuos al mapa
-  // orillaIzquierda.agregarIndividuos((vector<Personaje *>){&robot, &zorro, &conejo, &lechuga, &matias, &C3PO});
+  // orillaIzquierda.agregarPersonajes((vector<Personaje *>){&robot, &zorro, &conejo, &lechuga, &matias, &C3PO});
+
   vector<Personaje *> auxPersonajes = {&robot, &zorro, &conejo, &lechuga} ;orillaIzquierda.agregarPersonajes(auxPersonajes);
 
   // inicio el juego y le cedo el control al Jugador
