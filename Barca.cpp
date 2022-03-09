@@ -27,7 +27,7 @@ Barca::Barca() : Lugar()
   this->orillaIzquierda = nullptr;
   this->pos = 2;
   this->nombre = "Barca";
-  this->capacidad =2;
+  this->capacidad = 2;
 }
 
 Barca::~Barca()
@@ -99,9 +99,12 @@ bool Barca::vincularOrillaDerecha(Orilla *orilla)
   orillaDerecha->vincularBarca(this);
 
   // Desvincular la orilla izquierda del atriuto orillaIzquierda
-  desvincularOrillaIzquierda();
-  // Desvincular la barca de la orilla izquierda
-  orillaIzquierda->desvincularBarca();
+  if (orillaIzquierda)
+  {
+    desvincularOrillaIzquierda();
+    // Desvincular la barca de la orilla izquierda
+    orillaIzquierda->desvincularBarca();
+  }
 
   return true;
 }
@@ -115,9 +118,12 @@ bool Barca::vincularOrillaIzquierda(Orilla *orilla)
   orillaIzquierda->vincularBarca(this);
 
   // Desvincular la orilla derecha del atriuto orillaDerecha
-  desvincularOrillaDerecha();
-  // Desvincular la barca de la orilla Derecha
-  orillaDerecha->desvincularBarca();
+  if (orillaDerecha)
+  {
+    desvincularOrillaDerecha();
+    // Desvincular la barca de la orilla Derecha
+    orillaDerecha->desvincularBarca();
+  }
 
   return true;
 }
@@ -139,18 +145,17 @@ void Barca::moverBarca(bool verificarConductor)
   if (!this->existePersonajeConNombre("Robot") && verificarConductor)
   {
     throw "No hay ningun Robot subido en la barca. La barca no se mueve sola!!!";
-
-    // Se cambia la posicion de la barca y se redefinen los vecinos dependiendo de donde este situado
-    if (this->estaIzquierda)
-    {
-      vincularOrillaDerecha(orillaDerecha);
-      setPosicion(pos + 1);
-    }
-    else
-    {
-      vincularOrillaIzquierda(orillaIzquierda);
-      setPosicion(pos - 1);
-    }
+  }
+  // Se cambia la posicion de la barca y se redefinen los vecinos dependiendo de donde este situado
+  if (this->estaIzquierda)
+  {
+    vincularOrillaDerecha(orillaDerecha);
+    setPosicion(pos + 1);
+  }
+  else
+  {
+    vincularOrillaIzquierda(orillaIzquierda);
+    setPosicion(pos - 1);
   }
 }
 
@@ -192,4 +197,15 @@ bool Barca::moverPersonaje(string primeraLetra)
   }
   // Si no esta vinculada a ninguna orilla retornamos false
   return false;
+}
+
+void Barca::imprimirLugar()
+{
+  string tab = "";
+  int auxPos = getPosicion();
+  for (int i = 0; i < auxPos; i++)
+  {
+    tab += "\t";
+  }
+  cout << tab << getNombre() << " " << getPosicion();
 }

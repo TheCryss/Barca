@@ -34,7 +34,8 @@ protected:
   Orilla *orillaIzquierda;
   Orilla *orillaDerecha;
   Barca *barca;
-
+  int totalPersonajes;
+  
 public:
   /*
     Constructor
@@ -47,7 +48,7 @@ public:
   /*
     jugar inicia el juego y tomar el control del programa.
   */
-  // virtual void jugar();
+  virtual void jugar();
   /*
     mostrarJuego imprime en consola el estado actual del juego
   */
@@ -56,26 +57,26 @@ public:
   /*
     recibirEntrada recibe por consola los comandos a ejecutar
   */
-  // virtual void recibirEntrada();
+  virtual void recibirEntrada();
 
   /*
     reiniciar permite regresar todos los lugares e individuos al estado inicial
   */
-  // virtual void reiniciar();
+  virtual void reiniciar();
 
   /*
     comprobarEstadoDelJuego determinar despues de cada movimiento si se ganó o se perdió
   */
-  // virtual bool comprobarEstadoDelJuego();
+  virtual bool comprobarEstadoDelJuego();
   /*
     menuDespuesDeGanarOPerder muestra las opciones de reiniciar o salir
     cuando se gana o pierde
   */
-  // virtual void menuDespuesDeGanarOPerder();
+  virtual void menuDespuesDeGanarOPerder();
   /*
     recibirUnCaracter recibe la entrada por consola
   */
-  // virtual string recibirUnCaracter();
+  virtual string recibirUnCaracter();
 };
 
 #endif

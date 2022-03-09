@@ -243,3 +243,28 @@ bool Lugar::moverPersonaje(string primeraLetra)
 {
   return true;
 }
+
+void Lugar::imprimirLugar()
+{
+  string tab = "";
+  int auxPos = getPosicion();
+  for (int i = 0; i < auxPos; i++)
+  {
+    tab += "\t";
+  }
+  cout << tab << getNombre();
+}
+
+void Lugar::imprimirPersonajes()
+{
+  for (Personaje *personaje : *getPersonajes())
+  {
+    string tab = "";
+    int auxPos = getPosicion();
+    for (int i = 0; i < auxPos * 2; i++)
+    {
+      tab += "\t";
+    }
+    cout << tab << personaje->getNombre() << endl;
+  }
+}

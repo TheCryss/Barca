@@ -25,25 +25,26 @@ int main()
 {
   Orilla orillaIzquierda("Izquierda");
   orillaIzquierda.setPosicion(0);
-  Barca barca("Barca",2);
+  Barca barca("Barca", 2);
   barca.setPosicion(1);
   Orilla orillaDerecha("Derecha");
   orillaDerecha.setPosicion(3);
 
-  Personaje robot("Robot","");
-  Personaje zorro("Zorro","Conejo");
-  Personaje conejo("Conejo","Lechuga");
-  Personaje lechuga("Lechuga","");
+  barca.vincularOrillaIzquierda(&orillaIzquierda);
+  orillaIzquierda.vincularBarca(&barca);
 
-  vector <Personaje*> personajes = {&robot,&zorro,&conejo,&lechuga};
+  Personaje robot("Robot", "");
+  Personaje zorro("Zorro", "Conejo");
+  Personaje conejo("Conejo", "Lechuga");
+  Personaje lechuga("Lechuga", "");
+
+  vector<Personaje *> personajes = {&robot, &zorro, &conejo, &lechuga};
 
   orillaIzquierda.agregarPersonajes(personajes);
 
+  Jugador miJuego(&barca, &orillaIzquierda, &orillaDerecha);
 
-  Jugador miJuego(&barca,&orillaIzquierda,&orillaDerecha);
-
-  miJuego.mostrarJuego();
-
+  miJuego.jugar();
 
   return 0;
 }
