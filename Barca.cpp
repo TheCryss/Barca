@@ -144,7 +144,7 @@ void Barca::moverBarca(bool verificarConductor)
   // Se verifica que el conductor se encuentre en la barca a no ser que el parametro verificarConductor sea falso
   if (!this->existePersonajeConNombre("Robot") && verificarConductor)
   {
-    throw "No hay ningun Robot subido en la barca. La barca no se mueve sola!!!";
+    throw "No hay ningun " + this->guardian + " subido en la barca. La barca no se mueve sola!!!";
   }
   // Se cambia la posicion de la barca y se redefinen los vecinos dependiendo de donde este situado
   if (this->estaIzquierda)
