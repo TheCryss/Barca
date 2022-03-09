@@ -64,6 +64,11 @@ bool Lugar::getEstaGuardian()
   return estaGuardian;
 }
 
+int Lugar::getPosicion()
+{
+  return pos;
+}
+
 void Lugar::setNombre(string nombre)
 {
   this->nombre = nombre;
@@ -77,6 +82,11 @@ void Lugar::setCapacidad(int capacidad)
 void Lugar::setEstaGuardian(bool estado)
 {
   this->estaGuardian = estado;
+}
+
+void Lugar::setPosicion(int pos)
+{
+  this->pos = pos;
 }
 
 void Lugar::agregarPersonaje(Personaje *personaje)
@@ -231,12 +241,5 @@ int Lugar::buscarPorLetra(string primeraLetra)
 
 bool Lugar::moverPersonaje(string primeraLetra)
 {
-}
-
-void Lugar::vincularBarca(Lugar *barca)
-{
-}
-
-void Lugar::desvincularBarca()
-{
+  return true;
 }

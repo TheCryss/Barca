@@ -9,7 +9,6 @@ Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
 */
 #include "Barca.h"
-#include <stdio.h>
 
 Barca::Barca(string nombre, int capacidad) : Lugar(nombre, capacidad)
 {
@@ -17,6 +16,18 @@ Barca::Barca(string nombre, int capacidad) : Lugar(nombre, capacidad)
   this->estaIzquierda = false;
   this->orillaDerecha = nullptr;
   this->orillaIzquierda = nullptr;
+  this->pos = 2;
+}
+
+Barca::Barca() : Lugar()
+{
+  this->estaDerecha = false;
+  this->estaIzquierda = false;
+  this->orillaDerecha = nullptr;
+  this->orillaIzquierda = nullptr;
+  this->pos = 2;
+  this->nombre = "Barca";
+  this->capacidad =2;
 }
 
 Barca::~Barca()
@@ -33,7 +44,7 @@ Barca::~Barca()
   }
 }
 
-Lugar *Barca::getOrillaDerecha()
+Orilla *Barca::getOrillaDerecha()
 {
   if (orillaDerecha)
   {
@@ -45,7 +56,7 @@ Lugar *Barca::getOrillaDerecha()
   }
 }
 
-Lugar *Barca::getOrillaIzquierda()
+Orilla *Barca::getOrillaIzquierda()
 {
   if (orillaIzquierda)
   {
@@ -79,7 +90,7 @@ void Barca::desvincularOrillaIzquierda()
   this->orillaIzquierda = nullptr;
 }
 
-bool Barca::vincularOrillaDerecha(Lugar *orilla)
+bool Barca::vincularOrillaDerecha(Orilla *orilla)
 {
   // Vincular el parametro al atributo orillaDerecha
   this->orillaDerecha = orilla;
@@ -91,9 +102,11 @@ bool Barca::vincularOrillaDerecha(Lugar *orilla)
   desvincularOrillaIzquierda();
   // Desvincular la barca de la orilla izquierda
   orillaIzquierda->desvincularBarca();
+
+  return true;
 }
 
-bool Barca::vincularOrillaIzquierda(Lugar *orilla)
+bool Barca::vincularOrillaIzquierda(Orilla *orilla)
 {
   // Vincular el parametro al atributo orillaIzquierda
   this->orillaIzquierda = orilla;
@@ -105,6 +118,8 @@ bool Barca::vincularOrillaIzquierda(Lugar *orilla)
   desvincularOrillaDerecha();
   // Desvincular la barca de la orilla Derecha
   orillaDerecha->desvincularBarca();
+
+  return true;
 }
 
 void Barca::setEstaDerecha(bool estado)
@@ -118,24 +133,23 @@ void Barca::setEstaIzquierda(bool estado)
 }
 
 // ? no se
-void Barca::moverBarca(array<Lugar *, 4> *mapa, bool verificarConductor)
+void Barca::moverBarca(bool verificarConductor)
 {
   // Se verifica que el conductor se encuentre en la barca a no ser que el parametro verificarConductor sea falso
   if (!this->existePersonajeConNombre("Robot") && verificarConductor)
   {
     throw "No hay ningun Robot subido en la barca. La barca no se mueve sola!!!";
 
-    // Despues se barca la posicion de la barca en el mapa
-    swap((*mapa)[1], (*mapa)[2]);
-
-    // Se redefinen los vecinos en Barca
+    // Se cambia la posicion de la barca y se redefinen los vecinos dependiendo de donde este situado
     if (this->estaIzquierda)
     {
       vincularOrillaDerecha(orillaDerecha);
+      setPosicion(pos + 1);
     }
     else
     {
       vincularOrillaIzquierda(orillaIzquierda);
+      setPosicion(pos - 1);
     }
   }
 }

@@ -27,6 +27,7 @@ protected:
   string nombre;
   string personajeQueCome;
   bool estaVivo;
+  int pos;
 
 public:
   // Constructor
@@ -41,10 +42,12 @@ public:
   virtual string getNombre();
   virtual string getPersonajeQueCome();
   virtual bool getEstaVivo();
+  virtual int getPosicion();
   // Setters
   virtual void setNombre(string nombre);
   virtual void setPersonajeQueCome(string personajeQueCome);
   virtual void setEstaVivo(bool estado);
+  virtual void setPosicion(int pos);
   // Funciones
   /*
     puedeComer : retorna true si el atributo nombre del personaje pasado por parametro coincide con el atributo personajeQueCome del personaje actual

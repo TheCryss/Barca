@@ -22,7 +22,7 @@ Relaciones:
 #include "Personaje.h"
 #include <iostream>
 using namespace std;
-#include <vector>;
+#include <vector>
 
 class Lugar
 {
@@ -33,6 +33,7 @@ protected:
   int capacidad;
   const string guardian = "Robot";
   bool estaGuardian;
+  int pos;
 
 public:
   // Constructor
@@ -49,10 +50,12 @@ public:
   virtual int getCapacidad();
   virtual string getGuardian();
   virtual bool getEstaGuardian();
+  virtual int getPosicion();
   // Setters
   virtual void setNombre(string nombre);
   virtual void setCapacidad(int capacidad);
   virtual void setEstaGuardian(bool estado);
+  virtual void setPosicion(int pos);
   // Funciones
   /*
     Saber el numero de punteros a Personajes que hay en el vectore personajes
@@ -105,8 +108,6 @@ public:
 
   virtual bool moverPersonaje(string primeraLetra);
 
-  void vincularBarca(Lugar *barca);
-  void desvincularBarca();
 };
 
 #endif

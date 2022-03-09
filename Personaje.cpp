@@ -14,14 +14,14 @@ licencia: GNU-GPL
 /*
   Si no se pasa nada por parametro al momento de instanciar personaje, inicializaremos el atributo nombre y personajeQueCome como vacío, por otra parte el atributo estaVivo por defecto sera verdadero
 */
-Personaje::Personaje() : nombre(""), personajeQueCome(""), estaVivo(true)
+Personaje::Personaje() : nombre(""), personajeQueCome(""), estaVivo(true), pos(1)
 {
 }
 
 /*
   Si se pasa el nombre y personajeQueCome por parametro los asignamos a los atributos de la clase, mientras que el atirbuto estaVivo por defecto es verdadero
 */
-Personaje::Personaje(string nombre, string personajeQueCome) : estaVivo(true)
+Personaje::Personaje(string nombre, string personajeQueCome) : estaVivo(true), pos(1)
 {
   this->nombre = nombre;
   this->personajeQueCome = personajeQueCome;
@@ -59,6 +59,14 @@ bool Personaje::getEstaVivo()
 }
 
 /*
+  Obtener el valor del atributo pos
+*/
+int Personaje::getPosicion()
+{
+  return this->pos;
+}
+
+/*
   Asignar un valor al atritbuto nombre
 */
 void Personaje::setNombre(string nombre)
@@ -83,13 +91,26 @@ void Personaje::setEstaVivo(bool estado)
 }
 
 /*
-  Verififcar si el personaje puede comer o no, dado otro personaje pasado por parametro
+  Asignar un valor al atritbuto pos
+*/
+void Personaje::setPosicion(int pos)
+{
+  this->pos= pos;
+}
+
+/*
+  Verififcar si el personaje puede comer o no, dado otro personaje pasado por parametro, y viendo que ambos esten en la misma posicion
 */
 bool Personaje::puedeComer(Personaje *personaje)
 {
-  if (personaje->getNombre() == getPersonajeQueCome())
-  {
-    return true;
+  if(this->getPosicion()!=personaje->getPosicion()){
+    throw this->getNombre() + " esta en una posicion diferente a " + personaje->getNombre();
+    return false;
+  }else{
+    if (personaje->getNombre() == getPersonajeQueCome())
+    {
+      return true;
+    }
+    return false;
   }
-  return false;
 }

@@ -23,25 +23,27 @@ Relaciones:
 
 #include "Lugar.h"
 #include "Orilla.h"
-#include <array>
+
+class Orilla;
 
 class Barca : public Lugar
 {
   // Atributos
 private:
-  Lugar *orillaIzquierda;
-  Lugar *orillaDerecha;
+  Orilla *orillaIzquierda;
+  Orilla *orillaDerecha;
   bool estaIzquierda;
   bool estaDerecha;
 
 public:
   // Constructor
   Barca(string nombre = "Barca", int capacidad = 2);
+  Barca();
   // Destructor
   virtual ~Barca();
   // Getters
-  Lugar *getOrillaIzquierda();
-  Lugar *getOrillaDerecha();
+  Orilla *getOrillaIzquierda();
+  Orilla *getOrillaDerecha();
   bool getEstaIzquierda();
   bool getEstaDerecha();
   // Setters
@@ -49,25 +51,25 @@ public:
   void setEstaDerecha(bool estado);
   // Metodos
   /*
-    Asignar al atributo orillaIzquieda de la clase Barca un puntero de la clase Lugar pasado por parametro, y a su vez setear el atributo estaOrillaIzquierda  a true.
+    Asignar al atributo orillaIzquieda de la clase Barca un puntero de la clase Orilla pasado por parametro, y a su vez setear el atributo estaOrillaIzquierda  a true.
   */
-  bool vincularOrillaIzquierda(Lugar *orilla);
+  bool vincularOrillaIzquierda(Orilla *orilla);
   /*
-  Asignar al atributo orillaDerecha de la clase Barca un puntero de la clase Lugar pasado por parametro, y a su vez setear el atributo estaOrillaDerecha  a true.
+  Asignar al atributo orillaDerecha de la clase Barca un puntero de la clase Orilla pasado por parametro, y a su vez setear el atributo estaOrillaDerecha  a true.
   */
-  bool vincularOrillaDerecha(Lugar *orilla);
+  bool vincularOrillaDerecha(Orilla *orilla);
   /*
-  Eliminar la relacion de la clase Barca a la clase Lugar por medio del puntero, para que así ya no apunte a la orilla derecha si no a un puntero nulo, además de setear el atributo estaOrillaDerecha a false
+  Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla derecha si no a un puntero nulo, además de setear el atributo estaOrillaDerecha a false
   */
   void desvincularOrillaDerecha();
   /*
-  Eliminar la relacion de la clase Barca a la clase Lugar por medio del puntero, para que así ya no apunte a la orilla izquierda si no a un puntero nulo, además de setear el atributo estaOrillaIzquierda a false
+  Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla izquierda si no a un puntero nulo, además de setear el atributo estaOrillaIzquierda a false
   */
   void desvincularOrillaIzquierda();
   /*
     moverBarca recibe el mapa del juego (un array) e intercambia su posicion en él, así como tambien cambia las relaciones conoce de las orillas, para que estas sepan si estan enlazadas o no a la barca y cambia a sus atributos, para saber en que orilla esta la barca.
   */
-  void moverBarca(array<Lugar *, 4> *mapa, bool verificarConductor = true);
+  void moverBarca(bool verificarConductor = true);
   /*
     Lo que hace es pasar el personaje que esta dentro del vector personajes cuyo nombre empieze con la primera letra pasada por parametro a la orilla que este enlazada la barca en ese momento
   */
