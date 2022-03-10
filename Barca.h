@@ -53,11 +53,11 @@ public:
   /*
     Asignar al atributo orillaIzquieda de la clase Barca un puntero de la clase Orilla pasado por parametro, y a su vez setear el atributo estaOrillaIzquierda  a true.
   */
-  bool vincularOrillaIzquierda(Orilla *orilla);
+  void vincularOrillaIzquierda(Orilla *orilla);
   /*
   Asignar al atributo orillaDerecha de la clase Barca un puntero de la clase Orilla pasado por parametro, y a su vez setear el atributo estaOrillaDerecha  a true.
   */
-  bool vincularOrillaDerecha(Orilla *orilla);
+  void vincularOrillaDerecha(Orilla *orilla);
   /*
   Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla derecha si no a un puntero nulo, además de setear el atributo estaOrillaDerecha a false
   */
@@ -69,7 +69,7 @@ public:
   /*
     moverBarca recibe el mapa del juego (un array) e intercambia su posicion en él, así como tambien cambia las relaciones conoce de las orillas, para que estas sepan si estan enlazadas o no a la barca y cambia a sus atributos, para saber en que orilla esta la barca.
   */
-  void moverBarca(bool verificarConductor = true);
+  void moverBarca(Orilla *orillaIzquierda, Orilla *orillaDerecha, bool verificarConductor = true);
   /*
     Lo que hace es pasar el personaje que esta dentro del vector personajes cuyo nombre empieze con la primera letra pasada por parametro a la orilla que este enlazada la barca en ese momento
   */

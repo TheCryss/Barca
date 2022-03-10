@@ -35,7 +35,7 @@ protected:
   Orilla *orillaDerecha;
   Barca *barca;
   int totalPersonajes;
-  
+
 public:
   /*
     Constructor

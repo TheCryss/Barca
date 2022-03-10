@@ -125,7 +125,7 @@ void Jugador::recibirEntrada()
 {
   string orden = recibirUnCaracter();
   if (orden == "B")
-    barca->moverBarca();
+    barca->moverBarca(orillaIzquierda,orillaDerecha,true);
 
   else if (orden == "S")
     exit(0);
@@ -136,11 +136,11 @@ void Jugador::recibirEntrada()
   else
   {
     // realizar el movimiento de un personaje
-    if (orillaIzquierda->moverPersonaje(orden))
+    if (barca->moverPersonaje(orden))
     {
       return;
     }
-    if (barca->moverPersonaje(orden))
+    if (orillaIzquierda->moverPersonaje(orden))
     {
       return;
     }
@@ -161,15 +161,44 @@ void Jugador::reiniciar()
   // regresa la barca al lado de la orilla izquierda
   if (barca->getPosicion() == 2)
   {
-    barca->setPosicion(1);
+    barca->moverBarca(orillaIzquierda,orillaDerecha,false);
   }
 }
 
 bool Jugador::comprobarEstadoDelJuego()
 {
   // se verifica si algun individuo ha podido comerse a otro
-  // Para Derech
+
+  // Para Derecha
   Personaje *personajeMuerto = orillaDerecha->algunPersonajeHaSidoComido();
+  // throw "Personaje muerto : " + personajeMuerto->getNombre() + " ";
+  if (personajeMuerto)
+  {
+    mostrarJuego();
+
+    // Mensaje
+    cout << "Se murio el " << personajeMuerto->getNombre() << endl;
+    cout << endl;
+
+    menuDespuesDeGanarOPerder();
+  }
+
+  // Para Izquierda
+  personajeMuerto = orillaIzquierda->algunPersonajeHaSidoComido();
+  // throw "Personaje muerto : " + personajeMuerto->getNombre() + " ";
+  if (personajeMuerto)
+  {
+    mostrarJuego();
+
+    // Mensaje
+    cout << "Se murio el " << personajeMuerto->getNombre();
+
+    menuDespuesDeGanarOPerder();
+  }
+
+  // Para Barca
+  personajeMuerto = barca->algunPersonajeHaSidoComido();
+  // throw "Personaje muerto : " + personajeMuerto->getNombre() + " ";
   if (personajeMuerto)
   {
     mostrarJuego();

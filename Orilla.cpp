@@ -62,12 +62,7 @@ void Orilla::vincularBarca(Barca *barca)
 
 void Orilla::desvincularBarca()
 {
-  if (barca)
-  {
-    delete barca;
-    barca = nullptr;
-    setEstaBarca(false);
-  }
+  setEstaBarca(false);
 }
 
 bool Orilla::moverPersonaje(string primeraLetra)
@@ -80,7 +75,7 @@ bool Orilla::moverPersonaje(string primeraLetra)
     return false;
   }
   // Si no existe una barca vinculada singinifica que la barca esta al otro lado del rio
-  if (!barca)
+  if (!getEstaBarca())
   {
     throw personajes[personajeAMover]->getNombre() + " no puede saltar al rio ";
   }
