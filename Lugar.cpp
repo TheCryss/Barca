@@ -244,7 +244,7 @@ bool Lugar::moverPersonaje(string primeraLetra)
   return true;
 }
 
-void Lugar::imprimirLugar()
+string Lugar::imprimirLugar()
 {
   string tab = "";
   int auxPos = getPosicion();
@@ -252,19 +252,29 @@ void Lugar::imprimirLugar()
   {
     tab += "\t";
   }
-  cout << tab << getNombre();
+  tab += getNombre();
+  return tab;
 }
 
-void Lugar::imprimirPersonajes()
+string Lugar::imprimirPersonaje(Personaje *personaje)
 {
-  for (Personaje *personaje : *getPersonajes())
+  string tab = "";
+  int auxPos = getPosicion();
+  if (auxPos == 0)
   {
-    string tab = "";
-    int auxPos = getPosicion();
-    for (int i = 0; i < auxPos * 2; i++)
-    {
-      tab += "\t";
-    }
-    cout << tab << personaje->getNombre() << endl;
+    return personaje->getNombre();
   }
+  else if (auxPos == 1)
+  {
+    tab += "\t\t" + personaje->getNombre();
+  }
+  else if (auxPos == 2)
+  {
+    tab += "\t\t\t" + personaje->getNombre();
+  }
+  else
+  {
+    tab += "\t\t\t\t" + personaje->getNombre();
+  }
+  return tab;
 }

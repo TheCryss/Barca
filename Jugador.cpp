@@ -66,19 +66,28 @@ void Jugador::mostrarJuego()
 
   // Se muestran los lugares
   // Se muestra orilla izquierda
-  orillaIzquierda->imprimirLugar();
+  cout << orillaIzquierda->imprimirLugar(barca);
 
-  barca->imprimirLugar();
+  cout << barca->imprimirLugar();
 
-  orillaDerecha->imprimirLugar();
+  cout << orillaDerecha->imprimirLugar(barca);
 
   cout << endl;
 
   // Se muestran los individuos de cada lugar
 
-  orillaIzquierda->imprimirPersonajes();
-  orillaDerecha->imprimirPersonajes();
-  barca->imprimirPersonajes();
+  for (Personaje *personaje : *orillaIzquierda->getPersonajes())
+  {
+    cout << orillaIzquierda->imprimirPersonaje(personaje) << endl;
+  }
+  for (Personaje *personaje : *barca->getPersonajes())
+  {
+    cout << barca->imprimirPersonaje(personaje) << endl;
+  }
+  for (Personaje *personaje : *orillaDerecha->getPersonajes())
+  {
+    cout << orillaDerecha->imprimirPersonaje(personaje) << endl;
+  }
 
   cout << endl;
 }
@@ -125,7 +134,7 @@ void Jugador::recibirEntrada()
 {
   string orden = recibirUnCaracter();
   if (orden == "B")
-    barca->moverBarca(orillaIzquierda,orillaDerecha,true);
+    barca->moverBarca(orillaIzquierda, orillaDerecha, true);
 
   else if (orden == "S")
     exit(0);
@@ -161,7 +170,7 @@ void Jugador::reiniciar()
   // regresa la barca al lado de la orilla izquierda
   if (barca->getPosicion() == 2)
   {
-    barca->moverBarca(orillaIzquierda,orillaDerecha,false);
+    barca->moverBarca(orillaIzquierda, orillaDerecha, false);
   }
 }
 

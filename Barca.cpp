@@ -244,13 +244,14 @@ bool Barca::moverPersonaje(string primeraLetra)
   return false;
 }
 
-void Barca::imprimirLugar()
-{
-  string tab = "";
-  int auxPos = getPosicion();
-  for (int i = 0; i < auxPos; i++)
-  {
-    tab += "\t";
-  }
-  cout << tab << getNombre() << " " << getPosicion();
-}
+// string Barca::imprimirLugar()
+// {
+//   string tab = "";
+//   int auxPos = getPosicion();
+//   for (int i = 0; i < auxPos; i++)
+//   {
+//     tab += "\t";
+//   }
+//   tab += getNombre();
+//   return tab ;
+// }

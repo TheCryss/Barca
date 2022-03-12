@@ -75,7 +75,7 @@ public:
   */
   virtual bool moverPersonaje(string primeraLetra);
 
-  virtual void imprimirLugar();
+  // virtual string imprimirLugar();
 };
 
 #endif

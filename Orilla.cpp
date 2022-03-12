@@ -92,3 +92,24 @@ bool Orilla::moverPersonaje(string primeraLetra)
     throw(string) "La barca esta llena... No se puede subir nadie más";
   }
 }
+
+string Orilla::imprimirLugar(Barca *barca)
+{
+  if (getNombre() == "Izquierda" || getNombre() == "IZQUIERDA" || getNombre() == "izquierda")
+  {
+    return getNombre();
+  }
+  else
+  {
+    if (barca->getPosicion() == 1)
+    {
+      string aux = "\t \t" + getNombre();
+      return aux;
+    }
+    else
+    {
+      string aux = " \t" + getNombre();
+      return aux;
+    }
+  }
+}

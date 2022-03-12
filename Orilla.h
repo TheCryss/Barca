@@ -60,6 +60,8 @@ public:
     Mover al personaje cuyo nombre empiece por la primera letra pasada por paramtero. Este personaje se mueve del vector personajes de la clase Orilla al vector de personajes de la clase Barca, siempre y cuando la relación con la Barca por medio del atributo no sea nula, pues si es nula significa que la barca esta en la otra orilla
   */
   bool moverPersonaje(string primeraLetra);
+
+  virtual string imprimirLugar(Barca *barca);
 };
 
 #endif

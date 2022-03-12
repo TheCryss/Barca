@@ -108,10 +108,9 @@ public:
 
   virtual bool moverPersonaje(string primeraLetra);
 
-  virtual void imprimirLugar();
+  virtual string imprimirLugar();
 
-virtual void imprimirPersonajes();
-
+  virtual string imprimirPersonaje(Personaje *personaje);
 };
 
 #endif
