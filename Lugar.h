@@ -106,10 +106,19 @@ public:
   */
   virtual int buscarPorLetra(string primeraLetra);
 
+  /*
+    Metodo para mover un personaje el cual solo retorna true pues son las clases hijas que van a definir realmente el metodo, pues este cambia si la clase es Barca u Orilla
+  */
   virtual bool moverPersonaje(string primeraLetra);
 
+  /*
+    Imprimir el lugar dependiendo de la posicion de este. Supiendo que posicion=n, entonces pondra n tabs antes de mostrar el nombre del lugar
+  */
   virtual string imprimirLugar();
 
+  /*
+    Imprimir el personaje dependiendo de la posicion del lugar en donde este personaje, por lo que pondra un numero determinado de tabs antes de imprimir el nombre del personaje
+  */
   virtual string imprimirPersonaje(Personaje *personaje);
 };
 

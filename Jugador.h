@@ -13,18 +13,29 @@ licencia: GNU-GPL
 Clase: Jugador
 Responsabilidad: representa al jugador humano en el juego, es el objeto que tiene acceso a la consola, muestra el estado del juego y ejecuta las órdenes que recibe desde afuera
 Relaciones:
-- conoce a todos los Lugares por medio de un array de punteros a Jugador (mapa)
+- conoce a Orilla y a Barca por medio de punteros
 */
 
 #ifndef _JUGADOR_H_
 #define _JUGADOR_H_
+
+
+// Para los colores
+#define textoSubrayadoAzul "\e[4;34m"
+#define textoSubrayadoPurpura "\e[4;35m"
+#define textoSubrayadoVerde "\e[4;32m"
+#define textoVerde "\e[0;32m"
+#define textoRojo "\e[0;31m"
+#define textoMarron "\e[0;33m"
+#define textoAzul "\e[0;34m"
+#define textoPurpura "\e[0;35m"
+#define textoGris "\e[0;3m"
 
 #include "Personaje.h"
 #include "Barca.h"
 #include "Orilla.h"
 
 #include <time.h>
-#include <array>
 #include <string>
 
 class Jugador

@@ -103,12 +103,12 @@ string Orilla::imprimirLugar(Barca *barca)
   {
     if (barca->getPosicion() == 1)
     {
-      string aux = "\t \t" + getNombre();
+      string aux = "\t\t" + getNombre();
       return aux;
     }
     else
     {
-      string aux = " \t" + getNombre();
+      string aux = "\t" + getNombre();
       return aux;
     }
   }

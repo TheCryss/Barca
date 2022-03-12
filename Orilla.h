@@ -61,6 +61,9 @@ public:
   */
   bool moverPersonaje(string primeraLetra);
 
+  /*
+  imprimirLugar es una funcion que hereda de la clase padre pero con distinto comportamiento en la clase orilla, la cual imprime el lugar dependiendo del nombre de este y de la posicion de la barca para el caso de la orilla derecha.
+  */
   virtual string imprimirLugar(Barca *barca);
 };
 

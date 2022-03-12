@@ -32,6 +32,7 @@ class Barca : public Lugar
 private:
   Orilla *orillaIzquierda;
   Orilla *orillaDerecha;
+
   bool estaIzquierda;
   bool estaDerecha;
 
@@ -42,10 +43,10 @@ public:
   // Destructor
   virtual ~Barca();
   // Getters
-  Orilla *getOrillaIzquierda();
-  Orilla *getOrillaDerecha();
   bool getEstaIzquierda();
   bool getEstaDerecha();
+  Orilla *getOrillaDerecha();
+  Orilla *getOrillaIzquierda();
   // Setters
   void setEstaIzquierda(bool estado);
   void setEstaDerecha(bool estado);
@@ -59,23 +60,21 @@ public:
   */
   void vincularOrillaDerecha(Orilla *orilla);
   /*
-  Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla derecha si no a un puntero nulo, además de setear el atributo estaOrillaDerecha a false
+    Eliminamos la realcion con la orilla derecha
   */
   void desvincularOrillaDerecha();
   /*
-  Eliminar la relacion de la clase Barca a la clase Orilla por medio del puntero, para que así ya no apunte a la orilla izquierda si no a un puntero nulo, además de setear el atributo estaOrillaIzquierda a false
+    Eliminamos la realcion con la orilla izquierda
   */
   void desvincularOrillaIzquierda();
   /*
-    moverBarca recibe el mapa del juego (un array) e intercambia su posicion en él, así como tambien cambia las relaciones conoce de las orillas, para que estas sepan si estan enlazadas o no a la barca y cambia a sus atributos, para saber en que orilla esta la barca.
+    moverBarca recibe la orillaIzquierda, la orillaDerecha y un parametro que nos servira para sabe si tenemos que verificar si esa el Robot o no para mover la barca, y lo que hara es mover la barca en una posicion u otra enlazandose con la orilla izquierda o la orilla derecha
   */
   void moverBarca(Orilla *orillaIzquierda, Orilla *orillaDerecha, bool verificarConductor = true);
   /*
     Lo que hace es pasar el personaje que esta dentro del vector personajes cuyo nombre empieze con la primera letra pasada por parametro a la orilla que este enlazada la barca en ese momento
   */
   virtual bool moverPersonaje(string primeraLetra);
-
-  // virtual string imprimirLugar();
 };
 
 #endif

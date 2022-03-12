@@ -92,54 +92,17 @@ void Barca::desvincularOrillaIzquierda()
 
 void Barca::vincularOrillaDerecha(Orilla *orilla)
 {
-  // // Vincular el parametro al atributo orillaDerecha
-  // this->orillaDerecha = orilla;
-  // setEstaDerecha(true);
-  // setEstaIzquierda(false);
-  // // Vincular la barca a la orilla derecha
-  // orillaDerecha->vincularBarca(this);
-
-  // // Desvincular la orilla izquierda del atriuto orillaIzquierda
-  // if (orillaIzquierda)
-  // {
-  //   desvincularOrillaIzquierda();
-  //   // Desvincular la barca de la orilla izquierda
-  //   orillaIzquierda->desvincularBarca();
-  // }
   setEstaIzquierda(false);
   setEstaDerecha(true);
   setPosicion(2);
-  // if(orillaIzquierda){
-  //   delete orillaIzquierda;
-  //   orillaIzquierda = nullptr;
-  // }
   orillaDerecha = orilla;
 }
 
 void Barca::vincularOrillaIzquierda(Orilla *orilla)
 {
-  // // Vincular el parametro al atributo orillaIzquierda
-  // this->orillaIzquierda = orilla;
-  // setEstaIzquierda(true);
-  // setEstaDerecha(false);
-  // // Vincular la barca a la orilla Izquierda
-  // orillaIzquierda->vincularBarca(this);
-
-  // // Desvincular la orilla derecha del atriuto orillaDerecha
-  // if (orillaDerecha)
-  // {
-  //   desvincularOrillaDerecha();
-  //   // Desvincular la barca de la orilla Derecha
-  //   orillaDerecha->desvincularBarca();
-  // }
   setEstaIzquierda(true);
   setEstaDerecha(false);
   setPosicion(1);
-  // if (orillaDerecha)
-  // {
-  //   delete orillaDerecha;
-  //   orillaDerecha = nullptr;
-  // }
   orillaIzquierda = orilla;
 }
 
@@ -153,7 +116,6 @@ void Barca::setEstaIzquierda(bool estado)
   this->estaIzquierda = estado;
 }
 
-// ? no se
 void Barca::moverBarca(Orilla *orillaIzquierdam, Orilla *orillaDerecha, bool verificarConductor)
 {
   // Se verifica que el conductor se encuentre en la barca a no ser que el parametro verificarConductor sea falso
@@ -161,35 +123,16 @@ void Barca::moverBarca(Orilla *orillaIzquierdam, Orilla *orillaDerecha, bool ver
   {
     throw "No hay ningun " + this->guardian + " subido en la barca. La barca no se mueve sola!!!";
   }
+
   // Se cambia la posicion de la barca y se redefinen los vecinos dependiendo de donde este situado
-
-  string aux = "";
-  if (this->estaIzquierda == 0)
-  {
-    aux = "False";
-  }
-  else
-  {
-    aux = "True";
-  }
-
-  // throw "Esta izquierda " + aux;
   if (this->estaIzquierda)
   {
-    // vincularOrillaDerecha(orillaDerecha);
-    // setEstaIzquierda(false);
-    // setEstaDerecha(true);
-    // setPosicion(2);
     vincularOrillaDerecha(orillaDerecha);
     orillaDerecha->vincularBarca(this);
     orillaIzquierda->desvincularBarca();
   }
   else
   {
-    // vincularOrillaIzquierda(orillaIzquierda);
-    // setEstaIzquierda(true);
-    // setEstaDerecha(false);
-    // setPosicion(1);
     vincularOrillaIzquierda(orillaIzquierda);
     orillaIzquierda->vincularBarca(this);
     orillaDerecha->desvincularBarca();
@@ -205,15 +148,6 @@ bool Barca::moverPersonaje(string primeraLetra)
   {
     return false;
   }
-  // Vemos a cual orilla esta vinculada
-  // if (getEstaDerecha())
-  // {
-  //   throw "Personaje va para derecha " + this->getNombre();
-  // }
-  // if (getEstaIzquierda())
-  // {
-  //   throw "Personaje va para  izquierda " + this->getNombre();
-  // }
   if (getEstaDerecha())
   {
     if (orillaDerecha->agregarPersonajeBooleano(personajes[personajeAMover]))
@@ -243,15 +177,3 @@ bool Barca::moverPersonaje(string primeraLetra)
   // Si no esta vinculada a ninguna orilla retornamos false
   return false;
 }
-
-// string Barca::imprimirLugar()
-// {
-//   string tab = "";
-//   int auxPos = getPosicion();
-//   for (int i = 0; i < auxPos; i++)
-//   {
-//     tab += "\t";
-//   }
-//   tab += getNombre();
-//   return tab ;
-// }

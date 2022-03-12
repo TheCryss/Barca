@@ -34,43 +34,19 @@ Jugador::~Jugador()
   }
 }
 
-// void Jugador::jugar()
-// {
-//   do
-//   {
-//     mostrarJuego();
-
-//     while (true)
-//     {
-//       // Recibe entradas hasta que sea valida
-//       try
-//       {
-//         recibirEntrada();
-//         break;
-//       }
-//       catch (string mensaje)
-//       {
-//         cout << mensaje << endl;
-//       }
-//     }
-//   } while (comprobarEstadoDelJuego());
-// }
-
 void Jugador::mostrarJuego()
 {
   // Limpiar la consoa
   cout << "\033c";
-  // ! Mirar otra forma de hacerlo
 
-  cout << "\033[1;44;38;2;255;155;0mJUEGO LA BARCA\033[0m" << endl;
+  cout << textoRojo "JUEGO LA BARCA\033" << endl;
 
   // Se muestran los lugares
-  // Se muestra orilla izquierda
-  cout << orillaIzquierda->imprimirLugar(barca);
+  cout << textoSubrayadoAzul << orillaIzquierda->imprimirLugar(barca);
 
-  cout << barca->imprimirLugar();
+  cout << textoSubrayadoPurpura << barca->imprimirLugar();
 
-  cout << orillaDerecha->imprimirLugar(barca);
+  cout << textoSubrayadoVerde << orillaDerecha->imprimirLugar(barca);
 
   cout << endl;
 
@@ -78,15 +54,36 @@ void Jugador::mostrarJuego()
 
   for (Personaje *personaje : *orillaIzquierda->getPersonajes())
   {
-    cout << orillaIzquierda->imprimirPersonaje(personaje) << endl;
+    if (personaje->getNombre() == "Robot" || personaje->getNombre() == "ROBOT")
+    {
+      cout << textoMarron << orillaIzquierda->imprimirPersonaje(personaje) << endl;
+    }
+    else
+    {
+      cout << textoGris << orillaIzquierda->imprimirPersonaje(personaje) << endl;
+    }
   }
   for (Personaje *personaje : *barca->getPersonajes())
   {
-    cout << barca->imprimirPersonaje(personaje) << endl;
+    if (personaje->getNombre() == "Robot" || personaje->getNombre() == "ROBOT")
+    {
+      cout << textoMarron << barca->imprimirPersonaje(personaje) << endl;
+    }
+    else
+    {
+      cout << textoGris << barca->imprimirPersonaje(personaje) << endl;
+    }
   }
   for (Personaje *personaje : *orillaDerecha->getPersonajes())
   {
-    cout << orillaDerecha->imprimirPersonaje(personaje) << endl;
+    if (personaje->getNombre() == "Robot" || personaje->getNombre() == "ROBOT")
+    {
+      cout << textoMarron << orillaDerecha->imprimirPersonaje(personaje) << endl;
+    }
+    else
+    {
+      cout << textoGris << orillaDerecha->imprimirPersonaje(personaje) << endl;
+    }
   }
 
   cout << endl;
