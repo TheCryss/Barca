@@ -1,9 +1,12 @@
 /**
 Archivo: Jugador.cpp
 Autores:
-Carlos Hernandez
-Susana
-Jose Luis
+Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
+Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
+Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
+Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -92,7 +95,7 @@ void Jugador::mostrarJuego()
       }
       else
       {
-        cout << textoGris << lugar->imprimirPersonaje(personaje) << endl;
+        cout << textoMarron << lugar->imprimirPersonaje(personaje) << endl;
       }
     }
   }
@@ -132,7 +135,14 @@ string Jugador::recibirUnCaracter()
   if (orden.size() > 2)
     throw(string) " ¡Solo puedes ingresar dos letras como maximo! ";
 
-  orden[0] = toupper(orden[0]); // se convierte la orden de minúscula a mayúscula
+  // Pasamos la orden a mayuscula
+  for (int i = 0; i < orden.length(); i++)
+  {
+    // Y cambiar cada letra por su representación
+    // mayúscula
+    orden[i] = toupper(orden[i]);
+  }
+  // orden = toupper(orden); // se convierte la orden de minúscula a mayúscula
 
   return orden;
 }
@@ -159,7 +169,7 @@ void Jugador::recibirEntrada()
         return;
       }
     }
-    throw "No hay ningun personaje que empiece con la letra " + orden;
+    throw "No hay ningun personaje que tenga como comando: " + orden;
   }
 }
 
@@ -200,6 +210,9 @@ bool Jugador::comprobarEstadoDelJuego()
       {
         mostrarJuego();
         // Mensaje
+        // Texto obligatorio
+        cout << textoRojo "PERDISTE" << endl;
+        // Texto alternativo
         cout << textoRojo "El personaje " << personaje->getNombre() << " esta muerto, debido a que salto al agua. " << endl;
         menuDespuesDeGanarOPerder();
       }
@@ -215,7 +228,10 @@ bool Jugador::comprobarEstadoDelJuego()
       mostrarJuego();
 
       // Mensaje
-      cout << "Se murio el " << personajeMuerto->getNombre() << endl;
+      // Texto obligatorio
+      cout << textoRojo "PERDISTE" << endl;
+      // Texto alternativo
+      cout << textoRojo "Se murio el " << personajeMuerto->getNombre() << endl;
 
       menuDespuesDeGanarOPerder();
     }
@@ -225,7 +241,8 @@ bool Jugador::comprobarEstadoDelJuego()
   if (mapa[2]->numeroDePersonajes() == totalPersonajes)
   {
     mostrarJuego();
-    cout << "HAS GANADO" << endl;
+    // Texto obligatorio
+    cout << "GANASTE" << endl;
     menuDespuesDeGanarOPerder();
   }
 

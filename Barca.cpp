@@ -1,9 +1,12 @@
 /**
 Archivo: Barca.cpp
 Autores:
-Carlos Hernandez
-Susana
-Jose Luis
+Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
+Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
+Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
+Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -49,12 +52,12 @@ void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
 
 string Barca::imprimirLugar()
 {
-  string tab = "";
+  string aux = "";
   int auxPos = getPosicion();
   for (int i = 0; i < auxPos; i++)
   {
-    tab += "\t";
+    aux += "\t";
   }
-  tab += getNombre();
-  return tab;
+  aux += getNombre();
+  return aux;
 }
