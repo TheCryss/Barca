@@ -11,14 +11,8 @@ licencia: GNU-GPL
 #include "Lugar.h"
 #include <stdio.h>
 
-Lugar::Lugar() : nombre(""), capacidad(-1), estaGuardian(false)
+Lugar::Lugar(int pos, string nombre, int capacidad) : estaGuardian(false), nombre(nombre), capacidad(capacidad), pos(pos), vecino(nullptr), estaVecino(false)
 {
-}
-
-Lugar::Lugar(string nombre, int capacidad) : estaGuardian(false)
-{
-  this->nombre = nombre;
-  this->capacidad = capacidad;
 }
 
 int Lugar::numeroDePersonajes()
@@ -37,6 +31,11 @@ Lugar::~Lugar()
     }
   }
   personajes.clear();
+  if (vecino)
+  {
+    delete vecino;
+    vecino == nullptr;
+  }
 }
 
 string Lugar::getNombre()
@@ -69,6 +68,11 @@ int Lugar::getPosicion()
   return pos;
 }
 
+bool Lugar::getEstaVecino()
+{
+  return estaVecino;
+}
+
 void Lugar::setNombre(string nombre)
 {
   this->nombre = nombre;
@@ -89,17 +93,12 @@ void Lugar::setPosicion(int pos)
   this->pos = pos;
 }
 
-void Lugar::agregarPersonaje(Personaje *personaje)
+void Lugar::setEstaVecino(bool estado)
 {
-  if (numeroDePersonajes() < getCapacidad() || getCapacidad() == -1)
-  {
-    personajes.push_back(personaje);
-    // Una vez agregado el personaje verificamos si ese personaje es o no es guardian, para setearlo en el atributo estGuardian de la clase
-    verificarGuardian();
-  }
+  this->estaVecino = estado;
 }
 
-bool Lugar::agregarPersonajeBooleano(Personaje *personaje)
+bool Lugar::agregarPersonaje(Personaje *personaje)
 {
   if (numeroDePersonajes() < getCapacidad() || getCapacidad() == -1)
   {
@@ -155,6 +154,7 @@ bool Lugar::existePersonajeConNombre(string nombre)
 
 void Lugar::moverATodos(Lugar *lugarDestino)
 {
+  setEstaGuardian(false);
   lugarDestino->agregarPersonajes(personajes);
   // Limpiamos los personajes del vector actual
   for (int indexPersonaje = 0; indexPersonaje < numeroDePersonajes(); indexPersonaje++)
@@ -203,7 +203,6 @@ Personaje *Lugar::algunPersonajeHaSidoComido()
     {
       if (personajes[i]->puedeComer(personajes[j]))
       {
-        personajes[j]->setEstaVivo(false);
         return personajes[j];
       }
     }
@@ -212,7 +211,6 @@ Personaje *Lugar::algunPersonajeHaSidoComido()
     {
       if (personajes[i]->puedeComer(personajes[j]))
       {
-        personajes[j]->setEstaVivo(false);
         return personajes[j];
       }
     }
@@ -221,13 +219,28 @@ Personaje *Lugar::algunPersonajeHaSidoComido()
   return nullptr;
 }
 
-int Lugar::buscarPorLetra(string primeraLetra)
+void Lugar::vincularVecino(Lugar *vecino)
+{
+  this->vecino = vecino;
+  setEstaVecino(true);
+}
+
+void Lugar::desvincularVecino()
+{
+  if (vecino)
+  {
+    vecino = nullptr;
+  }
+  setEstaVecino(false);
+}
+
+int Lugar::buscarPorComando(string comando)
 {
   // busca un individuo y compara su letra inicial con primeraLetra
   int index = 0;
   for (Personaje *personaje : personajes)
   {
-    if (personaje->getNombre()[0] == primeraLetra[0])
+    if (personaje->getComando() == comando)
     {
       return index;
     }
@@ -239,22 +252,51 @@ int Lugar::buscarPorLetra(string primeraLetra)
   return -1;
 }
 
-bool Lugar::moverPersonaje(string primeraLetra)
+bool Lugar::moverPersonaje(string comando)
 {
-  return true;
+  int indicePersonajeAMover = buscarPorComando(comando);
+
+  // Si no encontro al personaje
+  if (indicePersonajeAMover == -1)
+  {
+    return false;
+  }
+
+  // Si no hay ningun vecino significa que el personaje murio al tirarse al agua
+  if (!getEstaVecino())
+  {
+    personajes[indicePersonajeAMover]->setEstaVivo(false);
+    return false;
+    // throw personajes[indicePersonajeAMover]->getNombre() + " no puede saltar al rio"
+  }
+  else
+  {
+    // Agregamos un personaje al Lugar vecino
+    if (vecino->agregarPersonaje(personajes[indicePersonajeAMover]))
+    {
+      // Borramos el personaje de este lugar
+      personajes.erase(personajes.begin() + indicePersonajeAMover);
+      return true;
+    }
+    else
+    {
+      // si la barca esta ocupada con 2 objetos
+      throw(string) "La barca esta llena... Intentalo de nuevo";
+    }
+  }
 }
 
-string Lugar::imprimirLugar()
-{
-  string tab = "";
-  int auxPos = getPosicion();
-  for (int i = 0; i < auxPos; i++)
-  {
-    tab += "\t";
-  }
-  tab += getNombre();
-  return tab;
-}
+// string Lugar::imprimirLugar()
+// {
+//   string tab = "";
+//   int auxPos = getPosicion();
+//   for (int i = 0; i < auxPos; i++)
+//   {
+//     tab += "\t";
+//   }
+//   tab += getNombre();
+//   return tab;
+// }
 
 string Lugar::imprimirPersonaje(Personaje *personaje)
 {

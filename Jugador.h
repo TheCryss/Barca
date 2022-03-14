@@ -34,6 +34,7 @@ Relaciones:
 #include "Personaje.h"
 #include "Barca.h"
 #include "Orilla.h"
+#include "Lugar.h"
 
 #include <time.h>
 #include <string>
@@ -42,8 +43,9 @@ class Jugador
 {
   // Atributos
 protected:
-  Orilla *orillaIzquierda;
-  Orilla *orillaDerecha;
+  vector <Lugar*> mapa;
+  // Orilla *orillaIzquierda;
+  // Orilla *orillaDerecha;
   Barca *barca;
   int totalPersonajes;
 

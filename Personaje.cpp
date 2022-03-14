@@ -12,19 +12,10 @@ licencia: GNU-GPL
 #include <stdio.h>
 
 /*
-  Si no se pasa nada por parametro al momento de instanciar personaje, inicializaremos el atributo nombre y personajeQueCome como vacío, por otra parte el atributo estaVivo por defecto sera verdadero
-*/
-Personaje::Personaje() : nombre(""), personajeQueCome(""), estaVivo(true), pos(1)
-{
-}
-
-/*
   Si se pasa el nombre y personajeQueCome por parametro los asignamos a los atributos de la clase, mientras que el atirbuto estaVivo por defecto es verdadero
 */
-Personaje::Personaje(string nombre, string personajeQueCome) : estaVivo(true), pos(1)
+Personaje::Personaje(string nombre, string comando) : nombre(nombre), comando(comando), estaVivo(true)
 {
-  this->nombre = nombre;
-  this->personajeQueCome = personajeQueCome;
 }
 
 /*
@@ -32,6 +23,13 @@ Personaje::Personaje(string nombre, string personajeQueCome) : estaVivo(true), p
 */
 Personaje::~Personaje()
 {
+  for (Personaje *personaje : personajesQueCome)
+  {
+    if(personaje){
+      delete personaje;
+      personaje = nullptr;
+    }
+  }
 }
 
 /*
@@ -45,9 +43,9 @@ string Personaje::getNombre()
 /*
   Obtener el valor del atributo personajeQueCome
 */
-string Personaje::getPersonajeQueCome()
+vector <Personaje*> Personaje::getPersonajesQueCome()
 {
-  return this->personajeQueCome;
+  return this->personajesQueCome;
 }
 
 /*
@@ -59,11 +57,11 @@ bool Personaje::getEstaVivo()
 }
 
 /*
-  Obtener el valor del atributo pos
+  Obtener el valor del atributo comando
 */
-int Personaje::getPosicion()
+string Personaje::getComando()
 {
-  return this->pos;
+  return this->comando;
 }
 
 /*
@@ -75,11 +73,11 @@ void Personaje::setNombre(string nombre)
 }
 
 /*
-  Asignar un valor al atritbuto personajeQueCome
+  Asignar un personaje al vector personajesQueCome
 */
-void Personaje::setPersonajeQueCome(string personajeQueCome)
+void Personaje::agregarPersonajeQueCome(Personaje *personajeQueCome)
 {
-  this->personajeQueCome = personajeQueCome;
+  personajesQueCome.push_back(personajeQueCome);
 }
 
 /*
@@ -91,11 +89,11 @@ void Personaje::setEstaVivo(bool estado)
 }
 
 /*
-  Asignar un valor al atritbuto pos
+  Asignar un valor al atritbuto comando
 */
-void Personaje::setPosicion(int pos)
+void Personaje::setComando(string comando)
 {
-  this->pos= pos;
+  this->comando = comando;
 }
 
 /*
@@ -103,14 +101,12 @@ void Personaje::setPosicion(int pos)
 */
 bool Personaje::puedeComer(Personaje *personaje)
 {
-  if(this->getPosicion()!=personaje->getPosicion()){
-    throw this->getNombre() + " esta en una posicion diferente a " + personaje->getNombre();
-    return false;
-  }else{
-    if (personaje->getNombre() == getPersonajeQueCome())
+  for(Personaje* personajeVector : personajesQueCome){
+    if (personaje->getNombre() == personajeVector->getNombre())
     {
+      personajeVector->setEstaVivo(false);
       return true;
     }
-    return false;
   }
+  return false;
 }

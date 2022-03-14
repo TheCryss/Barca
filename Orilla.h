@@ -21,50 +21,20 @@ Relaciones:
 #ifndef _ORILLA_H_
 #define _ORILLA_H_
 
-#include "Barca.h"
 #include "Lugar.h"
 
-
-class Barca;
 class Orilla : public Lugar
 {
   // Atributos
 private:
-  Barca *barca;
-  bool estaBarca;
 
 public:
   // Constructor
-  /*
-    Tenemos dos constructores, para que así existan dos maneras de intanciar un objeto de la clase Orilla
-  */
-  Orilla(string nombre, int capacidad = -1);
-  Orilla();
+  Orilla(int pos, string nombre, int capacidad = -1);
   // Destructor
   virtual ~Orilla();
-  // Getters
-  Barca *getbarca();
-  bool getEstaBarca();
-  // Setters
-  void setEstaBarca(bool estado);
-  // Metodos
-  /*
-    Asignar al atributo barca de la clase Orilla un puntero de la clase Barca pasado por parametro, y a su vez setear el atributo estaBarca a true.
-  */
-  void vincularBarca(Barca *barca);
-  /*
-    Eliminar la relacion de la clase Orilla a la clase Barca por medio del puntero, para que así ya no apunte a la barca si no a un puntero nulo, además de setear el atributo estaBarca a false
-  */
-  void desvincularBarca();
-  /*
-    Mover al personaje cuyo nombre empiece por la primera letra pasada por paramtero. Este personaje se mueve del vector personajes de la clase Orilla al vector de personajes de la clase Barca, siempre y cuando la relación con la Barca por medio del atributo no sea nula, pues si es nula significa que la barca esta en la otra orilla
-  */
-  bool moverPersonaje(string primeraLetra);
 
-  /*
-  imprimirLugar es una funcion que hereda de la clase padre pero con distinto comportamiento en la clase orilla, la cual imprime el lugar dependiendo del nombre de este y de la posicion de la barca para el caso de la orilla derecha.
-  */
-  virtual string imprimirLugar(Barca *barca);
+  virtual string imprimirLugar();
 };
 
 #endif

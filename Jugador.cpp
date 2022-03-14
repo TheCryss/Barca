@@ -10,23 +10,35 @@ licencia: GNU-GPL
 */
 #include "Jugador.h"
 
-Jugador::Jugador(Barca *barca, Orilla *orillaIzquierda, Orilla *orillaDerecha) : barca(barca), orillaIzquierda(orillaIzquierda), orillaDerecha(orillaDerecha)
+Jugador::Jugador(Barca *barca, Orilla *orillaIzquierda, Orilla *orillaDerecha) : barca(barca)
 {
   totalPersonajes = orillaIzquierda->numeroDePersonajes();
+  mapa.push_back(orillaIzquierda);
+  mapa.push_back(barca);
+  mapa.push_back(orillaDerecha);
 }
 
 Jugador::~Jugador()
 {
-  if (orillaIzquierda)
+  for (Lugar *lugar : mapa)
   {
-    delete orillaIzquierda;
-    orillaIzquierda = nullptr;
+    if (lugar)
+    {
+      delete lugar;
+      lugar = nullptr;
+    }
   }
-  if (orillaDerecha)
-  {
-    delete orillaDerecha;
-    orillaDerecha = nullptr;
-  }
+  mapa.clear();
+  // if (orillaIzquierda)
+  // {
+  //   delete orillaIzquierda;
+  //   orillaIzquierda = nullptr;
+  // }
+  // if (orillaDerecha)
+  // {
+  //   delete orillaDerecha;
+  //   orillaDerecha = nullptr;
+  // }
   if (barca)
   {
     delete barca;
@@ -39,50 +51,43 @@ void Jugador::mostrarJuego()
   // Limpiar la consoa
   cout << "\033c";
 
-  cout << textoRojo "JUEGO LA BARCA\033" << endl;
+  cout << textoRojo "JUEGO LA BARCA" << endl;
+
+  cout << textoGris "El juego consiste en pasar todos los personajes del rio al otro lado.... INSERTE MENSAJES" << endl;
 
   // Se muestran los lugares
-  cout << textoSubrayadoAzul << orillaIzquierda->imprimirLugar(barca);
-
-  cout << textoSubrayadoPurpura << barca->imprimirLugar();
-
-  cout << textoSubrayadoVerde << orillaDerecha->imprimirLugar(barca);
+  for (Lugar *lugar : mapa)
+  {
+    if (lugar->getNombre() == "Barca")
+    {
+      cout << textoSubrayadoAzul << lugar->imprimirLugar();
+    }
+    if (lugar->getNombre() == "Izquierda")
+    {
+      cout << textoSubrayadoPurpura << lugar->imprimirLugar();
+    }
+    if (lugar->getNombre() == "Derecha")
+    {
+      cout << textoSubrayadoVerde << lugar->imprimirLugar();
+    }
+  }
 
   cout << endl;
+  cout << endl;
 
-  // Se muestran los individuos de cada lugar
-
-  for (Personaje *personaje : *orillaIzquierda->getPersonajes())
+  // Se muestran los personajes de cada lugar
+  for (Lugar *lugar : mapa)
   {
-    if (personaje->getNombre() == "Robot" || personaje->getNombre() == "ROBOT")
+    for (Personaje *personaje : *lugar->getPersonajes())
     {
-      cout << textoMarron << orillaIzquierda->imprimirPersonaje(personaje) << endl;
-    }
-    else
-    {
-      cout << textoGris << orillaIzquierda->imprimirPersonaje(personaje) << endl;
-    }
-  }
-  for (Personaje *personaje : *barca->getPersonajes())
-  {
-    if (personaje->getNombre() == "Robot" || personaje->getNombre() == "ROBOT")
-    {
-      cout << textoMarron << barca->imprimirPersonaje(personaje) << endl;
-    }
-    else
-    {
-      cout << textoGris << barca->imprimirPersonaje(personaje) << endl;
-    }
-  }
-  for (Personaje *personaje : *orillaDerecha->getPersonajes())
-  {
-    if (personaje->getNombre() == "Robot" || personaje->getNombre() == "ROBOT")
-    {
-      cout << textoMarron << orillaDerecha->imprimirPersonaje(personaje) << endl;
-    }
-    else
-    {
-      cout << textoGris << orillaDerecha->imprimirPersonaje(personaje) << endl;
+      if (personaje->getNombre() == "Robot")
+      {
+        cout << textoVerde << lugar->imprimirPersonaje(personaje) << endl;
+      }
+      else
+      {
+        cout << textoGris << lugar->imprimirPersonaje(personaje) << endl;
+      }
     }
   }
 
@@ -112,15 +117,14 @@ void Jugador::jugar()
 string Jugador::recibirUnCaracter()
 {
   string orden = "";
-  cout << "Ingrese una orden: \033[1;38;2;61;242;234m";
+  cout << textoGris "Ingrese una orden: ";
   getline(cin, orden);
-  cout << "\033[0m";
 
   if (orden.size() == 0)
     throw(string) "¡No ha ingresado ninguna orden!";
 
-  if (orden.size() > 1)
-    throw(string) "¡Solo puedes ingresar una letra!";
+  if (orden.size() > 2)
+    throw(string) "¡Solo puedes ingresar dos letras como maximo!";
 
   orden[0] = toupper(orden[0]); // se convierte la orden de minúscula a mayúscula
 
@@ -131,7 +135,7 @@ void Jugador::recibirEntrada()
 {
   string orden = recibirUnCaracter();
   if (orden == "B")
-    barca->moverBarca(orillaIzquierda, orillaDerecha, true);
+    barca->moverBarca(&mapa);
 
   else if (orden == "S")
     exit(0);
@@ -141,18 +145,13 @@ void Jugador::recibirEntrada()
 
   else
   {
-    // realizar el movimiento de un personaje
-    if (barca->moverPersonaje(orden))
+    // Realizar el movimiento de un personaje
+    for (Lugar *lugar : mapa)
     {
-      return;
-    }
-    if (orillaIzquierda->moverPersonaje(orden))
-    {
-      return;
-    }
-    if (orillaDerecha->moverPersonaje(orden))
-    {
-      return;
+      if (lugar->moverPersonaje(orden))
+      {
+        return;
+      }
     }
     throw "No hay ningun personaje que empiece con la letra " + orden;
   }
@@ -161,62 +160,50 @@ void Jugador::recibirEntrada()
 void Jugador::reiniciar()
 {
   // regresa todos los individuos a la orilla izquierda
-  barca->moverATodos(orillaIzquierda);
-  orillaDerecha->moverATodos(orillaIzquierda);
+  barca->moverATodos(mapa[0]);
+  mapa[2]->moverATodos(mapa[0]);
 
   // regresa la barca al lado de la orilla izquierda
   if (barca->getPosicion() == 2)
   {
-    barca->moverBarca(orillaIzquierda, orillaDerecha, false);
+    barca->moverBarca(&mapa, false);
   }
 }
 
 bool Jugador::comprobarEstadoDelJuego()
 {
+  // Verifica que nadie este muerto
+  for (Lugar *lugar : mapa)
+  {
+    for (Personaje *personaje : *lugar->getPersonajes())
+    {
+      if (personaje->getEstaVivo() == false)
+      {
+        mostrarJuego();
+        // Mensaje
+        cout << textoRojo "El personaje " << personaje->getNombre() << " esta muerto";
+        menuDespuesDeGanarOPerder();
+      }
+    }
+  }
+
   // se verifica si algun individuo ha podido comerse a otro
-
-  // Para Derecha
-  Personaje *personajeMuerto = orillaDerecha->algunPersonajeHaSidoComido();
-  // throw "Personaje muerto : " + personajeMuerto->getNombre() + " ";
-  if (personajeMuerto)
+  for (Lugar *lugar : mapa)
   {
-    mostrarJuego();
+    Personaje *personajeMuerto = lugar->algunPersonajeHaSidoComido();
+    if (personajeMuerto)
+    {
+      mostrarJuego();
 
-    // Mensaje
-    cout << "Se murio el " << personajeMuerto->getNombre() << endl;
-    cout << endl;
+      // Mensaje
+      cout << "Se murio el " << personajeMuerto->getNombre();
 
-    menuDespuesDeGanarOPerder();
-  }
-
-  // Para Izquierda
-  personajeMuerto = orillaIzquierda->algunPersonajeHaSidoComido();
-  // throw "Personaje muerto : " + personajeMuerto->getNombre() + " ";
-  if (personajeMuerto)
-  {
-    mostrarJuego();
-
-    // Mensaje
-    cout << "Se murio el " << personajeMuerto->getNombre();
-
-    menuDespuesDeGanarOPerder();
-  }
-
-  // Para Barca
-  personajeMuerto = barca->algunPersonajeHaSidoComido();
-  // throw "Personaje muerto : " + personajeMuerto->getNombre() + " ";
-  if (personajeMuerto)
-  {
-    mostrarJuego();
-
-    // Mensaje
-    cout << "Se murio el " << personajeMuerto->getNombre();
-
-    menuDespuesDeGanarOPerder();
+      menuDespuesDeGanarOPerder();
+    }
   }
 
   // se verifica que todos los individuos han pasado a la orilla derecha
-  if (orillaDerecha->numeroDePersonajes() == totalPersonajes)
+  if (mapa[2]->numeroDePersonajes() == totalPersonajes)
   {
     mostrarJuego();
     cout << "HAS GANADO" << endl;
@@ -228,7 +215,7 @@ bool Jugador::comprobarEstadoDelJuego()
 
 void Jugador::menuDespuesDeGanarOPerder()
 {
-  cout << "Para salir del juego presione la letra \033[1;36mS\033[0m, para reiniciar presione la letra \033[1;36mJ\033[0m." << endl;
+  cout << textoGris "Para salir del juego presione la letra para reiniciar presione la letra " << endl;
 
   string orden;
   try

@@ -20,23 +20,23 @@ Historia: Queremos alojar los promedios de n estudiante, para luego mostrarlos
 
 #include <string>
 
-// Funcion main
+// Funcion main.
 int main()
 {
-  Orilla orillaIzquierda("Izquierda");
-  orillaIzquierda.setPosicion(0);
-  Barca barca("Barca", 2);
-  barca.setPosicion(1);
-  Orilla orillaDerecha("Derecha");
-  orillaDerecha.setPosicion(3);
+  Orilla orillaIzquierda(0, "Izquierda");
+  Barca barca;
+  Orilla orillaDerecha(3, "Derecha");
 
-  barca.vincularOrillaIzquierda(&orillaIzquierda);
-  orillaIzquierda.vincularBarca(&barca);
+  barca.vincularVecino(&orillaIzquierda);
+  orillaIzquierda.vincularVecino(&barca);
 
-  Personaje robot("Robot", "");
-  Personaje zorro("Zorro", "Conejo");
-  Personaje conejo("Conejo", "Lechuga");
-  Personaje lechuga("Lechuga", "");
+  Personaje robot("Robot", "R");
+  Personaje zorro("Zorro", "Z");
+  Personaje conejo("Conejo", "C");
+  Personaje lechuga("Lechuga", "L");
+
+  zorro.agregarPersonajeQueCome(&conejo);
+  conejo.agregarPersonajeQueCome(&lechuga);
 
   vector<Personaje *> personajes = {&robot, &zorro, &conejo, &lechuga};
 

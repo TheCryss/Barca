@@ -28,8 +28,10 @@ class Lugar
 {
   // Atributos
 protected:
-  string nombre;
   vector<Personaje *> personajes;
+  Lugar *vecino;
+  bool estaVecino;
+  string nombre;
   int capacidad;
   const string guardian = "Robot";
   bool estaGuardian;
@@ -37,11 +39,7 @@ protected:
 
 public:
   // Constructor
-  /*
-    Hay dos constructores para poder tener la posibilidad de instanciar a la clase, ya sea pasandole parametros o no.
-  */
-  Lugar(string nombre, int capacidad);
-  Lugar();
+  Lugar(int pos, string nombre, int capacidad);
   // Destructor
   virtual ~Lugar();
   // Getters
@@ -51,24 +49,26 @@ public:
   virtual string getGuardian();
   virtual bool getEstaGuardian();
   virtual int getPosicion();
+  virtual bool getEstaVecino();
   // Setters
   virtual void setNombre(string nombre);
   virtual void setCapacidad(int capacidad);
   virtual void setEstaGuardian(bool estado);
   virtual void setPosicion(int pos);
+  virtual void setEstaVecino(bool estado);
   // Funciones
   /*
     Saber el numero de punteros a Personajes que hay en el vectore personajes
   */
   virtual int numeroDePersonajes();
-  /*
-    Agregar un puntero de Personaje al vector personajes
-  */
-  virtual void agregarPersonaje(Personaje *personaje);
+  // /*
+  //   Agregar un puntero de Personaje al vector personajes
+  // */
+  // virtual void agregarPersonaje(Personaje *personaje);
   /*
     Agregar un puntero de Personaje al vector personajes, con la diferencia de que si es posible (la capacidad no es excedida) retorna true, pero si no es posible (la capacidad es excedida) retorna true
   */
-  virtual bool agregarPersonajeBooleano(Personaje *personaje);
+  virtual bool agregarPersonaje(Personaje *personaje);
   /*
     Agregar varios personajes al vector personajes, si es posible (la capcidad no es excedida) retorna true, si no es posible (la capacidad es excedida) retorna false
   */
@@ -104,22 +104,25 @@ public:
   /*
     Retornar -1 si no se encontro ningun Personaje dentro del vector cuyo nombre empiece con la primera letra pasado por parametro. Si lo encuentra, retorna el indice donde se encuentra el personaje dentro del vector.
   */
-  virtual int buscarPorLetra(string primeraLetra);
+  virtual int buscarPorComando(string comando);
 
   /*
     Metodo para mover un personaje el cual solo retorna true pues son las clases hijas que van a definir realmente el metodo, pues este cambia si la clase es Barca u Orilla
   */
-  virtual bool moverPersonaje(string primeraLetra);
+  virtual bool moverPersonaje(string comando);
 
   /*
     Imprimir el lugar dependiendo de la posicion de este. Supiendo que posicion=n, entonces pondra n tabs antes de mostrar el nombre del lugar
   */
-  virtual string imprimirLugar();
+  virtual string imprimirLugar() = 0;
 
   /*
     Imprimir el personaje dependiendo de la posicion del lugar en donde este personaje, por lo que pondra un numero determinado de tabs antes de imprimir el nombre del personaje
   */
   virtual string imprimirPersonaje(Personaje *personaje);
+
+  virtual void vincularVecino(Lugar *vecino);
+  virtual void desvincularVecino();
 };
 
 #endif

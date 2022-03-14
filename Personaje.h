@@ -18,6 +18,7 @@ Relaciones: Ninguna
 #ifndef _PERSONAJE_H_
 #define _PERSONAJE_H_
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Personaje
@@ -25,30 +26,26 @@ class Personaje
   // Atributos
 protected:
   string nombre;
-  string personajeQueCome;
+  string comando;
+  vector<Personaje *> personajesQueCome;
   bool estaVivo;
-  int pos;
 
 public:
   // Constructor
-  /*
-    Tenemos dos constructores, para que así existan dos maneras de intanciar un objeto de la clase Personaje
-  */
-  Personaje(string nombre, string personajeQueCome="");
-  Personaje();
+  Personaje(string nombre, string comando);
   // Destructor
   virtual ~Personaje();
   // Getters
   virtual string getNombre();
-  virtual string getPersonajeQueCome();
+  virtual vector<Personaje *> getPersonajesQueCome();
   virtual bool getEstaVivo();
-  virtual int getPosicion();
+  virtual string getComando();
   // Setters
   virtual void setNombre(string nombre);
-  virtual void setPersonajeQueCome(string personajeQueCome);
   virtual void setEstaVivo(bool estado);
-  virtual void setPosicion(int pos);
+  virtual void setComando(string comando);
   // Funciones
+  virtual void agregarPersonajeQueCome(Personaje *personajeQueCome);
   /*
     puedeComer : retorna true si el atributo nombre del personaje pasado por parametro coincide con el atributo personajeQueCome del personaje actual
   */
