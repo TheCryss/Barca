@@ -32,21 +32,22 @@ Jugador::~Jugador()
     }
   }
   mapa.clear();
-  // if (orillaIzquierda)
-  // {
-  //   delete orillaIzquierda;
-  //   orillaIzquierda = nullptr;
-  // }
-  // if (orillaDerecha)
-  // {
-  //   delete orillaDerecha;
-  //   orillaDerecha = nullptr;
-  // }
+
   if (barca)
   {
     delete barca;
     barca = nullptr;
   }
+}
+
+bool Jugador::getEstaJuegoIniciado()
+{
+  return estaJuegoIniciado;
+}
+
+void Jugador::setEstaJuegoIniciado(bool estado)
+{
+  estaJuegoIniciado = estado;
 }
 
 void Jugador::mostrarJuego()
@@ -86,7 +87,8 @@ void Jugador::mostrarJuego()
   {
     for (Personaje *personaje : *lugar->getPersonajes())
     {
-      if(personaje->getEstaVivo()==false){
+      if (personaje->getEstaVivo() == false)
+      {
         cout << textoSubrayadoRojo << lugar->imprimirPersonaje(personaje) << endl;
       }
       else if (personaje->getNombre() == "Robot")
@@ -123,7 +125,7 @@ void Jugador::jugar()
   } while (comprobarEstadoDelJuego());
 }
 
-string Jugador::recibirUnCaracter()
+string Jugador::recibirCaracteres()
 {
   string orden = "";
   cout << textoGris " Ingrese una orden: ";
@@ -138,27 +140,30 @@ string Jugador::recibirUnCaracter()
   // Pasamos la orden a mayuscula
   for (int i = 0; i < orden.length(); i++)
   {
-    // Y cambiar cada letra por su representación
-    // mayúscula
     orden[i] = toupper(orden[i]);
   }
-  // orden = toupper(orden); // se convierte la orden de minúscula a mayúscula
 
   return orden;
 }
 
 void Jugador::recibirEntrada()
 {
-  string orden = recibirUnCaracter();
+  string orden = recibirCaracteres();
   if (orden == "B")
+  {
     barca->moverBarca(&mapa);
-
-  else if (orden == "S")
-    exit(0);
-
-  else if (orden == "J")
-    reiniciar();
-
+  }
+  else if (!getEstaJuegoIniciado())
+  {
+    if (orden == "S")
+    {
+      exit(0);
+    }
+    else if (orden == "J")
+    {
+      reiniciar();
+    }
+  }
   else
   {
     // Realizar el movimiento de un personaje
@@ -175,6 +180,7 @@ void Jugador::recibirEntrada()
 
 void Jugador::reiniciar()
 {
+  setEstaJuegoIniciado(true);
   // regresa todos los individuos a la orilla izquierda
   for (Lugar *lugar : mapa)
   {
@@ -191,12 +197,13 @@ void Jugador::reiniciar()
   mapa[2]->desvincularVecino();
 
   // Ponemos a todos los personajes vivos
-  for(Lugar* lugar : mapa){
-    for(Personaje* personaje : *lugar->getPersonajes()){
+  for (Lugar *lugar : mapa)
+  {
+    for (Personaje *personaje : *lugar->getPersonajes())
+    {
       personaje->setEstaVivo(true);
     }
   }
-
 }
 
 bool Jugador::comprobarEstadoDelJuego()
@@ -208,6 +215,7 @@ bool Jugador::comprobarEstadoDelJuego()
     {
       if (personaje->getEstaVivo() == false)
       {
+        setEstaJuegoIniciado(false);
         mostrarJuego();
         // Mensaje
         // Texto obligatorio
@@ -225,8 +233,8 @@ bool Jugador::comprobarEstadoDelJuego()
     Personaje *personajeMuerto = lugar->algunPersonajeHaSidoComido();
     if (personajeMuerto)
     {
+      setEstaJuegoIniciado(false);
       mostrarJuego();
-
       // Mensaje
       // Texto obligatorio
       cout << textoRojo "PERDISTE" << endl;
@@ -240,6 +248,7 @@ bool Jugador::comprobarEstadoDelJuego()
   // se verifica que todos los individuos han pasado a la orilla derecha
   if (mapa[2]->numeroDePersonajes() == totalPersonajes)
   {
+    setEstaJuegoIniciado(false);
     mostrarJuego();
     // Texto obligatorio
     cout << "GANASTE" << endl;
@@ -258,7 +267,7 @@ void Jugador::menuDespuesDeGanarOPerder()
   string orden;
   try
   {
-    orden = recibirUnCaracter();
+    orden = recibirCaracteres();
   }
   catch (string mensaje)
   {

@@ -28,13 +28,12 @@ string Orilla::imprimirLugar()
   {
     string aux = getNombre();
     return aux;
-    // return getNombre();
   }
   else
   {
     if (!getEstaVecino())
     {
-      string aux ="\t\t" + getNombre();
+      string aux = "\t\t" + getNombre();
       return aux;
     }
     else

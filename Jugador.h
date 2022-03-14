@@ -14,16 +14,16 @@ licencia: GNU-GPL
 
 /**
 Clase: Jugador
-Responsabilidad: representa al jugador humano en el juego, es el objeto que tiene acceso a la consola, muestra el estado del juego y ejecuta las órdenes que recibe desde afuera
+Responsabilidad: Representa al jugador humano en el juego, es el objeto que tiene acceso a la consola, muestra el estado del juego y ejecuta las órdenes que recibe desde afuera
 Relaciones:
-- conoce a Orilla y a Barca por medio de punteros
+- Contiene a Lugar : Por medio de un vector a punteros de la clase Lugar
+- Conoce a barca : Con el fin de llamar al metodo propio de la barca (moverBarca)
 */
 
 #ifndef _JUGADOR_H_
 #define _JUGADOR_H_
 
-
-// Para los colores
+// Definimos los colores que se utilizaran para la consola
 #define textoSubrayadoAzul "\e[4;34m"
 #define textoSubrayadoPurpura "\e[4;35m"
 #define textoSubrayadoVerde "\e[4;32m"
@@ -40,18 +40,17 @@ Relaciones:
 #include "Orilla.h"
 #include "Lugar.h"
 
-#include <time.h>
+// #include <time.h>
 #include <string>
 
 class Jugador
 {
   // Atributos
 protected:
-  vector <Lugar*> mapa;
-  // Orilla *orillaIzquierda;
-  // Orilla *orillaDerecha;
+  vector<Lugar *> mapa;
   Barca *barca;
   int totalPersonajes;
+  bool estaJuegoIniciado = true;
 
 public:
   /*
@@ -63,37 +62,42 @@ public:
   */
   virtual ~Jugador();
   /*
-    jugar inicia el juego y tomar el control del programa.
+    Obtener el valor del atributo estaJuegoIniciado
+  */
+  virtual bool getEstaJuegoIniciado();
+  /*
+    Darle un valor al atibuto estaJuegoIniciado
+  */
+  virtual void setEstaJuegoIniciado(bool estado);
+  /*
+    Es la funcion que llama a casi todos los demás metodos con el fin de inicar el juego, comprobar el estado del mismo y leer las entradas
   */
   virtual void jugar();
   /*
-    mostrarJuego imprime en consola el estado actual del juego
+    Imprimir en consola un mensaje inicial del juego, los lugares y los personajes
   */
   virtual void mostrarJuego();
-
   /*
-    recibirEntrada recibe por consola los comandos a ejecutar
+    recibir la entrada por teclado del usuario, sabiendo que solo puede digitar de una a dos letras, y pasando lo recibido a mayuscula para que el usuario pueda digitar el nombre del personaje tanto en mayuscula como minuscula
+  */
+  virtual string recibirCaracteres();
+  /*
+    Determinar que se hace con lo ingresado por el usuario, para mover la barca, reiniciar el juego, salir o mover el personaje, sabiendo que las opciones de salir y reiniciar no se pueden dar mientras el juego este iniciado.
   */
   virtual void recibirEntrada();
-
   /*
-    reiniciar permite regresar todos los lugares e individuos al estado inicial
+    reiniciar vuelve todo a su estado incial, con las relaciones iniciales, todos los personajes al lado izquierdo y vivos, a demás de que vuelve a setear el estado del juego en true pues si se llego a este punto es porque se perdio y estaba en false
   */
   virtual void reiniciar();
 
   /*
-    comprobarEstadoDelJuego determinar despues de cada movimiento si se ganó o se perdió
+    comprueba que ningun personaje este muerto (haya saltado al agua), que ningun personaje ha comido a alguno, o que todos los personajes hayan llegado a la derecha, si alguno de esto sucede muestra el menu de ganar o perder correspondiente para salir o reiniciar el juego.
   */
   virtual bool comprobarEstadoDelJuego();
   /*
-    menuDespuesDeGanarOPerder muestra las opciones de reiniciar o salir
-    cuando se gana o pierde
+    Nos muestra las opciones que tenemos de salir o reiniciar el juego, además de recibir lo que el usuario digite por teclado para realizar la accion correspondiente.
   */
   virtual void menuDespuesDeGanarOPerder();
-  /*
-    recibirUnCaracter recibe la entrada por consola
-  */
-  virtual string recibirUnCaracter();
 };
 
 #endif

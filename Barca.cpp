@@ -13,14 +13,13 @@ licencia: GNU-GPL
 */
 #include "Barca.h"
 
-Barca::Barca(int pos , string nombre , int capacidad ) : Lugar(pos, nombre, capacidad)
+Barca::Barca(int pos, string nombre, int capacidad) : Lugar(pos, nombre, capacidad)
 {
 }
 
 Barca::~Barca()
 {
 }
-
 
 void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
 {
@@ -31,7 +30,6 @@ void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
   {
     throw "No hay ningun " + this->guardian + " subido en la barca. La barca no se mueve sola!!!";
   }
-
 
   // Se redefinen los vecinos dependiendo de donde este situado y se cambia la posicion de la barca
   if (vecino == orillaIzquierda)

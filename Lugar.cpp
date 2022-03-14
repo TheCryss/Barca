@@ -160,7 +160,7 @@ void Lugar::moverATodos(Lugar *lugarDestino)
   setEstaGuardian(false);
   lugarDestino->agregarPersonajes(personajes);
   // Limpiamos los personajes del vector actual
-  for (Personaje* personaje : personajes)
+  for (Personaje *personaje : personajes)
   {
     if (personaje)
     {
@@ -284,22 +284,10 @@ bool Lugar::moverPersonaje(string comando)
     else
     {
       // si la barca esta ocupada con 2 objetos
-      throw(string) " La barca esta llena... Intentalo de nuevo ";
+      throw(string) " El lugar " + vecino->getNombre() + " esta lleno... Intentalo de nuevo ";
     }
   }
 }
-
-// string Lugar::imprimirLugar()
-// {
-//   string tab = "";
-//   int auxPos = getPosicion();
-//   for (int i = 0; i < auxPos; i++)
-//   {
-//     tab += "\t";
-//   }
-//   tab += getNombre();
-//   return tab;
-// }
 
 string Lugar::imprimirPersonaje(Personaje *personaje)
 {
