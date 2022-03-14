@@ -157,12 +157,11 @@ void Lugar::moverATodos(Lugar *lugarDestino)
   setEstaGuardian(false);
   lugarDestino->agregarPersonajes(personajes);
   // Limpiamos los personajes del vector actual
-  for (int indexPersonaje = 0; indexPersonaje < numeroDePersonajes(); indexPersonaje++)
+  for (Personaje* personaje : personajes)
   {
-    if (personajes[indexPersonaje])
+    if (personaje)
     {
-      delete personajes[indexPersonaje];
-      personajes[indexPersonaje] = nullptr;
+      personaje = nullptr;
     }
   }
   //
@@ -266,7 +265,8 @@ bool Lugar::moverPersonaje(string comando)
   if (!getEstaVecino())
   {
     personajes[indicePersonajeAMover]->setEstaVivo(false);
-    return false;
+    // Retornamos true para que el programa pueda seguir (debido a que se movio, pero al agua) y así nos aparezca que se muro el personaje
+    return true;
     // throw personajes[indicePersonajeAMover]->getNombre() + " no puede saltar al rio"
   }
   else
@@ -281,7 +281,7 @@ bool Lugar::moverPersonaje(string comando)
     else
     {
       // si la barca esta ocupada con 2 objetos
-      throw(string) "La barca esta llena... Intentalo de nuevo";
+      throw(string) " La barca esta llena... Intentalo de nuevo ";
     }
   }
 }

@@ -24,6 +24,7 @@ Relaciones:
 #define textoSubrayadoAzul "\e[4;34m"
 #define textoSubrayadoPurpura "\e[4;35m"
 #define textoSubrayadoVerde "\e[4;32m"
+#define textoSubrayadoRojo "\e[4;31m"
 #define textoVerde "\e[0;32m"
 #define textoRojo "\e[0;31m"
 #define textoMarron "\e[0;33m"

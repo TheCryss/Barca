@@ -55,6 +55,9 @@ void Jugador::mostrarJuego()
 
   cout << textoGris "El juego consiste en pasar todos los personajes del rio al otro lado.... INSERTE MENSAJES" << endl;
 
+  cout << endl;
+  cout << endl;
+
   // Se muestran los lugares
   for (Lugar *lugar : mapa)
   {
@@ -80,7 +83,10 @@ void Jugador::mostrarJuego()
   {
     for (Personaje *personaje : *lugar->getPersonajes())
     {
-      if (personaje->getNombre() == "Robot")
+      if(personaje->getEstaVivo()==false){
+        cout << textoSubrayadoRojo << lugar->imprimirPersonaje(personaje) << endl;
+      }
+      else if (personaje->getNombre() == "Robot")
       {
         cout << textoVerde << lugar->imprimirPersonaje(personaje) << endl;
       }
@@ -117,14 +123,14 @@ void Jugador::jugar()
 string Jugador::recibirUnCaracter()
 {
   string orden = "";
-  cout << textoGris "Ingrese una orden: ";
+  cout << textoGris " Ingrese una orden: ";
   getline(cin, orden);
 
   if (orden.size() == 0)
-    throw(string) "¡No ha ingresado ninguna orden!";
+    throw(string) " ¡No ha ingresado ninguna orden! ";
 
   if (orden.size() > 2)
-    throw(string) "¡Solo puedes ingresar dos letras como maximo!";
+    throw(string) " ¡Solo puedes ingresar dos letras como maximo! ";
 
   orden[0] = toupper(orden[0]); // se convierte la orden de minúscula a mayúscula
 
@@ -160,14 +166,27 @@ void Jugador::recibirEntrada()
 void Jugador::reiniciar()
 {
   // regresa todos los individuos a la orilla izquierda
-  barca->moverATodos(mapa[0]);
-  mapa[2]->moverATodos(mapa[0]);
-
-  // regresa la barca al lado de la orilla izquierda
-  if (barca->getPosicion() == 2)
+  for (Lugar *lugar : mapa)
   {
-    barca->moverBarca(&mapa, false);
+    if (!(lugar->getNombre() == "Izquierda"))
+    {
+      lugar->moverATodos(mapa[0]);
+    }
   }
+
+  // Arreglar relaciones y posiciones
+  mapa[0]->vincularVecino(barca);
+  barca->vincularVecino(mapa[0]);
+  barca->setPosicion(1);
+  mapa[2]->desvincularVecino();
+
+  // Ponemos a todos los personajes vivos
+  for(Lugar* lugar : mapa){
+    for(Personaje* personaje : *lugar->getPersonajes()){
+      personaje->setEstaVivo(true);
+    }
+  }
+
 }
 
 bool Jugador::comprobarEstadoDelJuego()
@@ -181,7 +200,7 @@ bool Jugador::comprobarEstadoDelJuego()
       {
         mostrarJuego();
         // Mensaje
-        cout << textoRojo "El personaje " << personaje->getNombre() << " esta muerto";
+        cout << textoRojo "El personaje " << personaje->getNombre() << " esta muerto, debido a que salto al agua. " << endl;
         menuDespuesDeGanarOPerder();
       }
     }
@@ -196,7 +215,7 @@ bool Jugador::comprobarEstadoDelJuego()
       mostrarJuego();
 
       // Mensaje
-      cout << "Se murio el " << personajeMuerto->getNombre();
+      cout << "Se murio el " << personajeMuerto->getNombre() << endl;
 
       menuDespuesDeGanarOPerder();
     }
@@ -215,7 +234,9 @@ bool Jugador::comprobarEstadoDelJuego()
 
 void Jugador::menuDespuesDeGanarOPerder()
 {
-  cout << textoGris "Para salir del juego presione la letra para reiniciar presione la letra " << endl;
+  cout << endl;
+  cout << textoGris "Para salir del juego presione la letra " << textoAzul "S" << textoGris " para reiniciar presione la letra " << textoAzul "J" << endl;
+  cout << endl;
 
   string orden;
   try

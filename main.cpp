@@ -20,7 +20,7 @@ Historia: Queremos alojar los promedios de n estudiante, para luego mostrarlos
 
 #include <string>
 
-// Funcion main.
+// Funcion main
 int main()
 {
   Orilla orillaIzquierda(0, "Izquierda");
