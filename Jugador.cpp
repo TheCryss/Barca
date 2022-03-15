@@ -53,7 +53,8 @@ void Jugador::setEstaJuegoIniciado(bool estado)
 void Jugador::mostrarJuego()
 {
   // Limpiar la consoa
-  cout << "\033c";
+  // cout << "\033c";
+  system("cls");
 
   cout << textoRojo "JUEGO LA BARCA" << endl;
 
@@ -92,13 +93,15 @@ void Jugador::mostrarJuego()
       {
         cout << textoSubrayadoRojo << lugar->imprimirPersonaje(personaje) << endl;
       }
-      for(Personaje* guardian : barca->getGuardianes()){
-        if(personaje->getNombre()==guardian->getNombre()){
+      for (Personaje *guardian : barca->getGuardianes())
+      {
+        if (personaje->getNombre() == guardian->getNombre())
+        {
           cout << textoVerde << lugar->imprimirPersonaje(personaje) << endl;
           aux = false;
         }
       }
-      if(aux==true)
+      if (aux == true)
       {
         cout << textoMarron << lugar->imprimirPersonaje(personaje) << endl;
       }
