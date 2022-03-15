@@ -57,9 +57,9 @@ string Lugar::getNombre()
   return nombre;
 }
 
-vector<Personaje *> *Lugar::getPersonajes()
+vector<Personaje *> Lugar::getPersonajes()
 {
-  return &personajes;
+  return personajes;
 }
 
 int Lugar::getCapacidad()

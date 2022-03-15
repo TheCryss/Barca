@@ -50,7 +50,7 @@ public:
   virtual ~Lugar();
   // Getters
   virtual string getNombre();
-  virtual vector<Personaje *> *getPersonajes();
+  virtual vector<Personaje *> getPersonajes();
   virtual int getCapacidad();
   //// virtual string getGuardian();
   virtual vector <Personaje*> getGuardianes();

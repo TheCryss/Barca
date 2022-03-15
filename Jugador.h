@@ -74,6 +74,9 @@ public:
   */
   virtual void jugar();
   /*
+  */
+  virtual void inicio();
+  /*
     Imprimir en consola un mensaje inicial del juego, los lugares y los personajes
   */
   virtual void mostrarJuego();

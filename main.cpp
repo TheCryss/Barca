@@ -51,7 +51,7 @@ int main()
 
   Jugador miJuego(barca, orillaIzquierda, orillaDerecha);
 
-  miJuego.jugar();
+  miJuego.inicio();
 
   delete orillaIzquierda;
   orillaIzquierda = nullptr;
