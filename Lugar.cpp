@@ -25,15 +25,26 @@ int Lugar::numeroDePersonajes()
 
 Lugar::~Lugar()
 {
-  for (int indexPersonaje = 0; indexPersonaje < numeroDePersonajes(); indexPersonaje++)
+  for (Personaje *personaje : guardianes)
   {
-    if (personajes[indexPersonaje])
+    if (personaje)
     {
-      delete personajes[indexPersonaje];
-      personajes[indexPersonaje] = nullptr;
+      delete personaje;
+      personaje = nullptr;
+    }
+  }
+  guardianes.clear();
+
+  for (Personaje *personaje : personajes)
+  {
+    if (personaje)
+    {
+      delete personaje;
+      personaje = nullptr;
     }
   }
   personajes.clear();
+
   if (vecino)
   {
     delete vecino;
@@ -56,9 +67,14 @@ int Lugar::getCapacidad()
   return capacidad;
 }
 
-string Lugar::getGuardian()
+// string Lugar::getGuardian()
+// {
+//   return guardian;
+// }
+
+vector<Personaje *> Lugar::getGuardianes()
 {
-  return guardian;
+  return guardianes;
 }
 
 bool Lugar::getEstaGuardian()
@@ -99,6 +115,11 @@ void Lugar::setPosicion(int pos)
 void Lugar::setEstaVecino(bool estado)
 {
   this->estaVecino = estado;
+}
+
+void Lugar::agregarGuardian(Personaje *guardian)
+{
+  guardianes.push_back(guardian);
 }
 
 bool Lugar::agregarPersonaje(Personaje *personaje)
@@ -176,10 +197,13 @@ void Lugar::verificarGuardian()
   bool aux = false;
   for (Personaje *personaje : personajes)
   {
-    if (personaje->getNombre() == getGuardian())
+    for (Personaje *guardian : guardianes)
     {
-      setEstaGuardian(true);
-      aux = true;
+      if (personaje->getNombre() == guardian->getNombre())
+      {
+        setEstaGuardian(true);
+        aux = true;
+      }
     }
   }
   if (aux == false)

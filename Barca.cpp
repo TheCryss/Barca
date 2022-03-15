@@ -23,12 +23,17 @@ Barca::~Barca()
 
 void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
 {
+  verificarGuardian();
   Lugar *orillaIzquierda = (*mapa)[0];
   Lugar *orillaDerecha = (*mapa)[2];
   // Se verifica que el conductor se encuentre en la barca a no ser que el parametro verificarConductor sea falso
-  if (!this->existePersonajeConNombre(getGuardian()) && verificarConductor)
+  if (!getEstaGuardian() && verificarConductor)
   {
-    throw "No hay ningun " + this->guardian + " subido en la barca. La barca no se mueve sola!!!";
+    string aux;
+    for(Personaje* guardian : guardianes ){
+      aux += guardian->getNombre() + ", ";
+    }
+    throw "No hay ninguno de estos guardianes subidos en la barca: " + aux + "recuers que la barca no se mueve sola!!!";
   }
 
   // Se redefinen los vecinos dependiendo de donde este situado y se cambia la posicion de la barca

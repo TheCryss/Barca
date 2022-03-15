@@ -87,15 +87,18 @@ void Jugador::mostrarJuego()
   {
     for (Personaje *personaje : *lugar->getPersonajes())
     {
+      bool aux = true;
       if (personaje->getEstaVivo() == false)
       {
         cout << textoSubrayadoRojo << lugar->imprimirPersonaje(personaje) << endl;
       }
-      else if (personaje->getNombre() == "Robot")
-      {
-        cout << textoVerde << lugar->imprimirPersonaje(personaje) << endl;
+      for(Personaje* guardian : barca->getGuardianes()){
+        if(personaje->getNombre()==guardian->getNombre()){
+          cout << textoVerde << lugar->imprimirPersonaje(personaje) << endl;
+          aux = false;
+        }
       }
-      else
+      if(aux==true)
       {
         cout << textoMarron << lugar->imprimirPersonaje(personaje) << endl;
       }

@@ -16,7 +16,7 @@ licencia: GNU-GPL
 Clase: Lugar
 Responsabilidad: Ser la clase padre de otras como Lugar y Barca. Además permite modelar un lugar, el cual contiene personajes por medio de un vector de punteros a un objeto de clase Personaje y un vecino de la clase Lugar (misma clase), con la cual podrá manipular los personajes que llegan y sale del lugar
 Relaciones:
-- Contiene a Personaje : Por medio de un vector de punteros a Personaje
+- Contiene a Personaje : Por medio de un vector de punteros a Personaje para almacenar los personajes que estan en el lugar y los personajes que son guardianes
 - Conoce a lugar: Por medio de un puntero a Lugar, que servira para transportar personajes al vecino actual
 */
 
@@ -36,7 +36,9 @@ protected:
   bool estaVecino;
   string nombre;
   int capacidad;
-  const string guardian = "Robot";
+  //// const string guardian = "Robot";
+  // guardianes : vector donde se almacenará los personajes que sean guardianes
+  vector <Personaje*> guardianes;
   bool estaGuardian;
   /*Esta variable nos ayudara especialmente para imprimir los personajes y los lugares dependiendo de la posicion en que se encuentren, pues de este modo imprimira al lugar con ciertos numeros de tabs */
   int pos;
@@ -50,7 +52,8 @@ public:
   virtual string getNombre();
   virtual vector<Personaje *> *getPersonajes();
   virtual int getCapacidad();
-  virtual string getGuardian();
+  //// virtual string getGuardian();
+  virtual vector <Personaje*> getGuardianes();
   virtual bool getEstaGuardian();
   virtual int getPosicion();
   virtual bool getEstaVecino();
@@ -61,6 +64,10 @@ public:
   virtual void setPosicion(int pos);
   virtual void setEstaVecino(bool estado);
   // Funciones
+  /*
+    Agregar un vector a los guardianes del lugar
+  */
+  virtual void agregarGuardian(Personaje *guardian);
   /*
     numeroDePersonajes: Saber el numero de punteros a Personaje que hay en el vector personajes
   */
