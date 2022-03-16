@@ -278,6 +278,15 @@ int Lugar::buscarPorComando(string comando)
   return -1;
 }
 
+Personaje* Lugar::buscarPorNombre(string nombre){
+  for(Personaje* personaje : personajes){
+    if(personaje->getNombre() == nombre){
+      return personaje;
+    }
+  }
+  return nullptr;
+}
+
 bool Lugar::moverPersonaje(string comando)
 {
   int indicePersonajeAMover = buscarPorComando(comando);

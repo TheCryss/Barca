@@ -83,6 +83,165 @@ void Jugador::inicio()
   }
 }
 
+void Jugador::personalizado()
+{
+  system("cls");
+  cout << textoRojo "Bienvenido al modo personalizado, por favor lea atentamente y digite lo que se le pida, gracias. " << endl;
+
+  // Borramos los personajes de los lugares que estan actualmente
+  for (Lugar *lugar : mapa)
+  {
+    for (Personaje *personaje : lugar->getPersonajes())
+    {
+      if (personaje)
+      {
+        delete personaje;
+        personaje = nullptr;
+      }
+    }
+    lugar->getPersonajes().clear();
+  }
+
+  // Creamos y añadimos los guadianes
+  string aux;
+  string aux2;
+  int numero;
+
+  cout << "Digite el numero de guardianes en el juego: ";
+  getline(cin, aux);
+  numero = stoi(aux);
+
+  for (int i = 0; i < numero; i++)
+  {
+    system("cls");
+    cout << "¿Cual será el nombre del guardian? : ";
+    getline(cin, aux);
+    cout << "¿Cual será el comando del guardian " << aux << " ?";
+    getline(cin, aux2);
+    // Creamos el guardian y lo agregamos en cada lugar como guardian, a demás de almaenarlo en la izquierda
+    Personaje *personaje = new Personaje(aux, aux2);
+    mapa[0]->agregarPersonaje(personaje);
+    for (Lugar *lugar : mapa)
+    {
+      lugar->agregarGuardian(personaje);
+    }
+    delete personaje;
+    personaje = nullptr;
+  }
+
+  // Creamos y añadimos los personajes
+  system("cls");
+  cout << "Digite el numero de personajes en el juego: ";
+  getline(cin, aux);
+  numero = stoi(aux);
+
+  for (int i = 0; i < numero; i++)
+  {
+    system("cls");
+    cout << "¿Cual será el nombre del personaje? : ";
+    getline(cin, aux);
+    cout << "¿Cual será el comando del personaje " << aux << " ?";
+    getline(cin, aux2);
+    // Creamos el personaje y lo almacenamos en la izquierda
+    Personaje *personaje = new Personaje(aux, aux2);
+    mapa[0]->agregarPersonaje(personaje);
+    delete personaje;
+    personaje = nullptr;
+  }
+
+  // Creamos las relaciones entre personajes (quien come a quien)
+  for (Personaje *personaje : mapa[0]->getPersonajes())
+  {
+    bool esGuardian = false;
+    for (Personaje *guardian : mapa[0]->getGuardianes())
+    {
+      if (personaje->getNombre() == guardian->getNombre())
+      {
+        esGuardian = true;
+      }
+    }
+    if (!esGuardian)
+    {
+      bool estado = true;
+      while (estado)
+      {
+        system("cls");
+        cout << "¿Desea agregar un personaje que come para el personaje" << personaje->getNombre() << " ? (S/N): ";
+        getline(cin, aux);
+
+        // Pasamos aux a mayuscula
+        for (int i = 0; i < aux.length(); i++)
+        {
+          aux[i] = toupper(aux[i]);
+        }
+
+        // Decidimos que hacer con la relacion
+        if (aux == "N")
+        {
+          estado = false;
+        }
+        else if (aux == "S")
+        {
+          cout << "Posibles Personajes: " << endl;
+          for (Personaje *personajeAux : mapa[0]->getPersonajes())
+          {
+            if (personajeAux->getNombre() != personaje->getNombre())
+            {
+              for (Personaje *guardian : mapa[0]->getGuardianes())
+              {
+                if (personajeAux->getNombre() != guardian->getNombre())
+                {
+                  cout << personajeAux->getNombre() << endl;
+                }
+              }
+            }
+          }
+          cout << endl;
+          bool estadoAux = true;
+          while (true)
+          {
+            cout << " ¿Digite el nombre del personaje que comera? : ";
+            getline(cin, aux2);
+            if (mapa[0]->existePersonajeConNombre(aux2))
+            {
+              bool estado2 = true;
+              for (Personaje *guardian : mapa[0]->getGuardianes())
+              {
+                if (aux2 == guardian->getNombre())
+                {
+                  cout << "El nombre coincide con un guardian, esa relacion no es posible" << endl;
+                  estado2 = false;
+                }
+              }
+              for (Personaje *personajeV : mapa[0]->getPersonajes())
+              {
+                if (aux2 == personajeV->getNombre())
+                {
+                  cout << "El nombre coincide con el nombre del mismo personaje, en que piensas" << endl;
+                  aux2 = false;
+                }
+              }
+              if (estado2)
+              {
+                personaje->agregarPersonajeQueCome(mapa[0]->buscarPorNombre(aux2));
+                estadoAux = false;
+              }
+            }
+            else
+            {
+              cout << "¡No existe ese nombre! " << endl;
+            }
+          }
+        }
+        else
+        {
+          cout << "Digite una opcion valida";
+        }
+      }
+    }
+  }
+}
+
 void Jugador::mostrarJuego()
 {
   // Limpiar la consoa
@@ -282,7 +441,7 @@ bool Jugador::comprobarEstadoDelJuego()
       // Texto obligatorio
       cout << textoRojo "PERDISTE" << endl;
       // Texto alternativo
-      cout << textoPurpura "El personaje " << textoRojo << personajeMuerto->getNombre()  << textoPurpura " ha sido cruelmente devorado..." << endl;
+      cout << textoPurpura "El personaje " << textoRojo << personajeMuerto->getNombre() << textoPurpura " ha sido cruelmente devorado..." << endl;
 
       menuDespuesDeGanarOPerder();
     }

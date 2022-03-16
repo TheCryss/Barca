@@ -114,6 +114,11 @@ public:
   virtual int buscarPorComando(string comando);
 
   /*
+    Retorna al personaje con el nombre dado por parametro, si no lo encuentra retorna nullptr
+  */
+  virtual Personaje* buscarPorNombre(string nombre);
+
+  /*
     moverPersonaje: Metodo para mover el personaje cuyo atributo comando sea el pasado por parametro, de modo que si se puede mover a otro lugar (atibuto vecino no es nullptr) pasa ese personaje al vector del otro lugar y lo elimina de su vector.
     - Si no se puede mover (no encuentra el personaje o el lugar esta lleno)
     - Si no existe vecino (vecino=nullptr) retorna true y setea el atributo estaVivo del personaje a false debido a que salto al agua

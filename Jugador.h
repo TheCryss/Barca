@@ -74,8 +74,13 @@ public:
   */
   virtual void jugar();
   /*
+    Mostrar la mini interfaz de inicio para que el jugador escoga entre las opciones
   */
   virtual void inicio();
+  /*
+    Hacer que el jugador decida que personajes integrar, donde, sus comandos y demás
+  */
+  virtual void personalizado();
   /*
     Imprimir en consola un mensaje inicial del juego, los lugares y los personajes
   */
