@@ -117,6 +117,18 @@ void Lugar::setEstaVecino(bool estado)
   this->estaVecino = estado;
 }
 
+void Lugar::borrarVectorPersonajes(){
+  for(Personaje* personaje:personajes){
+    personaje = nullptr;
+  }
+  personajes.clear();
+  for (Personaje *guardian : guardianes)
+  {
+    guardian = nullptr;
+  }
+  guardianes.clear();
+}
+
 void Lugar::agregarGuardian(Personaje *guardian)
 {
   guardianes.push_back(guardian);

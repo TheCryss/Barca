@@ -64,6 +64,8 @@ public:
   virtual void setPosicion(int pos);
   virtual void setEstaVecino(bool estado);
   // Funciones
+  // Borrar el vecotr
+  void borrarVectorPersonajes();
   /*
     Agregar un vector a los guardianes del lugar
   */

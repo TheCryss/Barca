@@ -52,6 +52,17 @@ protected:
   int totalPersonajes;
   bool estaJuegoIniciado = true;
 
+private:
+void borrarPersonajes();
+bool esUnNumero(const string &str);
+int recibirNumero(string nombre);
+bool existePersonajeConComando(string comando);
+bool existePersonajeConNombre(string nombre);
+void agregarGuardianes();
+void agregarPersonajes();
+void crearRelaciones();
+
+
 public:
   /*
     Constructor
@@ -88,7 +99,7 @@ public:
   /*
     recibir la entrada por teclado del usuario, sabiendo que solo puede digitar de una a dos letras, y pasando lo recibido a mayuscula para que el usuario pueda digitar el nombre del personaje tanto en mayuscula como minuscula
   */
-  virtual string recibirCaracteres();
+  virtual string recibirCaracteres(string pregunta);
   /*
     Determinar que se hace con lo ingresado por el usuario, para mover la barca, reiniciar el juego, salir o mover el personaje, sabiendo que las opciones de salir y reiniciar no se pueden dar mientras el juego este iniciado.
   */
