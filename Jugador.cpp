@@ -323,7 +323,7 @@ void Jugador::crearRelaciones()
   // Creamos las relaciones entre personajes (quien come a quien)
   for (Personaje *personaje : mapa[0]->getPersonajes())
   {
-    //Verificamos que el personaje no sea guardian pues guardian no podra comer a nadie
+    // Verificamos que el personaje no sea guardian pues guardian no podra comer a nadie
     bool esGuardian = false;
     for (Personaje *guardian : mapa[0]->getGuardianes())
     {
@@ -355,20 +355,23 @@ void Jugador::crearRelaciones()
         {
           estado = false;
         }
-        //Si quiere crear relaciones procedemos a preguntar
+        // Si quiere crear relaciones procedemos a preguntar
         else if (opcion == "S")
         {
           // Imprimos los pposibles personajes que puede poner en la relacion, teniendo en cuenta que no puede estar el guardian ni el personaje mismo
-          cout << textoPurpura "Posibles Personajes: " << endl;
-          for (Personaje *personajeAux : mapa[0]->getPersonajes())
+          if (mapa[0]->getGuardianes().size() == 1 or mapa[0]->getGuardianes().size() == 0)
           {
-            if (personajeAux->getNombre() != personaje->getNombre())
+            cout << textoPurpura "Posibles Personajes: " << endl;
+            for (Personaje *personajeAux : mapa[0]->getPersonajes())
             {
-              for (Personaje *guardian : mapa[0]->getGuardianes())
+              if (personajeAux->getNombre() != personaje->getNombre())
               {
-                if (personajeAux->getNombre() != guardian->getNombre())
+                for (Personaje *guardian : mapa[0]->getGuardianes())
                 {
-                  cout << textoPurpura << personajeAux->getNombre() << endl;
+                  if (guardian->getNombre() != personajeAux->getNombre())
+                  {
+                    cout << textoPurpura << personajeAux->getNombre() << endl;
+                  }
                 }
               }
             }
@@ -382,7 +385,7 @@ void Jugador::crearRelaciones()
             getline(cin, nombrePersonajeAComer);
             if (mapa[0]->existePersonajeConNombre(nombrePersonajeAComer))
             {
-              //Verificamos que no sea guardian
+              // Verificamos que no sea guardian
               for (Personaje *guardian : mapa[0]->getGuardianes())
               {
                 if (nombrePersonajeAComer == guardian->getNombre())
@@ -391,7 +394,8 @@ void Jugador::crearRelaciones()
                   puedoSalir = false;
                 }
               }
-              if(personaje->getNombre()==nombrePersonajeAComer){
+              if (personaje->getNombre() == nombrePersonajeAComer)
+              {
                 cout << textoRojo "El nombre coincide el mismo personaje, en que piensas!!" << endl;
                 puedoSalir = false;
               }
@@ -401,11 +405,12 @@ void Jugador::crearRelaciones()
               cout << textoRojo "¡No existe ese nombre! " << endl;
               puedoSalir = false;
             }
-            if(puedoSalir){
+            if (puedoSalir)
+            {
               estado2 = false;
             }
           }
-          Personaje* personajeRelacion = mapa[0]->buscarPorNombre(nombrePersonajeAComer);
+          Personaje *personajeRelacion = mapa[0]->buscarPorNombre(nombrePersonajeAComer);
           personaje->agregarPersonajeQueCome(personajeRelacion);
           estado = false;
         }
