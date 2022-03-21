@@ -23,6 +23,11 @@ Relaciones:
 #define _PERSONAJE_H_
 #include <iostream>
 #include <vector>
+#include <QPushButton>
+#include "ui_mainwindow.h"
+#include <QPixmap>
+#include <QMainWindow>
+
 using namespace std;
 
 class Personaje
@@ -35,10 +40,16 @@ protected:
   // Vector de personajes que el Personaje actual puede comer
   vector<Personaje *> personajesQueCome;
   bool estaVivo;
+  //boton al que esta asignado el personaje
+  QPushButton **boton;
+  //Direccion URL de la imagen
+  string url;
+  //Etiqueta dentro del ui
+  QLabel **etiqueta;
 
 public:
   // Constructor : Si el comando es mayor a dos letras pasara a valer la primera letra del nombre
-  Personaje(string nombre, string comando);
+  Personaje(string nombre, string comando, QPushButton* boton, QLabel *etiqueta, string url);
   // Destructor
   virtual ~Personaje();
   // Getters
@@ -59,6 +70,10 @@ public:
     puedeComer : retorna true si existe algun personaje en el vector personajesQueCome cuyo nombre sea igual al nombre del personaje pasado por parametro
   */
   virtual bool puedeComer(Personaje *personaje);
+  // Cosas de QT
+  virtual void imprimirImagen();
+  virtual void handleButton();
+
 };
 
 #endif

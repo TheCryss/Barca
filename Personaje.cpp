@@ -17,13 +17,17 @@ licencia: GNU-GPL
 /*
   Constructor
 */
-Personaje::Personaje(string nombre, string comando) : nombre(nombre), comando(comando), estaVivo(true)
+Personaje::Personaje(string nombre, string comando, QPushButton *boton, QLabel *etiqueta, string url ) : nombre(nombre), comando(comando), estaVivo(true)
 {
+    this->url=url;
+    this->etiqueta= &etiqueta;
+    this->boton = &boton;
   if (comando.size() > 2)
   {
+
     string aux;
-    aux.push_back(getNombre().at(0));
-    setComando(aux);
+    //aux.push_back(getNombre().at(0));
+    //setComando(aux);
   }
 }
 
@@ -93,4 +97,20 @@ bool Personaje::puedeComer(Personaje *personaje)
     }
   }
   return false;
+}
+//QT things
+
+void Personaje::handleButton()
+{
+    (*etiqueta)->move(500,500);
+}
+
+void Personaje::imprimirImagen()
+{
+    QPixmap  pix(":/bunny.png");
+
+    //Se conecta la imagen a la etiqueta
+    (*etiqueta)->setPixmap(pix.scaled(100,100,Qt::KeepAspectRatio));
+    //Se conecta el boton con un metodo
+
 }
