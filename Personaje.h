@@ -52,8 +52,10 @@ public:
   Personaje(string nombre, string comando, QPushButton* boton, QLabel *etiqueta, string url);
   // Destructor
   virtual ~Personaje();
+  virtual string getNombre();
   virtual void imprimirImagen();
   virtual void handleButton();
+  bool getEsGuardian();
 
 };
 

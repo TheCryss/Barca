@@ -46,6 +46,12 @@ Personaje::~Personaje()
   }
 }
 
+bool Personaje::getEsGuardian()
+{
+    return false;
+}
+
+
 //QT things
 
 void Personaje::handleButton()
@@ -53,6 +59,10 @@ void Personaje::handleButton()
     (*etiqueta)->move(500,500);
 }
 
+string Personaje::getNombre()
+{
+    return nombre;
+}
 void Personaje::imprimirImagen()
 {
     QPixmap  pix(":/bunny.png");

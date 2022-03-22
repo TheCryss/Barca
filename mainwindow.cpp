@@ -26,6 +26,16 @@ MainWindow::MainWindow(QWidget *parent)
     robot->imprimirImagen();
     connect(ui->Robot, SIGNAL (released()),this, SLOT (handleButtonR()));
 
+
+    /*
+    El diccionario es para junto con el entero que lleva el nombre asociado al personaje poder subierlo a la barca (al puntero del personaje).
+*/
+    /*
+    posiciones[c]=conejo;
+    posiciones[z]=zorro;
+    posiciones[l]=lechuga;
+    posiciones[r]=robot;
+    */
 }
 
 
@@ -39,9 +49,11 @@ MainWindow::~MainWindow()
 void MainWindow::handleButtonF()
 {
     cout<<"Test Move Fox"<<endl;
-    if(z==0)
+    const string nombre= "Zorro";
+    if(z==0 and barca.hayEspacio())
     {
       ui->Fox->move(250,190);
+      barca.agregarPersonaje(nombre);
       changePlaceF();
       if(cazar(z,c))
       {
@@ -51,6 +63,7 @@ void MainWindow::handleButtonF()
     } else if(z==1)
     {
       ui->Fox->move(80,190);
+      barca.elminarPersonaje(nombre);
       changePlaceF();
       if(cazar(z,c))
       {
@@ -65,9 +78,11 @@ void MainWindow::handleButtonF()
 void MainWindow::handleButtonB()
 {
     cout<<"Test Move Bunny"<<endl;
-    if(c==0)
+    const string nombre= "Conejo";
+    if(c==0  and barca.hayEspacio())
     {
       ui->Bunny->move(250,100);
+      barca.agregarPersonaje(nombre);
       changePlaceB();
       if(cazar(c,l))
       {
@@ -80,7 +95,69 @@ void MainWindow::handleButtonB()
     } else if(c==1)
     {
       ui->Bunny->move(80,100);
+      barca.elminarPersonaje(nombre);
       changePlaceB();
+      if(cazar(c,l))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+      if(cazar(c,z))
+      {
+          cout<<"El Zorro se comio al Conejo"<<endl;
+      }
+    }
+}
+
+void MainWindow::handleButtonL()
+{
+    cout<<"Test Move Lechuga"<<endl;
+    const string nombre= "Lechuga";
+    if(l==0  and barca.hayEspacio())
+    {
+      ui->Lettuce->move(250,280);
+      barca.agregarPersonaje(nombre);
+      changePlaceL();
+      if(cazar(l,c))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+
+    } else if(l==1)
+    {
+      ui->Lettuce->move(80,280);
+      barca.elminarPersonaje(nombre);
+      changePlaceL();
+      if(cazar(l,c))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+    }
+
+
+}
+
+void MainWindow::handleButtonR()
+{
+    cout<<"Test Move Robot"<<endl;
+    const string nombre= "Robot";
+    if(r==0  and barca.hayEspacio())
+    {
+      ui->Guardian->move(250,390);
+      barca.agregarPersonaje(nombre);
+      changePlaceR();
+      if(cazar(c,l))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+      if(cazar(c,z))
+      {
+          cout<<"El Zorro se comio al Conejo"<<endl;
+      }
+    } else if(r==1)
+    {
+      ui->Guardian->move(80,390);
+      barca.elminarPersonaje(nombre);
+      changePlaceR();
       if(cazar(c,l))
       {
           cout<<"El Conejo se comio a la lechuga"<<endl;
@@ -119,62 +196,7 @@ void MainWindow::changePlaceF()
     }
 }
 
-void MainWindow::handleButtonL()
-{
-    cout<<"Test Move Lechuga"<<endl;
-    if(l==0)
-    {  
-      ui->Lettuce->move(250,280);
-      changePlaceL();
-      if(cazar(l,c))
-      {
-          cout<<"El Conejo se comio a la lechuga"<<endl;
-      }
 
-    } else if(l==1)
-    {
-      ui->Lettuce->move(80,280);
-      changePlaceL();
-      if(cazar(l,c))
-      {
-          cout<<"El Conejo se comio a la lechuga"<<endl;
-      }
-    }
-
-
-    //conejo->handleButton();
-}
-
-void MainWindow::handleButtonR()
-{
-    cout<<"Test Move Robot"<<endl;
-    if(r==0)
-    {
-      ui->Guardian->move(250,390);
-      changePlaceR();
-      if(cazar(c,l))
-      {
-          cout<<"El Conejo se comio a la lechuga"<<endl;
-      }
-      if(cazar(c,z))
-      {
-          cout<<"El Zorro se comio al Conejo"<<endl;
-      }
-    } else if(r==1)
-    {
-      ui->Guardian->move(80,390);
-      changePlaceR();
-      if(cazar(c,l))
-      {
-          cout<<"El Conejo se comio a la lechuga"<<endl;
-      }
-      if(cazar(c,z))
-      {
-          cout<<"El Zorro se comio al Conejo"<<endl;
-      }
-    }
-    //ui->Bunny->move(250,100);
-}
 
 void MainWindow::changePlaceR()
 {

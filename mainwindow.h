@@ -6,6 +6,8 @@
 #include "Conejo.h"
 #include "Lechuga.h"
 #include "Robot.h"
+#include "Barca.h"
+#include <map>
 #include "ui_mainwindow.h"
 
 
@@ -38,10 +40,14 @@ QPushButton *Conejo = new QPushButton;
 QPushButton *Zorro = new QPushButton;
 QPushButton *Lechuga = new QPushButton;
 QPushButton *Robot = new QPushButton;
+
+//map<int, string> posiciones;
 int c=0;
 int z=0;
 int r=0;
 int l=0;
+Barca barca;
+
 private:
     Ui::MainWindow *ui;
 };
