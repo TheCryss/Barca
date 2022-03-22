@@ -10,15 +10,9 @@ Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
 */
 #include "Lugar.h"
-#include <stdio.h>
 
 Lugar::Lugar(int pos, string nombre, int capacidad) : estaGuardian(false), nombre(nombre), capacidad(capacidad), pos(pos), vecino(nullptr), estaVecino(false)
 {
-}
-
-int Lugar::numeroDePersonajes()
-{
-  return personajes.size();
 }
 
 Lugar::~Lugar()
@@ -50,6 +44,11 @@ Lugar::~Lugar()
   }
 }
 
+int Lugar::numeroDePersonajes()
+{
+  return personajes.size();
+}
+
 string Lugar::getNombre()
 {
   return nombre;
@@ -64,11 +63,6 @@ int Lugar::getCapacidad()
 {
   return capacidad;
 }
-
-// string Lugar::getGuardian()
-// {
-//   return guardian;
-// }
 
 vector<Personaje *> Lugar::getGuardianes()
 {
@@ -362,7 +356,7 @@ string Lugar::imprimirPersonaje(Personaje *personaje)
   }
   else
   {
-    for (int i = 0; i < 24 + 9 + 5; i++) /// 9 es el numero de letras de IZQUIERDA y 5 es el numero de letras de barca
+    for (int i = 0; i < 24 + 9 + 5; i++) /// 9 es el numero de letras de IZQUIERDA y 5 es el numero de letras de BARCA
     {
       auxImprimir += " ";
     }

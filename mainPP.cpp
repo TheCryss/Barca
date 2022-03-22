@@ -11,15 +11,21 @@
 // */
 
 // /**
-// Historia: Empezamos con varios personajes a la Izquierda, entre ellos hay guardianes y personajes que se pueden comer a otros si los guardianes no estan presentes, tu mision es hacer que todos ls personajes vayan a la derecha sanos y salvos
+// Historia: Empezamos con varios personajes a la Izquierda, entre ellos hay guardianes y personajes que se pueden comer a otros si los guardianes no estan presentes, admeás de que si no hay una barca e intenta saltar morirá. Tu mision es hacer que todos los personajes vayan a la derecha sanos y salvos
+
+// Izquierda              Barca          |           Derecha
+// Robot (Guardian)
+// Robot2 (Guardian)
+// Zorro (Come Conejo, come Conejo2)
+// Conejo (Come Lechuga)
+// Conejo2 (Come Lechuga)
+// Lechuga
 // */
 
 // #include "Personaje.h"
 // #include "Orilla.h"
 // #include "Jugador.h"
 // #include "Lugar.h"
-
-// #include <string>
 
 // // Funcion main
 // int main()
@@ -49,7 +55,6 @@
 //   zorro->agregarPersonajeQueCome(conejo2);
 //   conejo->agregarPersonajeQueCome(lechuga);
 //   conejo2->agregarPersonajeQueCome(lechuga);
-
 
 //   vector<Personaje *> personajes = {robot, zorro, conejo, lechuga, robot2, conejo2};
 

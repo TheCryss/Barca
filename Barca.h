@@ -1,5 +1,5 @@
 /*
-Archivo: Orilla.h
+Archivo: Barca.h
 Autores:
 Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
@@ -58,7 +58,7 @@ public:
   void moverBarca(vector<Lugar *> *mapa, bool verificarConductor = true);
 
   /*
-    imprimirLugar: imprime el nombre de la barca antecedido de un numero determinado de tabs el cual depende de la posicion actual de la barca, esto para hacer el efecto de que la barca se mueve
+    imprimirLugar: imprime el nombre de la barca antecedido de un numero determinado de espacios el cual depende de la posicion actual de la barca, esto para hacer el efecto de que la barca se mueve
   */
   virtual string imprimirLugar();
 };

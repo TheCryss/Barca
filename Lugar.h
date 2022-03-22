@@ -66,13 +66,17 @@ protected:
   vector<Personaje *> personajes;
   /*vecino ayudara a saber cual es el vecino del lugar, para transportar o recibir personajes de ese vecino, y saber si este es nulo, lo cual servira para cuando un personaje salte de la orilla a la barca sin haber barca (vecino = nullptr*/
   Lugar *vecino;
+  // Saber si esta vinculado vecino
   bool estaVecino;
+  // Nombre del lugar
   string nombre;
+  // Capacidad del lugar, si la capacidad es -1 sería infinita
   int capacidad;
   // guardianes : vector donde se almacenará los personajes que sean guardianes
-  vector <Personaje*> guardianes;
+  vector<Personaje *> guardianes;
+  // saber si existe un guardian en el lugar
   bool estaGuardian;
-  /*Esta variable nos ayudara especialmente para imprimir los personajes y los lugares dependiendo de la posicion en que se encuentren, pues de este modo imprimira al lugar con ciertos numeros de tabs */
+  // Esta variable nos ayudara especialmente para imprimir los personajes y los lugares dependiendo de la posicion en que se encuentren, pues de este modo imprimira al lugar con ciertos numeros de espacios
   int pos;
 
 public:
@@ -84,7 +88,7 @@ public:
   virtual string getNombre();
   virtual vector<Personaje *> getPersonajes();
   virtual int getCapacidad();
-  virtual vector <Personaje*> getGuardianes();
+  virtual vector<Personaje *> getGuardianes();
   virtual bool getEstaGuardian();
   virtual int getPosicion();
   virtual bool getEstaVecino();
@@ -95,10 +99,12 @@ public:
   virtual void setPosicion(int pos);
   virtual void setEstaVecino(bool estado);
   // Funciones
-  // Borrar el vecotr
+  /*
+    borrarVectorPersonajes: Limpia y elimina los personajes que existe en el vector de personajes y en el vector de guardianes
+  */
   void borrarVectorPersonajes();
   /*
-    Agregar un vector a los guardianes del lugar
+    agregarGuardian: Agrega un guardian al vector de guardiane
   */
   virtual void agregarGuardian(Personaje *guardian);
   /*
@@ -149,7 +155,7 @@ public:
   /*
     Retorna al personaje con el nombre dado por parametro, si no lo encuentra retorna nullptr
   */
-  virtual Personaje* buscarPorNombre(string nombre);
+  virtual Personaje *buscarPorNombre(string nombre);
 
   /*
     moverPersonaje: Metodo para mover el personaje cuyo atributo comando sea el pasado por parametro, de modo que si se puede mover a otro lugar (atibuto vecino no es nullptr) pasa ese personaje al vector del otro lugar y lo elimina de su vector.
@@ -162,11 +168,39 @@ public:
   /*
     imprimirLugar: Imprimir el lugar dependiendo de la posicion de este. En este caso sera una funcion pura donde son las clases hijas que definen como se imprime lugar, esto debido a que la forma en que se imprime una barca es diferente a como se imprime una orilla
   */
+
+  /*
+  FORMA GRAFICA DE COMO SE IMPRIMIRAN LOS LUGARES EN LAS CLASES HIJAS
+  IZQUIERDA             BARCA             |                 DERECHA
+  0 Espacios            8 espacios                          16 espacios
+
+  IZQUIEDA              |                 BARCA             DERECHA
+  0 Espacios                              16 espacios       8 espacios
+
+  Como ven si derecha no tiene vecino me daria 16 espacios para ese lugar, pero si por el contrario tiene vecino ahora seran 8 espacios debido a que barca aumento 8 espacios. Si dejamps a derecha con los mismos 16 espacios veremos como en la consola (al mover la barca) tambien se mueve derecha, y no queremos eso
+  */
+
   virtual string imprimirLugar() = 0;
 
   /*
     imprimirPersonajes: Imprimir el personaje dependiendo de la posicion del lugar en donde esté, por lo que pondra un numero determinado de tabs antes de imprimir el nombre del personaje
   */
+
+  /*
+  FORMA GRAFICA DE COMO SE IMPRIMIRAN PERSONAJES
+
+  Personaje en izquierda (posicion 0): 0 espacios
+
+  Personaje en barca (posicion 1): 8 espacios + letras de izquierda
+
+  Personaje en barca(posicion 2) : 16 espacios + letras de izquierda
+
+  Personaje en derecha (posicion 3) : 24 espacios + letras de izquierda + letras de barca
+
+  Debemos poner los espacios que vimos en el metodo anterior para cada respectivo lugar + las letras de los lugares anteriors (si hay) para que queden alineados con cada lugar en el que este
+
+ */
+
   virtual string imprimirPersonaje(Personaje *personaje);
 
   /*

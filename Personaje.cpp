@@ -10,7 +10,6 @@ Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
 */
 #include "Personaje.h"
-#include <stdio.h>
 
 /*
   Constructor

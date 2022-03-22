@@ -185,6 +185,63 @@ bool Jugador::existePersonajeConComando(string comando)
   }
 }
 
+string Jugador::agregarNombrePersonaje()
+{
+  string nombre;
+  bool estado = true;
+  while (estado)
+  {
+    cout << textoPurpura "¿Cual será el nombre del Personaje? : ";
+    getline(cin, nombre);
+    if (existePersonajeConNombre(nombre))
+    {
+      cout << textoRojo "¡El nombre ya existe!" << endl;
+    }
+    else
+    {
+      estado = false;
+    }
+  }
+  return nombre;
+}
+
+string Jugador::agregarComandoPersonaje()
+{
+  bool estado = true;
+  string comando;
+  while (estado)
+  {
+    bool auxEstado2 = true;
+    while (auxEstado2)
+    {
+      cout << textoPurpura "Ingrese el comando del Personaje : ";
+      getline(cin, comando);
+      if (comando.size() == 0 or comando.size() > 2)
+      {
+        cout << textoRojo "Ingrese un comando valido" << endl;
+      }
+      else
+      {
+        auxEstado2 = false;
+        // Ponemos el comando en mayuscula
+        for (int i = 0; i < comando.length(); i++)
+        {
+          comando[i] = toupper(comando[i]);
+        }
+      }
+    }
+    if (existePersonajeConComando(comando))
+    {
+      cout << textoRojo "¡El comando ya existe!" << endl;
+    }
+    else
+    {
+      estado = false;
+    }
+  }
+  return comando;
+}
+
 void Jugador::agregarGuardianes()
 {
   system("cls");
@@ -196,51 +253,10 @@ void Jugador::agregarGuardianes()
   for (int i = 0; i < numero; i++)
   {
     system("cls");
-    bool estado = true;
-    while (estado)
-    {
-      cout << textoPurpura "¿Cual será el nombre del guardian? : ";
-      getline(cin, nombre);
-      if (existePersonajeConNombre(nombre))
-      {
-        cout << textoRojo "¡El nombre ya existe!" << endl;
-      }
-      else
-      {
-        estado = false;
-      }
-    }
-
-    estado = true;
-    while (estado)
-    {
-      bool auxEstado2 = true;
-      while (auxEstado2)
-      {
-        cout << textoPurpura "Ingrese el comando del guardian : ";
-        getline(cin, comando);
-        if (comando.size() == 0 or comando.size() > 2)
-        {
-          cout << textoRojo "Ingrese un comando valido" << endl;
-        }
-        else
-        {
-          auxEstado2 = false;
-          for (int i = 0; i < comando.length(); i++)
-          {
-            comando[i] = toupper(comando[i]);
-          }
-        }
-      }
-      if (existePersonajeConComando(comando))
-      {
-        cout << textoRojo "¡El comando ya existe!" << endl;
-      }
-      else
-      {
-        estado = false;
-      }
-    }
+    // Preguntamos por el nombre
+    nombre = agregarNombrePersonaje();
+    // Preguntamos por el comando
+    comando = agregarComandoPersonaje();
     // Creamos el guardian y lo agregamos en cada lugar como guardian, a demás de almaenarlo en la izquierda
     Personaje *guardian = new Personaje(nombre, comando);
     mapa[0]->agregarPersonaje(guardian);
@@ -263,56 +279,103 @@ void Jugador::agregarPersonajes()
   for (int i = 0; i < numero; i++)
   {
     system("cls");
-    bool estado = true;
-    while (estado)
-    {
-      cout << textoPurpura "¿Cual será el nombre del personaje? : ";
-      getline(cin, nombre);
-      if (existePersonajeConNombre(nombre))
-      {
-        cout << textoRojo "¡El nombre ya existe!" << endl;
-      }
-      else
-      {
-        estado = false;
-      }
-    }
-
-    estado = true;
-    while (estado)
-    {
-      bool auxEstado2 = true;
-      while (auxEstado2)
-      {
-        cout << textoPurpura "Ingrese el comando del personaje : ";
-        getline(cin, comando);
-        if (comando.size() == 0 or comando.size() > 2)
-        {
-          cout << textoRojo "Ingrese un comando valido" << endl;
-        }
-        else
-        {
-          auxEstado2 = false;
-          for (int i = 0; i < comando.length(); i++)
-          {
-            comando[i] = toupper(comando[i]);
-          }
-        }
-      }
-      if (existePersonajeConComando(comando))
-      {
-        cout << textoRojo "¡El comando ya existe!" << endl;
-      }
-      else
-      {
-        estado = false;
-      }
-    }
+    // Preguntamos por el nombre
+    nombre = agregarNombrePersonaje();
+    // Preguntamos por el comando
+    comando = agregarComandoPersonaje();
     // Creamos el guardian y lo agregamos en cada lugar como guardian, a demás de almaenarlo en la izquierda
     Personaje *personaje = new Personaje(nombre, comando);
     mapa[0]->agregarPersonaje(personaje);
     personaje = nullptr;
   }
+}
+
+bool Jugador::verficiarEsGuardian(Personaje *personaje)
+{
+  bool esGuardian = false;
+  for (Personaje *guardian : mapa[0]->getGuardianes())
+  {
+    if (personaje->getNombre() == guardian->getNombre())
+    {
+      esGuardian = true;
+    }
+  }
+  return esGuardian;
+}
+
+string Jugador::recibirOpcionAgregarPersonaje(Personaje *personaje)
+{
+  system("cls");
+  string opcion;
+  cout << textoPurpura "¿Desea agregar una presa para el personaje " << personaje->getNombre() << " ? (S/N): ";
+  getline(cin, opcion);
+
+  // Pasamos la opcion a mayuscula
+  for (int i = 0; i < opcion.length(); i++)
+  {
+    opcion[i] = toupper(opcion[i]);
+  }
+  return opcion;
+}
+
+void Jugador::imprimirPosiblesPersonajes(Personaje *personaje)
+{
+  if (mapa[0]->getGuardianes().size() == 1 or mapa[0]->getGuardianes().size() == 0)
+  {
+    cout << textoPurpura "Posibles Personajes: " << endl;
+    for (Personaje *personajeAux : mapa[0]->getPersonajes())
+    {
+      if (personajeAux->getNombre() != personaje->getNombre())
+      {
+        for (Personaje *guardian : mapa[0]->getGuardianes())
+        {
+          if (guardian->getNombre() != personajeAux->getNombre())
+          {
+            cout << textoPurpura << personajeAux->getNombre() << endl;
+          }
+        }
+      }
+    }
+  }
+}
+
+string Jugador::preguntarPorElNombrePresa(Personaje *personaje)
+{
+  string nombrePersonajeAComer;
+  bool estado = true;
+  while (estado)
+  {
+    bool puedoSalir = true;
+    cout << textoPurpura "¿Digite el nombre de la presa? : ";
+    getline(cin, nombrePersonajeAComer);
+    if (mapa[0]->existePersonajeConNombre(nombrePersonajeAComer))
+    {
+      // Verificamos que no sea guardian
+      for (Personaje *guardian : mapa[0]->getGuardianes())
+      {
+        if (nombrePersonajeAComer == guardian->getNombre())
+        {
+          cout << textoRojo "El nombre coincide con un guardian, esa relacion no es posible" << endl;
+          puedoSalir = false;
+        }
+      }
+      if (personaje->getNombre() == nombrePersonajeAComer)
+      {
+        cout << textoRojo "El nombre coincide el mismo personaje, en que piensas!!" << endl;
+        puedoSalir = false;
+      }
+    }
+    else
+    {
+      cout << textoRojo "¡No existe ese nombre! " << endl;
+      puedoSalir = false;
+    }
+    if (puedoSalir)
+    {
+      estado = false;
+    }
+  }
+  return nombrePersonajeAComer;
 }
 
 void Jugador::crearRelaciones()
@@ -322,14 +385,7 @@ void Jugador::crearRelaciones()
   for (Personaje *personaje : mapa[0]->getPersonajes())
   {
     // Verificamos que el personaje no sea guardian pues guardian no podra comer a nadie
-    bool esGuardian = false;
-    for (Personaje *guardian : mapa[0]->getGuardianes())
-    {
-      if (personaje->getNombre() == guardian->getNombre())
-      {
-        esGuardian = true;
-      }
-    }
+    bool esGuardian = verficiarEsGuardian(personaje);
     // Si el personaje no es guardian procedemos a crear las relaciones si el usuario quiere
     if (!esGuardian)
     {
@@ -338,16 +394,7 @@ void Jugador::crearRelaciones()
       bool estado = true;
       while (estado)
       {
-        system("cls");
-        cout << textoPurpura "¿Desea agregar una presa para el personaje " << personaje->getNombre() << " ? (S/N): ";
-        getline(cin, opcion);
-
-        // Pasamos la opcion a mayuscula
-        for (int i = 0; i < opcion.length(); i++)
-        {
-          opcion[i] = toupper(opcion[i]);
-        }
-
+        opcion = recibirOpcionAgregarPersonaje(personaje);
         // Si no quiere crear relaciones pues pasamos
         if (opcion == "N")
         {
@@ -356,58 +403,12 @@ void Jugador::crearRelaciones()
         // Si quiere crear relaciones procedemos a preguntar
         else if (opcion == "S")
         {
-          // Imprimos los pposibles personajes que puede poner en la relacion, teniendo en cuenta que no puede estar el guardian ni el personaje mismo
-          if (mapa[0]->getGuardianes().size() == 1 or mapa[0]->getGuardianes().size() == 0)
-          {
-            cout << textoPurpura "Posibles Personajes: " << endl;
-            for (Personaje *personajeAux : mapa[0]->getPersonajes())
-            {
-              if (personajeAux->getNombre() != personaje->getNombre())
-              {
-                for (Personaje *guardian : mapa[0]->getGuardianes())
-                {
-                  if (guardian->getNombre() != personajeAux->getNombre())
-                  {
-                    cout << textoPurpura << personajeAux->getNombre() << endl;
-                  }
-                }
-              }
-            }
-          }
+          // Imprimimos los posibles personajes que puede poner en la relacion, teniendo en cuenta que no puede estar el guardian ni el personaje mismo
+          imprimirPosiblesPersonajes(personaje);
           cout << endl;
-          bool estado2 = true;
-          while (estado2)
-          {
-            bool puedoSalir = true;
-            cout << textoPurpura "¿Digite el nombre de la presa? : ";
-            getline(cin, nombrePersonajeAComer);
-            if (mapa[0]->existePersonajeConNombre(nombrePersonajeAComer))
-            {
-              // Verificamos que no sea guardian
-              for (Personaje *guardian : mapa[0]->getGuardianes())
-              {
-                if (nombrePersonajeAComer == guardian->getNombre())
-                {
-                  cout << textoRojo "El nombre coincide con un guardian, esa relacion no es posible" << endl;
-                  puedoSalir = false;
-                }
-              }
-              if (personaje->getNombre() == nombrePersonajeAComer)
-              {
-                cout << textoRojo "El nombre coincide el mismo personaje, en que piensas!!" << endl;
-                puedoSalir = false;
-              }
-            }
-            else
-            {
-              cout << textoRojo "¡No existe ese nombre! " << endl;
-              puedoSalir = false;
-            }
-            if (puedoSalir)
-            {
-              estado2 = false;
-            }
-          }
+          // Agregar una presa
+          nombrePersonajeAComer = preguntarPorElNombrePresa(personaje);
+          // Agregar la relacion
           Personaje *personajeRelacion = mapa[0]->buscarPorNombre(nombrePersonajeAComer);
           personaje->agregarPersonajeQueCome(personajeRelacion);
           estado = false;

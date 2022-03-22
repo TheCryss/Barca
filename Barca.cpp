@@ -28,7 +28,8 @@ void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
   if (!getEstaGuardian() && verificarConductor)
   {
     string aux;
-    for(Personaje* guardian : guardianes ){
+    for (Personaje *guardian : guardianes)
+    {
       aux += guardian->getNombre() + ", ";
     }
     throw "No hay ninguno de estos guardianes subidos en la barca: " + aux + "recuerda que la barca no se mueve sola!!!";
@@ -54,7 +55,7 @@ void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
 string Barca::imprimirLugar()
 {
   string aux = "";
-  for (int i = 0; i < getPosicion()*8; i++)
+  for (int i = 0; i < getPosicion() * 8; i++)
   {
     aux += " ";
   }

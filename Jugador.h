@@ -66,8 +66,6 @@ APORTES
 #include "Orilla.h"
 #include "Lugar.h"
 
-#include <string>
-
 /*NOTA: Los metodos private y el metodo personalizado no son necesarios para la entrega base del juego, pero se hicieron con el fin de añadir una funcionalidad más al mismo*/
 
 class Jugador
@@ -81,7 +79,7 @@ protected:
 
 private:
   /*
-  Estos metodos serán utilizados a su vez por el metodo personalizado, es por eso que estan como privados pues no es necesario para el main directamente
+  Estos metodos serán utilizados a su vez por el metodo personalizado, es por eso que estan como privados pues no son necesarios para ser llamados en el main directamente
   */
   /*
     borrarPersonajes : borra y elimina los elementos del vector de personajes de cada lugar del mapa
@@ -115,6 +113,30 @@ private:
     crearRelaciones: sirve para poder añadir un personaje que come a cada personaje si el usuario quiere, con verificaciones como que el persoanje que come no puede ser el mismo personaje o un guardian
  */
   void crearRelaciones();
+  /*
+    Leer por consola el nombre del personaje, teniendo en cuenta que no puede ser el mismo que otro que ya exista. Retorna el nombre.
+  */
+  string agregarNombrePersonaje();
+  /*
+    Leer por consola el comando del personaje, teniendo en cuenta que no puede ser el mismo que otro que ya exista. Retorna el comando.
+  */
+  string agregarComandoPersonaje();
+  /*
+    verififca si el personaje es o no un guardian, si lo es retorna true, de lo contrario retorna false
+  */
+  bool verficiarEsGuardian(Personaje *personaje);
+  /*
+    recibir opcion para agregar saber si se agrega o no un personaje. Retorna el string que el usuario digito
+  */
+  string recibirOpcionAgregarPersonaje(Personaje *personaje);
+  /*
+  Imprimir los personajes que no sean guardianes ni que sea el personaje pasado por parametro
+  */
+  void imprimirPosiblesPersonajes(Personaje *personaje);
+  /*
+    Preguntar por el nombre de la presa y retornarlo, sabiendo que no puede ser un guardian ni tampoco el personaje pasado por parametro. Retorna el nombre de la presa;
+  */
+  string preguntarPorElNombrePresa(Personaje *personaje);
 
 public:
   /*

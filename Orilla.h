@@ -45,7 +45,7 @@ public:
   virtual ~Orilla();
 
   /*
-    imprimirLugar: Imprimir el nombre de la orilla en relacion a si es izquierda o derecha (debido a que una no necesita tabs y otra sí) y en relacion a la posicion de la barca, pues debido a la forma de imprimir con tabs de este codigo es necesario
+    imprimirLugar: Imprimir el nombre de la orilla en relacion a si es izquierda o derecha (debido a que una no necesita espacios y otra sí) y en relacion a la posicion de la barca.
   */
   virtual string imprimirLugar();
 };
