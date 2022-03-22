@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -24,22 +22,31 @@ Orilla::~Orilla()
 
 string Orilla::imprimirLugar()
 {
+  string auxImprimir;
   if (getNombre() == "Izquierda" || getNombre() == "IZQUIERDA" || getNombre() == "izquierda")
   {
-    string aux = getNombre();
-    return aux;
+    auxImprimir += getNombre();
+    return auxImprimir;
   }
   else
   {
     if (!getEstaVecino())
     {
-      string aux = "\t\t" + getNombre();
-      return aux;
+      for (int i = 0; i < 16; i++)
+      {
+        auxImprimir += " ";
+      }
+      auxImprimir += getNombre();
+      return auxImprimir;
     }
     else
     {
-      string aux = "\t" + getNombre();
-      return aux;
+      for (int i = 0; i < 8; i++)
+      {
+        auxImprimir += " ";
+      }
+      auxImprimir += getNombre();
+      return auxImprimir;
     }
   }
 }

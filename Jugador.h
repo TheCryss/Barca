@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>se Luis
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -18,6 +16,34 @@ Responsabilidad: Representa al jugador humano en el juego, es el objeto que tien
 Relaciones:
 - Contiene a Lugar : Por medio de un vector a punteros de la clase Lugar
 - Conoce a barca : Con el fin de llamar al metodo propio de la barca (moverBarca)
+*/
+
+/*
+APORTES
+
+@Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+- Idear la clase
+- colocar la funcionalidad de los colores
+- Todos lo metodos private los cuales seran utilizados para el metodo personalizado
+- metodo personalizado
+- getters y setters
+- metodo inicio
+- recibir Entrada
+- modificar recibirCaracteres para que tambien funcione con el modo personalizado
+- comprobarEstadoDelJuego
+- menuDespuesDeGanarOPerder
+
+@Susana Valencia Bravo
+<susana.valencia@correounivalle.edu.co>
+- el metodo jugar el cual será como un menu del juego
+- metodo reiniciar
+
+@Jose Luis Hincapie Bucheli
+<jose.bucheli@correounivalle.edu.co>
+- agregar el atributo estaJuegoIniciado que luego servira para saber cuando se pueden usar las teclas de salir y reiniciar
+- metodo mostrarJuego
+- recibirCaracteres como mejora ayuda para recibirEntrada
 */
 
 #ifndef _JUGADOR_H_
@@ -40,8 +66,9 @@ Relaciones:
 #include "Orilla.h"
 #include "Lugar.h"
 
-// #include <time.h>
 #include <string>
+
+/*NOTA: Los metodos private y el metodo personalizado no son necesarios para la entrega base del juego, pero se hicieron con el fin de añadir una funcionalidad más al mismo*/
 
 class Jugador
 {
@@ -53,15 +80,41 @@ protected:
   bool estaJuegoIniciado = true;
 
 private:
-void borrarPersonajes();
-bool esUnNumero(const string &str);
-int recibirNumero(string nombre);
-bool existePersonajeConComando(string comando);
-bool existePersonajeConNombre(string nombre);
-void agregarGuardianes();
-void agregarPersonajes();
-void crearRelaciones();
-
+  /*
+  Estos metodos serán utilizados a su vez por el metodo personalizado, es por eso que estan como privados pues no es necesario para el main directamente
+  */
+  /*
+    borrarPersonajes : borra y elimina los elementos del vector de personajes de cada lugar del mapa
+   */
+  void borrarPersonajes();
+  /*
+    esUnNumero : verifica si el string dado por parametro es un numero
+  */
+  bool esUnNumero(const string &str);
+  /*
+    recibirNumero : Este metodo sera utilizado para ingresar el numero de  *parametro* en el juego, sabiendo que el usuario debe ingresar un numero, pues si ingresa otro tipo de dato no lo dejara seguir
+  */
+  int recibirNumero(string nombre);
+  /*
+    existePersonajeConComando : Verifica si existe un personaje con el comando pasado por parametro, pasando por cada lugar del mapa
+  */
+  bool existePersonajeConComando(string comando);
+  /*
+    existePersonajeConNombr : Verifica si existe un personaje con el nombre pasado por parametro, pasando por cada lugar del mapa
+  */
+  bool existePersonajeConNombre(string nombre);
+  /*
+    agregarGuardianes : sirve para agregar un determinado numero de guardianes al juego, con verificaciones como que no existan dos guardianes con el mismo nombre o comando
+  */
+  void agregarGuardianes();
+  /*
+    agregarPersonajes : sirve para agregar un determinado numero de personajes al juego, con verificaciones como que no existan dos personajes con el mismo nombre o comando, y que estos no sean iguales a uno de los guardianes
+ */
+  void agregarPersonajes();
+  /*
+    crearRelaciones: sirve para poder añadir un personaje que come a cada personaje si el usuario quiere, con verificaciones como que el persoanje que come no puede ser el mismo personaje o un guardian
+ */
+  void crearRelaciones();
 
 public:
   /*

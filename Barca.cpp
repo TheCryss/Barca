@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -33,7 +31,7 @@ void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
     for(Personaje* guardian : guardianes ){
       aux += guardian->getNombre() + ", ";
     }
-    throw "No hay ninguno de estos guardianes subidos en la barca: " + aux + "recuers que la barca no se mueve sola!!!";
+    throw "No hay ninguno de estos guardianes subidos en la barca: " + aux + "recuerda que la barca no se mueve sola!!!";
   }
 
   // Se redefinen los vecinos dependiendo de donde este situado y se cambia la posicion de la barca
@@ -56,10 +54,9 @@ void Barca::moverBarca(vector<Lugar *> *mapa, bool verificarConductor)
 string Barca::imprimirLugar()
 {
   string aux = "";
-  int auxPos = getPosicion();
-  for (int i = 0; i < auxPos; i++)
+  for (int i = 0; i < getPosicion()*8; i++)
   {
-    aux += "\t";
+    aux += " ";
   }
   aux += getNombre();
   return aux;

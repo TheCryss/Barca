@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -117,8 +115,10 @@ void Lugar::setEstaVecino(bool estado)
   this->estaVecino = estado;
 }
 
-void Lugar::borrarVectorPersonajes(){
-  for(Personaje* personaje:personajes){
+void Lugar::borrarVectorPersonajes()
+{
+  for (Personaje *personaje : personajes)
+  {
     personaje = nullptr;
   }
   personajes.clear();
@@ -290,9 +290,12 @@ int Lugar::buscarPorComando(string comando)
   return -1;
 }
 
-Personaje* Lugar::buscarPorNombre(string nombre){
-  for(Personaje* personaje : personajes){
-    if(personaje->getNombre() == nombre){
+Personaje *Lugar::buscarPorNombre(string nombre)
+{
+  for (Personaje *personaje : personajes)
+  {
+    if (personaje->getNombre() == nombre)
+    {
       return personaje;
     }
   }
@@ -315,7 +318,6 @@ bool Lugar::moverPersonaje(string comando)
     personajes[indicePersonajeAMover]->setEstaVivo(false);
     // Retornamos true para que el programa pueda seguir (debido a que se movio, pero al agua) y así nos aparezca que se muro el personaje
     return true;
-    // throw personajes[indicePersonajeAMover]->getNombre() + " no puede saltar al rio"
   }
   else
   {
@@ -336,7 +338,7 @@ bool Lugar::moverPersonaje(string comando)
 
 string Lugar::imprimirPersonaje(Personaje *personaje)
 {
-  string tab = "";
+  string auxImprimir = "";
   int auxPos = getPosicion();
   if (auxPos == 0)
   {
@@ -344,15 +346,27 @@ string Lugar::imprimirPersonaje(Personaje *personaje)
   }
   else if (auxPos == 1)
   {
-    tab += "\t\t" + personaje->getNombre();
+    for (int i = 0; i < 8 + 9; i++) // 9 es el numero de letras de IZQUIERDA
+    {
+      auxImprimir += " ";
+    }
+    auxImprimir += personaje->getNombre();
   }
   else if (auxPos == 2)
   {
-    tab += "\t\t\t" + personaje->getNombre();
+    for (int i = 0; i < 16 + 9; i++) // 9 es el numero de letras de IZQUIERDA
+    {
+      auxImprimir += " ";
+    }
+    auxImprimir += personaje->getNombre();
   }
   else
   {
-    tab += "\t\t\t\t" + personaje->getNombre();
+    for (int i = 0; i < 24 + 9 + 5; i++) // 9 es el numero de letras de IZQUIERDA y 5 es el numero de letras de barca
+    {
+      auxImprimir += " ";
+    }
+    auxImprimir += personaje->getNombre();
   }
-  return tab;
+  return auxImprimir;
 }

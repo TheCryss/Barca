@@ -5,8 +5,6 @@
 // <carlos.hernandez.agudelo@correounivalle.edu.co >
 // Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 // Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-// Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-// Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 // Fecha creacion: 2022/02/07
 // Fecha ultima modificacion: 2022/02/07
 // licencia: GNU-GPL

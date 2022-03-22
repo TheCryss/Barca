@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -18,6 +16,41 @@ Responsabilidad: Ser la clase padre de otras como Lugar y Barca. Además permite
 Relaciones:
 - Contiene a Personaje : Por medio de un vector de punteros a Personaje para almacenar los personajes que estan en el lugar y los personajes que son guardianes
 - Conoce a lugar: Por medio de un puntero a Lugar, que servira para transportar personajes al vecino actual
+*/
+
+/*
+APORTES
+
+@Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+- Idear la clase con la mayoria de los metodos existentes
+- Getters y Setters
+- borrarVectorPersonajes
+- numeroDePersonajes
+- agregarPersonaje
+- agregarPersonajes
+- existePersonajeConNombre
+- verificarGuardian
+- moverPersonaje
+
+@Susana Valencia Bravo
+<susana.valencia@correounivalle.edu.co>
+- agregar un vector de guardianes en vez de un solo guardian
+- agregarGuardian
+- moverATodos
+- buscarPorComando
+- buscarPorNombre
+
+@Jose Luis Hincapie Bucheli
+<jose.bucheli@correounivalle.edu.co>
+- agregar un puntero vecino para que sirva como el lugar donde se pasaran los personajes
+- Añadir el atributo pos, por el cual se imprimira los lugares
+- getPersonajePorIndice
+- algunPersonajeHaSidoComido
+- imprimirLugar por el cual se implementara polimorfismo
+- imprimirPersonaje
+- vincularVecino
+- desvincularVecino
 */
 
 #ifndef _LUGAR_H_
@@ -36,7 +69,6 @@ protected:
   bool estaVecino;
   string nombre;
   int capacidad;
-  //// const string guardian = "Robot";
   // guardianes : vector donde se almacenará los personajes que sean guardianes
   vector <Personaje*> guardianes;
   bool estaGuardian;
@@ -52,7 +84,6 @@ public:
   virtual string getNombre();
   virtual vector<Personaje *> getPersonajes();
   virtual int getCapacidad();
-  //// virtual string getGuardian();
   virtual vector <Personaje*> getGuardianes();
   virtual bool getEstaGuardian();
   virtual int getPosicion();

@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -574,7 +572,7 @@ void Jugador::recibirEntrada()
     {
       exit(0);
     }
-    else if (orden == "J")
+    else if (orden == "R")
     {
       reiniciar();
     }
@@ -636,7 +634,7 @@ bool Jugador::comprobarEstadoDelJuego()
         // Texto obligatorio
         cout << textoRojo "PERDISTE" << endl;
         // Texto alternativo
-        cout << textoPurpura "El personaje " << textoRojo << personaje->getNombre() << textoPurpura " salto al algua, que desgracia... " << endl;
+        cout << textoPurpura "El personaje " << textoRojo << personaje->getNombre() << textoPurpura " salto al al agua, que desgracia... " << endl;
         menuDespuesDeGanarOPerder();
       }
     }
@@ -676,7 +674,7 @@ bool Jugador::comprobarEstadoDelJuego()
 void Jugador::menuDespuesDeGanarOPerder()
 {
   cout << endl;
-  cout << textoPurpura "Para salir del juego presione la letra " << textoAzul "S" << textoPurpura " para reiniciar presione la letra " << textoAzul "J" << endl;
+  cout << textoPurpura "Para salir del juego presione la letra " << textoAzul "S" << textoPurpura " para reiniciar presione la letra " << textoAzul "R" << endl;
   cout << endl;
 
   string orden;
@@ -691,7 +689,7 @@ void Jugador::menuDespuesDeGanarOPerder()
 
   if (orden == "S")
     exit(0);
-  else if (orden == "J")
+  else if (orden == "R")
     reiniciar();
   else
     exit(0);

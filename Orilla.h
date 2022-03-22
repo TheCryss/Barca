@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -20,6 +18,15 @@ Relaciones:
 Relaciones que hereda:
 - Contiene a Personaje : Por medio de un vector de punteros a Personaje
 - Conoce a lugar: Por medio de un puntero a Lugar, que servira para transportar personajes al vecino actual
+*/
+
+/*
+APORTES
+
+@Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+- Idear la clase
+- Agregar polimorfismo en imprimirLugar
 */
 
 #ifndef _ORILLA_H_
