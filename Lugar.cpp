@@ -362,7 +362,7 @@ string Lugar::imprimirPersonaje(Personaje *personaje)
   }
   else
   {
-    for (int i = 0; i < 24 + 9 + 5; i++) // 9 es el numero de letras de IZQUIERDA y 5 es el numero de letras de barca
+    for (int i = 0; i < 24 + 9 + 5; i++) /// 9 es el numero de letras de IZQUIERDA y 5 es el numero de letras de barca
     {
       auxImprimir += " ";
     }
