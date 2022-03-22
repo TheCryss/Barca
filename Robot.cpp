@@ -43,5 +43,9 @@ void Robot::imprimirImagen()
     //Se conecta la imagen a la etiqueta
     (*etiqueta)->setPixmap(pix.scaled(100,100,Qt::KeepAspectRatio));
     //Se conecta el boton con un metodo
+}
 
+bool Robot::getEsGuardian()
+{
+    return esGuardian;
 }

@@ -46,58 +46,6 @@ Personaje::~Personaje()
   }
 }
 
-string Personaje::getNombre()
-{
-  return this->nombre;
-}
-
-vector<Personaje *> Personaje::getPersonajesQueCome()
-{
-  return this->personajesQueCome;
-}
-
-bool Personaje::getEstaVivo()
-{
-  return this->estaVivo;
-}
-
-string Personaje::getComando()
-{
-  return this->comando;
-}
-
-void Personaje::setNombre(string nombre)
-{
-  this->nombre = nombre;
-}
-
-void Personaje::agregarPersonajeQueCome(Personaje *personajeQueCome)
-{
-  personajesQueCome.push_back(personajeQueCome);
-}
-
-void Personaje::setEstaVivo(bool estado)
-{
-  this->estaVivo = estado;
-}
-
-void Personaje::setComando(string comando)
-{
-  this->comando = comando;
-}
-
-bool Personaje::puedeComer(Personaje *personaje)
-{
-  for (Personaje *personajeVector : personajesQueCome)
-  {
-    if (personaje->getNombre() == personajeVector->getNombre())
-    {
-      personajeVector->setEstaVivo(false);
-      return true;
-    }
-  }
-  return false;
-}
 //QT things
 
 void Personaje::handleButton()

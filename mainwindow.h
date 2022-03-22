@@ -20,7 +20,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    bool cazar(int&,int&);
 
 public slots:
     void handleButtonF();
@@ -31,6 +31,8 @@ public slots:
     void changePlaceB();
     void changePlaceR();
     void changePlaceL();
+
+
 private:
 QPushButton *Conejo = new QPushButton;
 QPushButton *Zorro = new QPushButton;
@@ -40,14 +42,6 @@ int c=0;
 int z=0;
 int r=0;
 int l=0;
-
-
-
-
-
-
-
-
 private:
     Ui::MainWindow *ui;
 };

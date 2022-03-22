@@ -52,25 +52,6 @@ public:
   Personaje(string nombre, string comando, QPushButton* boton, QLabel *etiqueta, string url);
   // Destructor
   virtual ~Personaje();
-  // Getters
-  virtual string getNombre();
-  virtual vector<Personaje *> getPersonajesQueCome();
-  virtual bool getEstaVivo();
-  virtual string getComando();
-  // Setters
-  virtual void setNombre(string nombre);
-  virtual void setEstaVivo(bool estado);
-  virtual void setComando(string comando);
-  // Funciones
-  /*
-    agregarPersonajeQueCome: Añade un personaje al vector personajesQueCome de la clase
-  */
-  virtual void agregarPersonajeQueCome(Personaje *personajeQueCome);
-  /*
-    puedeComer : retorna true si existe algun personaje en el vector personajesQueCome cuyo nombre sea igual al nombre del personaje pasado por parametro
-  */
-  virtual bool puedeComer(Personaje *personaje);
-  // Cosas de QT
   virtual void imprimirImagen();
   virtual void handleButton();
 

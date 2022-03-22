@@ -29,7 +29,7 @@ class Robot : public Personaje
 {
   // Atributos
 protected:
-
+  bool esGuardian=true;
 public:
   // Constructor : Si el comando es mayor a dos letras pasara a valer la primera letra del nombre
   Robot(string nombre, string comando, QPushButton* boton, QLabel *etiqueta, string url);
@@ -38,6 +38,7 @@ public:
   // Cosas de QT
   virtual void imprimirImagen();
   virtual void handleButton();
+  bool getEsGuardian();
 
 };
 

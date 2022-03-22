@@ -1,36 +1,30 @@
 #include "mainwindow.h"
-//#include "Zorro.h"
-//#include <QCoreApplication>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setMinimumSize(size());
+    this->setMaximumSize(size());
 
-    Personaje *conejo = new class Conejo("Conejo", "C", ui->Conejo, ui->Bunny,":/bunny.png");
-    conejo->imprimirImagen();
-    connect(ui->Conejo, SIGNAL (released()),this, SLOT (handleButtonB()));
-
-
-    Personaje *zorro = new  class Zorro("Zorro", "Z", ui->Lobo, ui->Fox,":/fox.png");
-    zorro->imprimirImagen();
-    connect(ui->Lobo, SIGNAL (released()),this, SLOT (handleButtonF()));
-
-    Personaje *lechuga = new class Lechuga("Lechuga", "L", ui->Lechuga, ui->Lettuce,":/Lettuce.jpg");
+    class Lechuga *lechuga = new class Lechuga("Lechuga", "L", ui->Lechuga, ui->Lettuce,":/Lettuce.jpg");
     lechuga->imprimirImagen();
     connect(ui->Lechuga, SIGNAL (released()),this, SLOT (handleButtonL()));
 
-    Personaje *robot = new class Robot("Robot", "R", ui->Robot, ui->Guardian,":/Robot.png");
+    class Conejo *conejo = new class Conejo("Conejo", "C", ui->Conejo, ui->Bunny,":/bunny.png");
+    conejo->imprimirImagen();
+    connect(ui->Conejo, SIGNAL (released()),this, SLOT (handleButtonB()));
+
+    class Zorro *zorro = new  class Zorro("Zorro", "Z", ui->Lobo, ui->Fox,":/fox.png");
+    zorro->imprimirImagen();
+    connect(ui->Lobo, SIGNAL (released()),this, SLOT (handleButtonF()));
+
+
+    class Robot *robot =new class Robot("Robot", "R", ui->Robot, ui->Guardian,"a");
     robot->imprimirImagen();
     connect(ui->Robot, SIGNAL (released()),this, SLOT (handleButtonR()));
-
-
-/*
-    QPixmap  pix1(":/fox.png");
-    ui->Fox->setPixmap(pix1.scaled(100,100,Qt::KeepAspectRatio));
-*/
-    //connect(ui->Lobo, SIGNAL (released()),this, SLOT (handleButtonX(x)));
 
 }
 
@@ -41,6 +35,7 @@ MainWindow::~MainWindow()
 }
 
 
+
 void MainWindow::handleButtonF()
 {
     cout<<"Test Move Fox"<<endl;
@@ -48,14 +43,23 @@ void MainWindow::handleButtonF()
     {
       ui->Fox->move(250,190);
       changePlaceF();
+      if(cazar(z,c))
+      {
+          cout<<"El zorro se comio al conejo"<<endl;
+      }
+
     } else if(z==1)
     {
       ui->Fox->move(80,190);
       changePlaceF();
+      if(cazar(z,c))
+      {
+          cout<<"El zorro se comio al conejo"<<endl;
+      }
     }
 
 
-    //conejo->handleButton();
+ //conejo->handleButton();
 }
 
 void MainWindow::handleButtonB()
@@ -65,12 +69,27 @@ void MainWindow::handleButtonB()
     {
       ui->Bunny->move(250,100);
       changePlaceB();
+      if(cazar(c,l))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+      if(cazar(c,z))
+      {
+          cout<<"El Zorro se comio al Conejo"<<endl;
+      }
     } else if(c==1)
     {
       ui->Bunny->move(80,100);
       changePlaceB();
+      if(cazar(c,l))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+      if(cazar(c,z))
+      {
+          cout<<"El Zorro se comio al Conejo"<<endl;
+      }
     }
-    //ui->Bunny->move(250,100);
 }
 
 void MainWindow::changePlaceB()
@@ -104,13 +123,22 @@ void MainWindow::handleButtonL()
 {
     cout<<"Test Move Lechuga"<<endl;
     if(l==0)
-    {
+    {  
       ui->Lettuce->move(250,280);
       changePlaceL();
+      if(cazar(l,c))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+
     } else if(l==1)
     {
       ui->Lettuce->move(80,280);
       changePlaceL();
+      if(cazar(l,c))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
     }
 
 
@@ -124,10 +152,26 @@ void MainWindow::handleButtonR()
     {
       ui->Guardian->move(250,390);
       changePlaceR();
+      if(cazar(c,l))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+      if(cazar(c,z))
+      {
+          cout<<"El Zorro se comio al Conejo"<<endl;
+      }
     } else if(r==1)
     {
       ui->Guardian->move(80,390);
       changePlaceR();
+      if(cazar(c,l))
+      {
+          cout<<"El Conejo se comio a la lechuga"<<endl;
+      }
+      if(cazar(c,z))
+      {
+          cout<<"El Zorro se comio al Conejo"<<endl;
+      }
     }
     //ui->Bunny->move(250,100);
 }
@@ -156,5 +200,16 @@ void MainWindow::changePlaceL()
     case 1:
         l=0;
         break;
+    }
+}
+
+bool MainWindow::cazar(int &a, int &b)
+{
+    if(a==b and a!=r)
+    {
+      return true;
+    }else
+    {
+        return false;
     }
 }
