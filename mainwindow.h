@@ -33,15 +33,10 @@ public slots:
     void changePlaceB();
     void changePlaceR();
     void changePlaceL();
+    void moveRight();
 
 
 private:
-QPushButton *Conejo = new QPushButton;
-QPushButton *Zorro = new QPushButton;
-QPushButton *Lechuga = new QPushButton;
-QPushButton *Robot = new QPushButton;
-
-//map<int, string> posiciones;
 int c=0;
 int z=0;
 int r=0;

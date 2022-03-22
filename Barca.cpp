@@ -24,21 +24,30 @@ void Barca::agregarPersonaje(const string&personaje)
     } else
     {
        barca.push_back(personaje);
-       cout<<"Se Agrego, Barca size: "<<barca.size()<<endl;
+       cout<<"Se Agrego: "<<personaje<<", Barca size: "<<barca.size()<<endl;
     }
 }
 
 void Barca::elminarPersonaje(const string &personaje)
 {
+    //cout<<personaje<<endl;
+    cout<<"-----------------------------------------------------------------------------------"<<endl;
+    vector<string>::iterator it;
+    it=barca.begin();
+
 
     for(int i = 0; i<barca.size();i++)
     {
         if(barca[i]==personaje)
-        barca.erase(barca.begin()+i);
-        cout<<"Se elimino, Barca size: "<<barca.size()<<endl;
+        cout<<"Se selecciono: "<<barca[i]<<" Personaje: "<<personaje<<endl;
+        it+=i;
+        barca.erase(it) ;
+        //cout<<" Elemento que queda: "<<barca.front()<<" Barca size: "<<barca.size()<<endl;
+
         break;
     }
 }
+
 bool Barca::hayEspacio()
 {
     if(barca.size()<2)
@@ -52,7 +61,7 @@ bool Barca::hayEspacio()
 
 bool Barca::sePuedeMover()
 {
-    for(const string &personaje : barca)
+    for(string personaje : barca)
     {
         if(personaje=="Robot")
         {
@@ -63,7 +72,6 @@ bool Barca::sePuedeMover()
             return false;
         }
     }
-
 
     return false;
 }

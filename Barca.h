@@ -14,7 +14,7 @@ public:
     bool sePuedeMover();
 private:
     vector<string>barca;
-    int c,z,l,r;
+
 };
 
 #endif // BARCA_H

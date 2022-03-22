@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     robot->imprimirImagen();
     connect(ui->Robot, SIGNAL (released()),this, SLOT (handleButtonR()));
 
+    connect(ui->BotonDer, SIGNAL (released()),this, SLOT (moveRight()));
 
     /*
     El diccionario es para junto con el entero que lleva el nombre asociado al personaje poder subierlo a la barca (al puntero del personaje).
@@ -44,11 +45,40 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::moveRight()
+{
+    ui->Bunny->move(420,100);
+    c=2;
+    cout<<barca.sePuedeMover()<<endl;
+    /*
+    if(barca.sePuedeMover())
+    {
+        cout<<"Se mueve la barca"<<endl;
+        if(c==2)
+        {
+           c=3;
+           ui->Bunny->move(420,190);
+        }
+        if(r==2)
+        {
+           r=3;
+        }
+        if(z==2)
+        {
+           z=3;
 
+        }
+        if(l==2)
+        {
+           l=3;
+        }
+    }
+    */
+}
 
 void MainWindow::handleButtonF()
 {
-    cout<<"Test Move Fox"<<endl;
+    //cout<<"Test Move Fox"<<endl;
     const string nombre= "Zorro";
     if(z==0 and barca.hayEspacio())
     {
@@ -77,40 +107,42 @@ void MainWindow::handleButtonF()
 
 void MainWindow::handleButtonB()
 {
-    cout<<"Test Move Bunny"<<endl;
+    //cout<<"Test Move Bunny"<<endl;
     const string nombre= "Conejo";
     if(c==0  and barca.hayEspacio())
     {
       ui->Bunny->move(250,100);
       barca.agregarPersonaje(nombre);
       changePlaceB();
-      if(cazar(c,l))
-      {
-          cout<<"El Conejo se comio a la lechuga"<<endl;
-      }
-      if(cazar(c,z))
-      {
-          cout<<"El Zorro se comio al Conejo"<<endl;
-      }
+
     } else if(c==1)
     {
       ui->Bunny->move(80,100);
-      barca.elminarPersonaje(nombre);
       changePlaceB();
-      if(cazar(c,l))
-      {
-          cout<<"El Conejo se comio a la lechuga"<<endl;
-      }
-      if(cazar(c,z))
-      {
-          cout<<"El Zorro se comio al Conejo"<<endl;
-      }
+      barca.elminarPersonaje(nombre);
+    } else if(c==2)
+    {
+      ui->Bunny->move(590,100);
+      changePlaceB();
+    } else if(c==3)
+    {
+          ui->Bunny->move(420,100);
+          changePlaceB();
+  }
+
+    if(cazar(c,l))
+    {
+        cout<<"El Conejo se comio a la lechuga"<<endl;
+    }
+    if(cazar(c,z))
+    {
+        cout<<"El Zorro se comio al Conejo"<<endl;
     }
 }
 
 void MainWindow::handleButtonL()
 {
-    cout<<"Test Move Lechuga"<<endl;
+    //cout<<"Test Move Lechuga"<<endl;
     const string nombre= "Lechuga";
     if(l==0  and barca.hayEspacio())
     {
@@ -138,7 +170,7 @@ void MainWindow::handleButtonL()
 
 void MainWindow::handleButtonR()
 {
-    cout<<"Test Move Robot"<<endl;
+    //cout<<"Test Move Robot"<<endl;
     const string nombre= "Robot";
     if(r==0  and barca.hayEspacio())
     {
@@ -179,6 +211,12 @@ void MainWindow::changePlaceB()
     case 1:
         c=0;
         break;
+    case 2:
+        c=3;
+        break;
+    case 3:
+        c=2;
+        break;
     }
 
 }
@@ -193,6 +231,13 @@ void MainWindow::changePlaceF()
     case 1:
         z=0;
         break;
+    case 2:
+        z=3;
+        break;
+    case 3:
+        z=2;
+        break;
+
     }
 }
 
@@ -208,6 +253,13 @@ void MainWindow::changePlaceR()
     case 1:
         r=0;
         break;
+    case 2:
+        r=3;
+        break;
+    case 3:
+        r=2;
+        break;
+
     }
 
 }
@@ -221,6 +273,12 @@ void MainWindow::changePlaceL()
         break;
     case 1:
         l=0;
+        break;
+    case 2:
+        l=3;
+        break;
+    case 3:
+        l=2;
         break;
     }
 }
