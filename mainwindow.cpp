@@ -8,19 +8,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setMinimumSize(size());
     this->setMaximumSize(size());
+    this->setWindowTitle("Barca");
 
-    class Lechuga *lechuga = new class Lechuga("Lechuga", "L", ui->Lechuga, ui->Lettuce,":/Lettuce.jpg");
+    class Lechuga *lechuga = new class Lechuga("Lechuga", "L", ui->Lechuga, ui->Lettuce,":/Lettuce.png");
+    ui->Lettuce->setAlignment(Qt::AlignCenter);
     lechuga->imprimirImagen();
-
     connect(ui->Lechuga, SIGNAL (released()),this, SLOT (handleButtonL()));
-    //disconnect(ui->Lechuga, SIGNAL (released()),this, SLOT (handleButtonL()));
 
 
     class Conejo *conejo = new class Conejo("Conejo", "C", ui->Conejo, ui->Bunny,":/bunny.png");
     conejo->imprimirImagen();
+    ui->Bunny->setAlignment(Qt::AlignCenter);
     connect(ui->Conejo, SIGNAL (released()),this, SLOT (handleButtonB()));
 
-    class Zorro *zorro = new  class Zorro("Zorro", "Z", ui->Lobo, ui->Fox,":/fox.png");
+    class Zorro *zorro = new  class Zorro("Zorro", "Z", ui->Lobo, ui->Fox,":/Robot.png");
     zorro->imprimirImagen();
     connect(ui->Lobo, SIGNAL (released()),this, SLOT (handleButtonF()));
 
@@ -43,15 +44,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::mensajeDeGameOver(QString  &mensaje)
 {
-    QString final = mensaje+"\n ¿Desea volver a jugar?";
-    QMessageBox::StandardButton reply = QMessageBox::question(this,"Has Perdido",final,QMessageBox::Yes | QMessageBox::No);
-    if(reply==QMessageBox::Yes)
+    if(gano())
     {
-       restart();
+        QString final = mensaje+"\n ¿Desea volver a jugar?";
+        QMessageBox::StandardButton reply = QMessageBox::question(this,"Has Ganado",final,QMessageBox::Yes | QMessageBox::No);
+        if(reply==QMessageBox::Yes)
+        {
+           restart();
+        }else
+        {
+            close();
+        }
     }else
     {
-        close();
+        QString final = mensaje+"\n ¿Desea volver a jugar?";
+        QMessageBox::StandardButton reply = QMessageBox::question(this,"Has Perdido",final,QMessageBox::Yes | QMessageBox::No);
+        if(reply==QMessageBox::Yes)
+        {
+           restart();
+        }else
+        {
+            close();
+        }
     }
+
 
 }
 

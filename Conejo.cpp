@@ -42,6 +42,7 @@ void Conejo::imprimirImagen()
 
     //Se conecta la imagen a la etiqueta
     (*etiqueta)->setPixmap(pix.scaled(100,100,Qt::KeepAspectRatio));
+    //(*etiqueta)->setAlignment(Qt::AlignCenter);
     //Se conecta el boton con un metodo
 
 }
