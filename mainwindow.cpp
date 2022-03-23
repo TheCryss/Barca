@@ -33,6 +33,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->BotonDer, SIGNAL (released()),this, SLOT (moveRight()));
     connect(ui->BotonIzq, SIGNAL (released()),this, SLOT (moveLeft()));
 
+    //destruyendo todo
+    delete robot;
+    robot =nullptr;
+    delete zorro;
+    zorro =nullptr;
+    delete lechuga;
+    lechuga= nullptr;
+    delete conejo;
+    conejo =nullptr;
+
 
 }
 
