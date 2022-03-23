@@ -215,8 +215,8 @@ void MainWindow::handleButtonF()
 
         } else {
             cout<<"El zorro se ahogo "<<endl;
-            mensajeDeGameOver(mensaje);
             ui->Fox->move(420,190);
+            mensajeDeGameOver(mensaje);
             changePlaceF();
             perdio();
 
@@ -235,8 +235,8 @@ void MainWindow::handleButtonF()
           barca.agregarPersonaje(nombre);
         } else{
             cout<<"El zorro se ahogo"<<endl;
-            mensajeDeGameOver(mensaje);
             ui->Fox->move(250,190);
+            mensajeDeGameOver(mensaje);
             changePlaceF();
             perdio();
 
@@ -273,8 +273,8 @@ void MainWindow::handleButtonB()
         } else
         {
             cout<<"El Conejo se ahogo "<<endl;
-            mensajeDeGameOver(mensaje);
             ui->Bunny->move(420,100);
+            mensajeDeGameOver(mensaje);
             changePlaceB();
             perdio();
         }
@@ -293,8 +293,8 @@ void MainWindow::handleButtonB()
        } else
         {
         cout<<"El Conejo se ahogo"<<endl;
-        mensajeDeGameOver(mensaje);
         ui->Bunny->move(250,100);
+        mensajeDeGameOver(mensaje);
         changePlaceB();
         perdio();
         }
@@ -349,8 +349,9 @@ void MainWindow::handleButtonL()
         } else
         {
             cout<<"La Lechuga se ahogo "<<endl;
-            mensajeDeGameOver(mensaje);
             ui->Lettuce->move(420,280);
+            mensajeDeGameOver(mensaje);
+
             changePlaceL();
             perdio();
         }
@@ -369,8 +370,9 @@ void MainWindow::handleButtonL()
        } else
         {
             cout<<"La Lechuga se ahogo "<<endl;
-            mensajeDeGameOver(mensaje);
             ui->Lettuce->move(250,280);
+            mensajeDeGameOver(mensaje);
+
             changePlaceL();
             perdio();
         }
