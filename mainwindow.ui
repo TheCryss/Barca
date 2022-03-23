@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>814</width>
+    <width>850</width>
     <height>622</height>
    </rect>
   </property>
@@ -17,6 +17,9 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <property name="styleSheet">
     <string notr="true">#centralwidget
 {
@@ -26,8 +29,8 @@ background-image: url(:/albedo.jpg);
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>510</y>
+      <x>70</x>
+      <y>520</y>
       <width>721</width>
       <height>81</height>
      </rect>
@@ -117,79 +120,6 @@ background-image: url(:/albedo.jpg);
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="Izquierda">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>30</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255)</string>
-    </property>
-    <property name="text">
-     <string>Izquierda</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Centro">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>30</y>
-      <width>281</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255)</string>
-    </property>
-    <property name="text">
-     <string>Centro1                    Centro2</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Derecha">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>30</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255)</string>
-    </property>
-    <property name="text">
-     <string>Derecha</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="Bunny">
     <property name="geometry">
      <rect>
@@ -248,7 +178,7 @@ background-image: url(:/albedo.jpg);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>814</width>
+     <width>850</width>
      <height>21</height>
     </rect>
    </property>

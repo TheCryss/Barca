@@ -7,7 +7,8 @@
 #include "Lechuga.h"
 #include "Robot.h"
 #include "Barca.h"
-#include <map>
+#include <QMessageBox>
+#include <QString>
 #include "ui_mainwindow.h"
 
 
@@ -34,14 +35,20 @@ public slots:
     void changePlaceR();
     void changePlaceL();
     void moveRight();
-
-
+    void moveLeft();
+    void perdio();
+    bool gano();
+    bool getEstadoJuego();
+    void over();
+    void mensajeDeGameOver( QString &mensaje);
+    void restart();
 private:
 int c=0;
 int z=0;
 int r=0;
 int l=0;
 Barca barca;
+bool juego =true;
 
 private:
     Ui::MainWindow *ui;

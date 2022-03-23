@@ -6,16 +6,19 @@ Barca::Barca()
 
 Barca::~Barca()
 {
-    /*
-    for (int i = 0; i < barca.size(); i++)
-      {
-        if (barca[i])
-        {
-          delete barca[i];
-          barca[i] = nullptr;
-        }
-      }*/
 }
+int Barca::buscar(const string &aux){
+    int index = 0;
+    for(string str : barca){
+        if(str==aux){
+            return index;
+        }else{
+            index+=1;
+        }
+    }
+    return -1;
+}
+
 void Barca::agregarPersonaje(const string&personaje)
 {
     if(barca.size()>=2)
@@ -27,25 +30,48 @@ void Barca::agregarPersonaje(const string&personaje)
        cout<<"Se Agrego: "<<personaje<<", Barca size: "<<barca.size()<<endl;
     }
 }
-
+/*
 void Barca::elminarPersonaje(const string &personaje)
 {
     //cout<<personaje<<endl;
     cout<<"-----------------------------------------------------------------------------------"<<endl;
-    vector<string>::iterator it;
-    it=barca.begin();
 
 
     for(int i = 0; i<barca.size();i++)
     {
         if(barca[i]==personaje)
+        {
         cout<<"Se selecciono: "<<barca[i]<<" Personaje: "<<personaje<<endl;
-        it+=i;
-        barca.erase(it) ;
-        //cout<<" Elemento que queda: "<<barca.front()<<" Barca size: "<<barca.size()<<endl;
+
+            barca.erase(barca.begin()+i) ;
+        }
+
+        cout<<" Elemento que queda: "<<barca.front()<<" Barca size: "<<barca.size()<<endl;
 
         break;
     }
+}*/
+
+void Barca::elminarPersonaje(const string &personaje)
+{
+
+    cout<<"-----------------------------------------------------------------------------------"<<endl;
+
+    int indiceAEliminar = buscar(personaje);
+
+    if(indiceAEliminar==-1){
+        return;
+    }
+
+    barca.erase(barca.begin()+indiceAEliminar);
+
+    cout<<" Barca size: "<<barca.size()<<endl;
+
+    for(const string &str : barca)
+    {
+            cout << str << endl;
+    }
+
 }
 
 bool Barca::hayEspacio()
@@ -61,18 +87,36 @@ bool Barca::hayEspacio()
 
 bool Barca::sePuedeMover()
 {
-    for(string personaje : barca)
-    {
-        if(personaje=="Robot")
-        {
-            return true;
-            break;
-        }else
-        {
-            return false;
-        }
-    }
 
-    return false;
+    int indiceAEliminar = buscar("Robot");
+
+    if(indiceAEliminar==-1)
+    {
+        return false;
+    } else
+    {
+        return true;
+    }
 }
 
+void Barca::moverBarca()
+{
+    if(posicion==0)
+    {
+        posicion=1;
+    } else
+    {
+        posicion=0;
+    }
+}
+
+int Barca::getPosicion()
+{
+    return posicion;
+}
+
+void Barca::limpiarBarca()
+{
+    barca.clear();
+    posicion=0;
+}
