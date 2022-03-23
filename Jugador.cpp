@@ -52,7 +52,7 @@ void Jugador::inicio()
 {
 
   system("cls");
-  cout << textoPurpura "Bienvenido al Juego de La Barca \nA continuación veras las opciones que puedes elegir, por favor digite la opción que desea" << endl;
+  cout << textoPurpura "Bienvenido al Juego de La Barca \nA continuacion veras las opciones que puedes elegir, por favor digite la opción que desea" << endl;
   cout << endl;
   cout << endl;
 
