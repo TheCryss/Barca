@@ -1,3 +1,19 @@
+/**
+Archivo: mainwindow.cpp
+Autores:
+Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
+Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
+Fecha creacion: 2022/02/07
+Fecha ultima modificacion: 2022/02/07
+licencia: GNU-GPL
+*/
+
+/**
+Utilidad: Representar la ventana del juego
+*/
+
 #include "mainwindow.h"
 
 

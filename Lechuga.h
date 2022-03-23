@@ -1,22 +1,21 @@
 /*
-Archivo: Personaje.h
+Archivo: Lechuga.h
 Autores:
 Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
 */
 
 /**
-Clase: Personaje
-Responsabilidad: Modelar un personaje en el juego, con atributos como el nombre, el personaje que come o si esta vivo. Con esta clase representaremos al Robot, al Conejo, la Lechuga y al Zorro, y realmente a cualquier otro personaje que se quiera implementar.
+Clase: Lechuga
+Responsabilidad: Esta clase derivada de Personaje servira para representar la lechuga en el juego, con los mismos metodos y atributos de la clase padre pero con implementación diferentes en metodos propios del QT
 Relaciones:
-- Contiene a Personaje : A través de un vector de punteros a la clase Personaje
+- Es un personaje
+- Contiene a Personaje (heredado)
 */
 
 #ifndef _LECHUGA_H_

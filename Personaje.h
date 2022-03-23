@@ -5,8 +5,6 @@ Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
@@ -34,11 +32,15 @@ class Personaje
 {
   // Atributos
 protected:
+  /*
+  nombre del personaje
+  */
   string nombre;
   // el atributo comando determinará lo que debemos digitar por teclado para mover al personaje
   string comando;
   // Vector de personajes que el Personaje actual puede comer
   vector<Personaje *> personajesQueCome;
+  // variable apra saber si el personaje esta vivo
   bool estaVivo;
   //boton al que esta asignado el personaje
   QPushButton **boton;
@@ -52,9 +54,21 @@ public:
   Personaje(string nombre, string comando, QPushButton* boton, QLabel *etiqueta, string url);
   // Destructor
   virtual ~Personaje();
+  /*
+  retorna el nombre del personaje
+*/
   virtual string getNombre();
+  /*
+  metodo de QT para imprimir al personaje
+*/
   virtual void imprimirImagen();
+  /*
+  metodo de QT para el boton del personaje
+*/
   virtual void handleButton();
+  /*
+  Saber si el personaje es un guardian
+  */
   bool getEsGuardian();
 
 };

@@ -1,3 +1,14 @@
+/**
+Archivo: Barca.cpp
+Autores:
+Carlos Andrés Hernández
+<carlos.hernandez.agudelo@correounivalle.edu.co >
+Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
+Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
+Fecha creacion: 2022/02/07
+Fecha ultima modificacion: 2022/02/07
+licencia: GNU-GPL
+*/
 #include "Barca.h"
 
 Barca::Barca()
@@ -23,11 +34,11 @@ void Barca::agregarPersonaje(const string&personaje)
 {
     if(barca.size()>=2)
     {
-       cout<<"La barca esta llena"<<endl;
+    //    cout<<"La barca esta llena"<<endl;
     } else
     {
        barca.push_back(personaje);
-       cout<<"Se Agrego: "<<personaje<<", Barca size: "<<barca.size()<<endl;
+    //    cout<<"Se Agrego: "<<personaje<<", Barca size: "<<barca.size()<<endl;
     }
 }
 /*
@@ -65,12 +76,12 @@ void Barca::elminarPersonaje(const string &personaje)
 
     barca.erase(barca.begin()+indiceAEliminar);
 
-    cout<<" Barca size: "<<barca.size()<<endl;
+    // cout<<" Barca size: "<<barca.size()<<endl;
 
-    for(const string &str : barca)
-    {
-            cout << str << endl;
-    }
+    // for(const string &str : barca)
+    // {
+    //         cout << str << endl;
+    // }
 
 }
 

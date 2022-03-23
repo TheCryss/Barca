@@ -1,22 +1,21 @@
 /*
-Archivo: Personaje.h
+Archivo: Robot.h
 Autores:
 Carlos Andrés Hernández
 <carlos.hernandez.agudelo@correounivalle.edu.co >
 Susana Valencia Bravo <susana.valencia@correounivalle.edu.co>
 Jose Luis Hincapie Bucheli <jose.bucheli@correounivalle.edu.co>
-Sebastian Quintero Ramírez <sebastian.quintero.ramirez@correounivalle.edu.co>
-Jose Antonio Fernandez <jose.antonio.fernandez@correounivalle.edu.co>
 Fecha creacion: 2022/02/07
 Fecha ultima modificacion: 2022/02/07
 licencia: GNU-GPL
 */
 
 /**
-Clase: Personaje
-Responsabilidad: Modelar un personaje en el juego, con atributos como el nombre, el personaje que come o si esta vivo. Con esta clase representaremos al Robot, al Conejo, la Lechuga y al Zorro, y realmente a cualquier otro personaje que se quiera implementar.
+Clase: Robot
+Responsabilidad: Esta clase derivada de Personaje servira para representar el robot en el juego, con los mismos metodos y atributos de la clase padre pero con implementación diferentes en metodos propios del QT
 Relaciones:
-- Contiene a Personaje : A través de un vector de punteros a la clase Personaje
+- Es parecido a un personaje
+- Contiene a Personaje (heredado)
 */
 
 #ifndef _ROBOT_H_
@@ -29,6 +28,9 @@ class Robot : public Personaje
 {
   // Atributos
 protected:
+  /*
+  atributo por el que sabremos que el personaje es un guardian
+  */
   bool esGuardian=true;
 public:
   // Constructor : Si el comando es mayor a dos letras pasara a valer la primera letra del nombre
@@ -38,6 +40,9 @@ public:
   // Cosas de QT
   virtual void imprimirImagen();
   virtual void handleButton();
+  /*
+  metodo heredado de la clase padre pero con diferente implementación
+*/
   bool getEsGuardian();
 
 };
