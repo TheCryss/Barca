@@ -52,6 +52,7 @@ void Jugador::inicio()
 {
 
   system("cls");
+  system("clear");
   cout << textoPurpura "Bienvenido al Juego de La Barca \nA continuacion veras las opciones que puedes elegir, por favor digite la opcion que desea" << endl;
   cout << endl;
   cout << endl;
@@ -245,6 +246,7 @@ string Jugador::agregarComandoPersonaje()
 void Jugador::agregarGuardianes()
 {
   system("cls");
+  system("clear");
   string nombre;
   string comando;
 
@@ -253,6 +255,7 @@ void Jugador::agregarGuardianes()
   for (int i = 0; i < numero; i++)
   {
     system("cls");
+    system("clear");
     // Preguntamos por el nombre
     nombre = agregarNombrePersonaje();
     // Preguntamos por el comando
@@ -271,6 +274,7 @@ void Jugador::agregarGuardianes()
 void Jugador::agregarPersonajes()
 {
   system("cls");
+  system("clear");
   string nombre;
   string comando;
 
@@ -279,6 +283,7 @@ void Jugador::agregarPersonajes()
   for (int i = 0; i < numero; i++)
   {
     system("cls");
+    system("clear");
     // Preguntamos por el nombre
     nombre = agregarNombrePersonaje();
     // Preguntamos por el comando
@@ -306,6 +311,7 @@ bool Jugador::verficiarEsGuardian(Personaje *personaje)
 string Jugador::recibirOpcionAgregarPersonaje(Personaje *personaje)
 {
   system("cls");
+  system("clear");
   string opcion;
   cout << textoPurpura "¿Desea agregar una presa para el personaje " << personaje->getNombre() << " ? (S/N): ";
   getline(cin, opcion);
@@ -381,6 +387,7 @@ string Jugador::preguntarPorElNombrePresa(Personaje *personaje)
 void Jugador::crearRelaciones()
 {
   system("cls");
+  system("clear");
   // Creamos las relaciones entre personajes (quien come a quien)
   for (Personaje *personaje : mapa[0]->getPersonajes())
   {
@@ -426,6 +433,7 @@ void Jugador::crearRelaciones()
 void Jugador::personalizado()
 {
   system("cls");
+  system("clear");
   cout << textoRojo "Bienvenido al modo personalizado, por favor lea atentamente y digite lo que se le pida, gracias. " << endl;
 
   // Borramos los personajes que hay actualmente
@@ -451,7 +459,7 @@ void Jugador::mostrarJuego()
   // Limpiar la consoa
   // cout << "\033c";
   system("cls");
-
+  system("clear");
   cout << textoRojo "LA BARCA" << endl;
   cout << textoPurpura "Tu mision es pasar a cada uno de los personajes al lado derecho, sin que ninguno muera" << endl;
   cout << endl;
